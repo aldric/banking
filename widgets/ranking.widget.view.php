@@ -1,4 +1,4 @@
-<div class="exampleWidget">
+<div class="ranking-widget">
   <h3 class="widget-title">
     <span><?php echo $widget_title; ?></span>
 </h3>

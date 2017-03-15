@@ -30,13 +30,15 @@ if (! class_exists('Ranking_Widget')) {
         {
             return $value == 1 ?  "fa fa-check-circle-o fa-3x" : "fa fa-times fa-3x";
         }
+
+        public function get_text($value, $text)
+        {
+            return $value == 1 ?  '<i class="fa fa-check" aria-hidden="true"></i>'.$text : '<i class="fa fa-times" aria-hidden="true"></i><s>'.$text."</s>";
+        }
+
         public function get_bg($value)
         {
-            return $value == 1 ?  "alert-success" : "alert-danger";
-        }
-        public function get_bgcolor($value)
-        {
-            return $value == 1 ?  "#3c763d" : "#a94442";
+            return $value == 1 ?  "text-success" : "text-danger";
         }
 
         public function get_ranking_data($p)
