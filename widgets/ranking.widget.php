@@ -26,6 +26,19 @@ if (! class_exists('Ranking_Widget')) {
             echo "<br />";
         }
 
+        public function get_icon($value)
+        {
+            return $value == 1 ?  "fa fa-check-circle-o fa-3x" : "fa fa-times fa-3x";
+        }
+        public function get_bg($value)
+        {
+            return $value == 1 ?  "alert-success" : "alert-danger";
+        }
+        public function get_bgcolor($value)
+        {
+            return $value == 1 ?  "#3c763d" : "#a94442";
+        }
+
         public function get_ranking_data($p)
         {
             $ranking_data = null;
@@ -33,7 +46,7 @@ if (! class_exists('Ranking_Widget')) {
                 $id = $p->ID;
                 $name = get_field('bank_name_label', $id);
                 $ranking_data  = new RankingData($name, $id);
-                
+
                 $ranking_data->address = get_field("address", $id);
                 $ranking_data->icon = get_field("bank_icon", $id);
                 $ranking_data->image = get_field("bank_image", $id);
@@ -42,7 +55,10 @@ if (! class_exists('Ranking_Widget')) {
                 $ranking_data->holding_image = get_field("holding_image", $id);
                 $ranking_data->customer_count_label = get_field("numbers_of_customers_label", $id);
                 $ranking_data->customer_count = get_field("numbers_of_customers", $id);
-                
+
+                $ranking_data->review_link = get_field("review_link", $id);
+                $ranking_data->review_link_text = get_field("review_link_text", $id);
+
                 $ranking_data->welcome_offer = get_field("welcome_offer", $id);
                 $ranking_data->minimum_wadge = get_field("minimum_wadge", $id);
                 $ranking_data->credit_card = get_field("numbers_of_customers", $id);
@@ -58,7 +74,7 @@ if (! class_exists('Ranking_Widget')) {
                 $ranking_data->home_insurance = get_field("home_insurance", $id);
                 $ranking_data->other_insurance = get_field("other_insurance", $id);
                 $ranking_data->stock = get_field("stock", $id);
-                
+
 
                 if (have_rows('evaluation_criteres', $id)) {
                     $eval_count = 0;
@@ -86,13 +102,13 @@ if (! class_exists('Ranking_Widget')) {
         {
             $widget_id = "widget_" . $args["widget_id"];
             $template = get_field('side_template', $widget_id);
-            $widget_title = get_field('widget_ranking_title', $widget_id);
             $post_object = get_field('associated_bank');
             $data = $this->get_ranking_data($post_object);
+            $widget_title = get_field('widget_ranking_title', $widget_id).' '. $data->name;
             if ($data != null) {
                 include(realpath(dirname(__FILE__)) . "/ranking.widget.view.php");
                 $review = new BankReviewJson($data->name,
-                                             "Villeneuve d'asq, Lille cedex 9",
+                                             $data->address,
                                              "0680606073",
                                              "http://www.example.com/monabanq.jpg",
                                              "Le banque en ligne au meilleur prix",
@@ -110,11 +126,13 @@ if (! class_exists('Ranking_Widget')) {
         public $name;
         public $title;
         public $address;
-     
+
         public $icon;
         public $image;
         public $holding_image;
-     
+        public $review_link;
+        public $review_link_text;
+
         public $holding_label;
         public $holding_name;
         public $customer_count_label;
@@ -123,7 +141,7 @@ if (! class_exists('Ranking_Widget')) {
         public $welcome_offer;
         public $minimum_wadge;
         public $credit_card;
-     
+
         public $young_offer;
         public $prof_account;
         public $saving_account;
