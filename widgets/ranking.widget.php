@@ -33,6 +33,32 @@ if (! class_exists('Ranking_Widget')) {
                 $id = $p->ID;
                 $name = get_field('bank_name_label', $id);
                 $ranking_data  = new RankingData($name, $id);
+                
+                $ranking_data->address = get_field("address", $id);
+                $ranking_data->icon = get_field("bank_icon", $id);
+                $ranking_data->image = get_field("bank_image", $id);
+                $ranking_data->holding_label = get_field("holding_label", $id);
+                $ranking_data->holding_name = get_field("holding", $id);
+                $ranking_data->holding_image = get_field("holding_image", $id);
+                $ranking_data->customer_count_label = get_field("numbers_of_customers_label", $id);
+                $ranking_data->customer_count = get_field("numbers_of_customers", $id);
+                
+                $ranking_data->welcome_offer = get_field("welcome_offer", $id);
+                $ranking_data->minimum_wadge = get_field("minimum_wadge", $id);
+                $ranking_data->credit_card = get_field("numbers_of_customers", $id);
+
+                $ranking_data->young_offer = get_field("young_offer", $id);
+                $ranking_data->prof_account = get_field("prof_account", $id);
+                $ranking_data->saving_account = get_field("saving_account", $id);
+                $ranking_data->revolving_credit = get_field("revolving_credit", $id);
+                $ranking_data->mortgage = get_field("mortgage", $id);
+                $ranking_data->credit_rebuy = get_field("credit_rebuy", $id);
+                $ranking_data->life_insurance = get_field("life_insurance", $id);
+                $ranking_data->car_insurance = get_field("car_insurance", $id);
+                $ranking_data->home_insurance = get_field("home_insurance", $id);
+                $ranking_data->other_insurance = get_field("other_insurance", $id);
+                $ranking_data->stock = get_field("stock", $id);
+                
 
                 if (have_rows('evaluation_criteres', $id)) {
                     $eval_count = 0;
@@ -83,6 +109,34 @@ if (! class_exists('Ranking_Widget')) {
     {
         public $name;
         public $title;
+        public $address;
+     
+        public $icon;
+        public $image;
+        public $holding_image;
+     
+        public $holding_label;
+        public $holding_name;
+        public $customer_count_label;
+        public $customer_count;
+
+        public $welcome_offer;
+        public $minimum_wadge;
+        public $credit_card;
+     
+        public $young_offer;
+        public $prof_account;
+        public $saving_account;
+        public $revolving_credit;
+        public $mortgage;
+        public $credit_rebuy;
+        public $life_insurance;
+        public $car_insurance;
+        public $home_insurance;
+        public $other_insurance;
+        public $stock;
+
+
         public $mean;
         public $eval_data = array();
 
