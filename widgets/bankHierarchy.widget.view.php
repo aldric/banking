@@ -6,17 +6,17 @@
       <?php 
       global $post;
       $current_post_id = $post->ID;
-      echo '<nav class="bs-docs-sidebar"> <ul class="nav bs-docs-sidenav">'.printList($model, $current_post_id).'</ul></nav>'; ?>
+      echo '<ul class="nav nav-pills  flex-column">'.printList($model, $current_post_id).'</ul>'; ?>
  </div>
 </div>
 <?php 
 //class="active"
   function printList($row, $p_id) {
     $active = $row->id == $p_id ? 'class="active"' : '';
-    $out = '<li '.$active.'><a href="'.$row->permalink.'">'.$row->title.'</a>';
+    $out = '<li class="nav-item"><a href="'.$row->permalink.'" '.$active.'>'.$row->title.'</a>';
 
     if(count($row->children) > 0) {
-      $out .= '<ul class="nav">';
+      $out .= '<ul class="nav flex-column">';
       foreach($row->children as $child) {
         $out .= printList($child, $p_id);
       }
