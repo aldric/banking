@@ -41,6 +41,10 @@ if (! class_exists('Ranking_Widget')) {
             return $value == 1 ?  "text-success" : "text-danger";
         }
 
+        private function coerse_null_value($value, $default_value) { 
+            return $value == null ? $default_value : $value;
+        }
+        
         public function get_ranking_data($p)
         {
             $ranking_data = null;
@@ -49,9 +53,12 @@ if (! class_exists('Ranking_Widget')) {
                 $name = get_field('bank_name_label', $id);
                 $ranking_data  = new RankingData($name, $id);
 
-                $ranking_data->address = get_field("address", $id);
+                $ranking_data->favicon = get_field("bank_favicon", $id);
                 $ranking_data->icon = get_field("bank_icon", $id);
                 $ranking_data->image = get_field("bank_image", $id);
+
+                
+                $ranking_data->address = get_field("address", $id);
                 $ranking_data->holding_label = get_field("holding_label", $id);
                 $ranking_data->holding_name = get_field("holding", $id);
                 $ranking_data->holding_image = get_field("holding_image", $id);
@@ -65,17 +72,17 @@ if (! class_exists('Ranking_Widget')) {
                 $ranking_data->minimum_wadge = get_field("minimum_wadge", $id);
                 $ranking_data->credit_card = get_field("numbers_of_customers", $id);
 
-                $ranking_data->young_offer = get_field("young_offer", $id);
-                $ranking_data->prof_account = get_field("prof_account", $id);
-                $ranking_data->saving_account = get_field("saving_account", $id);
-                $ranking_data->revolving_credit = get_field("revolving_credit", $id);
-                $ranking_data->mortgage = get_field("mortgage", $id);
-                $ranking_data->credit_rebuy = get_field("credit_rebuy", $id);
-                $ranking_data->life_insurance = get_field("life_insurance", $id);
-                $ranking_data->car_insurance = get_field("car_insurance", $id);
-                $ranking_data->home_insurance = get_field("home_insurance", $id);
-                $ranking_data->other_insurance = get_field("other_insurance", $id);
-                $ranking_data->stock = get_field("stock", $id);
+                $ranking_data->young_offer = $this->coerse_null_value(get_field("young_offer", $id), 0);
+                $ranking_data->prof_account = $this->coerse_null_value(get_field("prof_account", $id), 0);
+                $ranking_data->saving_account = $this->coerse_null_value(get_field("saving_account", $id), 0);
+                $ranking_data->revolving_credit = $this->coerse_null_value(get_field("revolving_credit", $id), 0);
+                $ranking_data->mortgage = $this->coerse_null_value(get_field("mortgage", $id), 0);
+                $ranking_data->credit_rebuy = $this->coerse_null_value(get_field("credit_rebuy", $id), 0);
+                $ranking_data->life_insurance = $this->coerse_null_value(get_field("life_insurance", $id), 0);
+                $ranking_data->car_insurance = $this->coerse_null_value(get_field("car_insurance", $id), 0);
+                $ranking_data->home_insurance = $this->coerse_null_value(get_field("home_insurance", $id), 0);
+                $ranking_data->other_insurance = $this->coerse_null_value(get_field("other_insurance", $id), 0);
+                $ranking_data->stock = $this->coerse_null_value(get_field("stock", $id), 0);
 
 
                 if (have_rows('evaluation_criteres', $id)) {
@@ -99,7 +106,7 @@ if (! class_exists('Ranking_Widget')) {
             }
             return $ranking_data;
         }
-
+     
         public function widget($args, $instance)
         {
             $widget_id = "widget_" . $args["widget_id"];
@@ -129,6 +136,7 @@ if (! class_exists('Ranking_Widget')) {
         public $title;
         public $address;
 
+        public $favicon;
         public $icon;
         public $image;
         public $holding_image;

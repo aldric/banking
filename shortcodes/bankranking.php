@@ -19,7 +19,7 @@ function bankranking_func($atts)
             'name' => $a['display']
         ));
     }
-    $out = "<div class=\"container-fluid\"><div class=\"row\">";
+  //  $out = "<div class=\"container-fluid\"><div class=\"row\">";
 
     $widget = new Ranking_Widget();
     $rankings = array();
@@ -40,15 +40,19 @@ function bankranking_func($atts)
     } else {
         ksort($rankings);
     }
-    foreach ($rankings as $mean => $data) {
-        $out .= "<div class=\"col-md-4\">";
-        ob_start();
-        include(realpath(dirname(__FILE__)) . "/../widgets/template-1.php");
-        $content = ob_get_clean();
-        $out .= $content;
-        $out .= "</div>";
-    }
-    $out .= "</div></div>";
+    // foreach ($rankings as $mean => $data) {
+    //     $out .= "<div class=\"col-md-4\">";
+    //     ob_start();
+    //     include(realpath(dirname(__FILE__)) . "/../widgets/template-1.php");
+    //     $content = ob_get_clean();
+    //     $out .= $content;
+    //     $out .= "</div>";
+    // }
+    // $out .= "</div></div>";
+    $out = '<script type="text/javascript"> 
+             var banks =' . json_encode($rankings).';'.
+           '</script>';
+    //$out = 
     wp_reset_query();
     return $out;
 }
