@@ -49,11 +49,17 @@ function bankranking_func($atts)
     //     $out .= "</div>";
     // }
     // $out .= "</div></div>";
+    
+    $template = file_get_contents(realpath(dirname(__FILE__))."/../ranking.html");
+    $app = '<script type="text/javascript">' . file_get_contents(realpath(dirname(__FILE__))."/../ranking.js") . '</script>';
     $out = '<script type="text/javascript"> 
              var banks =' . json_encode($rankings).';'.
            '</script>';
     //$out = 
     wp_reset_query();
+    $out .= $template;
+    $out .= $app;
+
     return $out;
 }
 add_shortcode('bankranking', 'bankranking_func');
