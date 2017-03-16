@@ -1,6 +1,9 @@
-jQuery(function(){
+jQuery(function() {
     var app = new Vue({
         el: '#app-compare',
-        data: { banks : banks },
+        data: {
+            banks: banks
+        },
     });
+    console.log(banks);
 })
