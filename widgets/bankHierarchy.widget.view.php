@@ -1,23 +1,26 @@
-<div>
+<aside>
+<div class="widget-catalogue">
   <h3 class="widget-title">
     <span>Catalogue</span>
-</h3>
+  </h3>
   <div class="widget-custom">
       <?php
       global $post;
       $current_post_id = $post->ID;
-      echo '<ul class="">'.printList($model, $current_post_id).'</ul>'; ?>
+      echo '<ul>'.printList($model, $current_post_id).'</ul>'; ?>
  </div>
 </div>
 <?php
 //class="active"
   function printList($row, $p_id)
   {
-      $active = $row->id == $p_id ? 'class="active"' : '';
-      $out = '<li class=""><a href="'.$row->permalink.'" '.$active.'>'.$row->title.'</a>';
+      $is_active = $row->id == $p_id;
+      $active = $is_active ? 'class="active"' : '';
+      $link = $is_active ? 'javascript:return false;' : $row->permalink;
+      $out = '<li class=""><a href="'.$link.'" '.$active.'>'.$row->title.'</a>';
 
       if (count($row->children) > 0) {
-          $out .= '<ul class="">';
+          $out .= '<ul>';
           foreach ($row->children as $child) {
               $out .= printList($child, $p_id);
           }
@@ -29,3 +32,4 @@
     return $out;
   }
 ?>
+</aside>

@@ -1,6 +1,6 @@
 
 <aside>
-  <div class="card"><!-- -->
+  <div class="card card-ranking"><!-- -->
   <div class="card-block">
     <h4 class="card-title widget-title"><?php echo $widget_title; ?></h4>
      <div class="d-flex flex-column">
@@ -29,12 +29,12 @@
      <?php foreach ($data->eval_data as $row) : ?>
        <div class="d-flex flex-column">
         <div class="text-center">
-          <dl class="row">
-            <dt class="col-sm-6">
+           <dl class="row">
+            <dt class="col-sm-6 text-center">
             <strong class="h6"><?php echo $row['label']; ?></strong><br />
             <small><?php echo $row['description']; ?></small>
             </dt>
-            <dd class="col-sm-6">
+            <dd class="col-sm-6 text-center">
               <ul class="rating">
                <?php
                  $note = floor(($row['note'] / 20) * 2) / 2;
@@ -47,9 +47,8 @@
                  }
                ?>
               </ul>
-            </dd>
-
-          </dl>
+			  </dd>
+</dl>
         </div>
      </div>
  <?php endforeach; ?>
