@@ -1,9 +1,9 @@
 
 <aside>
-  <div class="card"><!-- -->
+  <div class="card card-ranking"><!-- -->
   <div class="card-block">
-    <h2 class="card-title widget-title"><?php echo $widget_title; ?></h2>
-     <div class="d-flex flex-column mb-4">
+    <h4 class="card-title widget-title"><?php echo $widget_title; ?></h4>
+     <div class="d-flex flex-column">
         <div class="text-center">
             <ul class="rating-green">
              <?php
@@ -29,22 +29,26 @@
      <?php foreach ($data->eval_data as $row) : ?>
        <div class="d-flex flex-column">
         <div class="text-center">
-          <dl>
-            <dt class="h5"><?php echo $row['label']; ?></dt>
-            <ul class="rating">
-             <?php
-               $note = floor(($row['note'] / 20) * 2) / 2;
-               while (0.5 <= $note) {
-                   $note--;
-                   echo '<li style="display: inline;"><i class="fa fa-star " ></i></li>';
-               }
-               if ($note == 0.5) {
-                   echo '<li style="display: inline;"><i class="fa fa-star-half-o "></i></li>';
-               }
-             ?>
-            </ul>
-            <dd><?php echo $row['description']; ?></dd>
-          </dl>
+           <dl class="row">
+            <dt class="col-sm-6 text-center">
+            <strong class="h6"><?php echo $row['label']; ?></strong><br />
+            <small><?php echo $row['description']; ?></small>
+            </dt>
+            <dd class="col-sm-6 text-center">
+              <ul class="rating">
+               <?php
+                 $note = floor(($row['note'] / 20) * 2) / 2;
+                 while (0.5 <= $note) {
+                     $note--;
+                     echo '<li style="display: inline;"><i class="fa fa-star " ></i></li>';
+                 }
+                 if ($note == 0.5) {
+                     echo '<li style="display: inline;"><i class="fa fa-star-half-o "></i></li>';
+                 }
+               ?>
+              </ul>
+			  </dd>
+</dl>
         </div>
      </div>
  <?php endforeach; ?>
@@ -70,7 +74,7 @@
     </dl>
   </div>
     <div class="card-block ">
-      <h2 class="card-title text-center">Services disponibles</h2>
+      <h4 class="card-title text-center text-uppercase">Services disponibles</h4>
       <div class=" <?php echo $this->get_bg($data->saving_account); ?>">
           <div class="h6"><?php echo $this->get_text($data->saving_account, 'Compte courant') ?></div>
       </div>
@@ -98,13 +102,13 @@
       <div class=" <?php echo $this->get_bg($data->home_insurance); ?>">
         <div class="h6"><?php echo $this->get_text($data->home_insurance, 'Assurance habitation') ?></div>
       </div>
-      <div class="p2 justify-content-center <?php echo $this->get_bg($data->other_insurance); ?>">
+      <div class="justify-content-center <?php echo $this->get_bg($data->other_insurance); ?>">
         <div class="h6"><?php echo $this->get_text($data->other_insurance, 'Autres Assurances') ?></div>
       </div>
-      <div class="p2 justify-content-center <?php echo $this->get_bg($data->stock); ?>">
+      <div class="justify-content-center <?php echo $this->get_bg($data->stock); ?>">
         <div class="h6"><?php echo $this->get_text($data->stock, 'Bourse') ?></div>
       </div>
-       <div class="p2 justify-content-center mt-4">
+       <div class="justify-content-center">
          <a href="<?php echo $data->review_link; ?>" class="btn btn-success btn-block text-center">Revue détaillée</a>
         </div>
     </div>
