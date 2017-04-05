@@ -41,10 +41,10 @@ if (! class_exists('Ranking_Widget')) {
             return $value == 1 ?  "text-success" : "text-danger";
         }
 
-        private function coerse_null_value($value, $default_value) { 
+        private function coerse_null_value($value, $default_value) {
             return $value == null ? $default_value : $value;
         }
-        
+
         public function get_ranking_data($p)
         {
             $ranking_data = null;
@@ -57,7 +57,7 @@ if (! class_exists('Ranking_Widget')) {
                 $ranking_data->icon = get_field("bank_icon", $id);
                 $ranking_data->image = get_field("bank_image", $id);
 
-                
+
                 $ranking_data->address = get_field("address", $id);
                 $ranking_data->holding_label = get_field("holding_label", $id);
                 $ranking_data->holding_name = get_field("holding", $id);
@@ -70,7 +70,7 @@ if (! class_exists('Ranking_Widget')) {
 
                 $ranking_data->welcome_offer = get_field("welcome_offer", $id);
                 $ranking_data->minimum_wadge = get_field("minimum_wadge", $id);
-                $ranking_data->credit_card = get_field("numbers_of_customers", $id);
+                $ranking_data->credit_card = get_field("credit_card", $id);
 
                 $ranking_data->young_offer = $this->coerse_null_value(get_field("young_offer", $id), 0);
                 $ranking_data->prof_account = $this->coerse_null_value(get_field("prof_account", $id), 0);
@@ -84,6 +84,19 @@ if (! class_exists('Ranking_Widget')) {
                 $ranking_data->other_insurance = $this->coerse_null_value(get_field("other_insurance", $id), 0);
                 $ranking_data->stock = $this->coerse_null_value(get_field("stock", $id), 0);
 
+                if(have_rows('points_forts', $id)) {
+                    while(have_rows('points_forts', $id)) {
+                        the_row();
+                        array_push($ranking_data->pros, get_sub_field('point_fort', $id));
+                    }
+                }
+
+                  if(have_rows('points_faibles', $id)) {
+                      while(have_rows('points_faibles', $id)) {
+                          the_row();
+                          array_push($ranking_data->cons, get_sub_field('point_faible', $id));
+                     }
+                  }
 
                 if (have_rows('evaluation_criteres', $id)) {
                     $eval_count = 0;
@@ -98,15 +111,15 @@ if (! class_exists('Ranking_Widget')) {
                         "label" => get_sub_field('label_critere', $id),
                         "description" => get_sub_field('description_critere', $id),
                         "note" => get_sub_field('valeur_note', $id)
-                    ));
-                    }
+                      ));
+                  }
                     $ranking_data->title = get_field("evaluation_title", $id);
                     $ranking_data->mean = round($eval_sum / $eval_count);
                 }
             }
             return $ranking_data;
         }
-     
+
         public function widget($args, $instance)
         {
             $widget_id = "widget_" . $args["widget_id"];
@@ -167,6 +180,8 @@ if (! class_exists('Ranking_Widget')) {
 
         public $mean;
         public $eval_data = array();
+        public $pros = array();
+        public $cons = array();
 
         public function __construct($name, $id)
         {
