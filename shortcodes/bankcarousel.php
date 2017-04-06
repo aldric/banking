@@ -4,10 +4,10 @@ require(__ROOT__. '/widgets/ranking.widget.php');
 // [bank-slide bank='hellobank' background='#fafafa' title='Le meilleur de hellobank' cover-title='En bref' cover-text='' button-text='Voir la revue' button-type='default|primary|success|info|warning|danger|link' button-icon='fa-star']
 function bankcarousel_func($atts, $content = null)
 {
-  $sliderid = 'slider-'.rand();
-  $content = '<div id="'.$sliderid.'">'.do_shortcode($content).'</div>';
+    $sliderid = 'slider-'.rand();
+    $content = '<div id="'.$sliderid.'">'.do_shortcode($content).'</div>';
 
-  $content .= '<script type="text/javascript">
+    $content .= '<script type="text/javascript">
     jQuery(document).ready(function(){
       jQuery("#'.$sliderid.'").bxSlider({
         controls: true,
@@ -19,12 +19,12 @@ function bankcarousel_func($atts, $content = null)
     });
     </script>
   ';
-  return $content;
+    return $content;
 }
 
 function bankslide_func($atts, $content = null)
 {
-  $a = shortcode_atts( array(
+    $a = shortcode_atts(array(
      'background' => '#fafafa',
      'bank' => '',
      'title' => '',
@@ -34,30 +34,31 @@ function bankslide_func($atts, $content = null)
      'button-type' => 'success',
      'button-icon' => 'fa-star'
 
- ), $atts );
+ ), $atts);
 
- $bg = $a['background'];
- $bank = $a['bank'];
- $title = $a['title'];
- $cover_title = $a['cover-title'];
- $cover_text = $a['cover-text'];
- $button_text = $a['button-text'];
- $button_type = $a['button-type'];
- $button_icon = $a['button-icon'];
+    $bg = $a['background'];
+    $bank = $a['bank'];
+    $title = $a['title'];
+    $cover_title = $a['cover-title'];
+    $cover_text = $a['cover-text'];
+    $button_text = $a['button-text'];
+    $button_type = $a['button-type'];
+    $button_icon = $a['button-icon'];
 
- $repository = new Bank_Repository();
- $data = $repository->get_bank_data($bank);
+    $repository = new Bank_Repository();
+    $data = $repository->get_bank_data($bank);
 
- if($data == null)
-    return $content;
+    if ($data == null) {
+        return $content;
+    }
 
-  $credit_card = $data->credit_card == '' ? '&nbsp;' : $data->credit_card;
-  $welcome_offer = $data->welcome_offer == '' ? '&nbsp;' : $data->welcome_offer;
+    $credit_card = $data->credit_card == '' ? '&nbsp;' : $data->credit_card;
+    $welcome_offer = $data->welcome_offer == '' ? '&nbsp;' : $data->welcome_offer;
 
-  $pros_one   = count($data->pros) == 1 ? $data->pros[0] : '&nbsp;';
-  $pros_two   = count($data->pros) == 2 ? $data->pros[1] : '';
+    $pros_one   = count($data->pros) == 1 ? $data->pros[0] : '&nbsp;';
+    $pros_two   = count($data->pros) == 2 ? $data->pros[1] : '';
 
- $content .= '<div class="slide" style="background:'.$bg.';">
+    $content .= '<div class="slide" style="background:'.$bg.';">
    <div class="row" >
      <div class="col-sm-2 col-md-4 m-auto">
                <div class="text-center slide-image">
@@ -66,7 +67,7 @@ function bankslide_func($atts, $content = null)
            </div>
            <div class="col-sm-10 col-md-8">
              <div class="text-center">
-                 <h2>'.$title.'</h2>
+                 <h1>'.$title.'</h1>
              </div>
                <ul class="faul">
                    <li class="cc"><span>Carte de cr&eacute;dit : '.$credit_card.'</span></li>
@@ -82,9 +83,8 @@ function bankslide_func($atts, $content = null)
            </div>
   </div>';
 
- return $content;
+    return $content;
 }
 
 add_shortcode('bankcarousel', 'bankcarousel_func');
 add_shortcode('bank-slide', 'bankslide_func');
-?>
