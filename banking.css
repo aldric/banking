@@ -29,6 +29,9 @@
 .bx-wrapper .bx-next:hover, .bx-wrapper .bx-prev:hover {
   color: #f13600;
 }
+.bx-wrapper .bx-pager.bx-default-pager a {
+  background: #ACACAC;
+}
 div.slider1 img {
  margin:auto;
 }
@@ -45,4 +48,42 @@ div.slide div.slide-image {
 div.slide ul.fa-ul i {
   color : #5cb85c;
   vertical-align: middle;
+}
+
+div.shade {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)!important;
+}
+
+ul.faul {
+  list-style: none;
+  padding: 0;
+}
+ul.faul li {
+  padding-left: 1.3em;
+  padding-top: 1em;
+  font-size: 2em;
+}
+li.cc:before {
+  content: "\f09d"; /* FontAwesome Unicode */
+  font-family: FontAwesome;
+  display: inline-block;
+  color : #5cb85c;
+  margin-left: -1.3em; /* same as padding-left set on li */
+  width: 1.3em; /* same as padding-left set on li */
+}
+li.gift:before {
+  content: "\f06b"; /* FontAwesome Unicode */
+  font-family: FontAwesome;
+  display: inline-block;
+  color : #5cb85c;
+  margin-left: -1.3em; /* same as padding-left set on li */
+  width: 1.3em; /* same as padding-left set on li */
+}
+li.check:before {
+  content: "\f046"; /* FontAwesome Unicode */
+  font-family: FontAwesome;
+  display: inline-block;
+  color : #5cb85c;
+  margin-left: -1.3em; /* same as padding-left set on li */
+  width: 1.3em; /* same as padding-left set on li */
 }

@@ -1,5 +1,6 @@
 <?php
-require realpath(dirname(__FILE__)) . "/../widgets/ranking.widget.php";
+require (__ROOT__ .'/widgets/ranking.widget.php');
+
 //[bankranking display="all"]
 function bankranking_func($atts)
 {
@@ -27,10 +28,10 @@ function bankranking_func($atts)
    if ($posts->have_posts()) {
        while ($posts->have_posts()) {
             $posts->the_post();
-            setup_postdata( $post ); 
+            setup_postdata( $post );
             $data = $widget->get_ranking_data($post);
             if($data != null) {
-                $rankings[$data->mean] = $data; 
+                $rankings[$data->mean] = $data;
             }
             wp_reset_postdata();
        }
@@ -49,13 +50,13 @@ function bankranking_func($atts)
     //     $out .= "</div>";
     // }
     // $out .= "</div></div>";
-    
+
     $template = file_get_contents(realpath(dirname(__FILE__))."/../ranking.html");
     $app = '<script type="text/javascript">' . file_get_contents(realpath(dirname(__FILE__))."/../ranking.js") . '</script>';
-    $out = '<script type="text/javascript"> 
+    $out = '<script type="text/javascript">
              var banks =' . json_encode($rankings).';'.
            '</script>';
-    //$out = 
+    //$out =
     wp_reset_query();
     $out .= $template;
     $out .= $app;
