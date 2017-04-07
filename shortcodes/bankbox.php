@@ -30,8 +30,6 @@ function bankbox_func($atts, $content = null)
     foreach ($data as $bank) {
       $pros_one   = count($bank->pros) == 1 ? $bank->pros[0] : '';
       $pros_two   = count($bank->pros) == 2 ? $bank->pros[1] : '';
-      var_dump($bank->eval_data);
-
       $content .= '<div class="bank-box '.$col_css.'">';
       $content .= '<span class="thumbnail text-center"><img src="'.$bank->icon.'" style="max-width:350px;" alt="Icône"'.$bank->name.' />';
       $content .= '<h1 class="text-danger">'.$bank->name.'</h1>';
