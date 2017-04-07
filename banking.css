@@ -91,3 +91,33 @@ li.check:before {
   margin-left: -1.3em; /* same as padding-left set on li */
   width: 1.3em; /* same as padding-left set on li */
 }
+.thumbnail {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
+.thumbnail:hover{
+		opacity:1.00;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		transition: box-shadow 0.5s;
+
+		}
+div.bank-box  a.btn {
+  margin: 0 2px;
+}
+.gold {
+  color : gold;
+}
+.green {
+  color : #69f0ae
+}
+.blue {
+  color : #01579b ;
+}

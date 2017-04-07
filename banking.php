@@ -36,6 +36,7 @@ function shortcodes_to_exempt_from_wptexturize( $shortcodes ) {
   $shortcodes[] = 'bankcarousel';
   $shortcodes[] = 'bank-slide';
   $shortcodes[] = 'bankranking';
+  $shortcodes[] = 'bank-box';
   $shortcodes[] = 'proscons';
 return $shortcodes;
 }

@@ -56,7 +56,6 @@ if (! class_exists('Bank_Repository')) {
               $ranking_data->icon = get_field("bank_icon", $id);
               $ranking_data->image = get_field("bank_image", $id);
 
-
               $ranking_data->address = get_field("address", $id);
               $ranking_data->holding_label = get_field("holding_label", $id);
               $ranking_data->holding_name = get_field("holding", $id);
