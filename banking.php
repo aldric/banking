@@ -13,6 +13,7 @@ Version: 1.6
 define('__ROOT__', realpath(dirname(__FILE__)));
 
 include(__ROOT__.'/Bank_Repository.php');
+include(__ROOT__."/ViewRenderer.php");
 include(__ROOT__. "/widgets/ranking.widget.php");
 include(__ROOT__. "/widgets/bankbanner.widget.php");
 include(__ROOT__. "/widgets/bankHierarchy.widget.php");
@@ -21,6 +22,7 @@ include(__ROOT__. "/shortcodes/bankcarousel.php");
 include(__ROOT__. "/shortcodes/proscons.php");
 include(__ROOT__. "/shortcodes/bankbox.php");
 include(__ROOT__."/class/BankReviewJson.php");
+
 
 function banking_plugin_enqueue_styles()
 {
@@ -31,7 +33,7 @@ function banking_plugin_enqueue_styles()
 
 add_action('wp_enqueue_scripts', 'banking_plugin_enqueue_styles', 15);
 
-add_filter( 'no_texturize_shortcodes', 'shortcodes_to_exempt_from_wptexturize' );
+add_filter( 'no_texturize_shortcodes', 'shortcodes_to_exempt_from_wptexturize', 10, 1 );
 function shortcodes_to_exempt_from_wptexturize( $shortcodes ) {
   $shortcodes[] = 'bankcarousel';
   $shortcodes[] = 'bank-slide';
