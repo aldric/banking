@@ -40,7 +40,7 @@ if (! class_exists('BankHierarchy_Widget')) {
           //  echo 'type :'.get_post_type($top);
             $model =  $this->get_posts_children($top);
             if ( get_post_type($top) == 'banque_en_ligne' && $model != null && count($model->children) > 0) {
-                include(__ROOT__ . "/widgets/bankHierarchy.widget.view.php");
+                echo ViewRenderer::render('bankHierarchy.widget.html', $model);
             }
         }
 

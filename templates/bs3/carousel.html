@@ -1,0 +1,125 @@
+<style>
+.carousel-overlay {
+  position:absolute;
+  left:0;
+  bottom:-22px;
+  width:100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  text-align:left;
+  height: 110px;
+  overflow: hidden;
+  color:white;
+}
+.carousel-overlay h2,
+.carousel-overlay p {
+      color:white;
+      margin:0;
+      padding: 0 5px;
+}
+.bx-viewport {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)!important;
+}
+.btn-success-shiny {
+  background-color: #64dd17;
+}
+.bx-wrapper .bx-next  {
+  right: 15px;
+}
+
+.bx-wrapper .bx-next:hover, .bx-wrapper .bx-prev:hover {
+  color: #f13600;
+}
+div.slider1 img {
+ margin:auto;
+}
+
+div.slide div.row {
+  padding: 10px 5px 110px 5px;
+}
+div.slide div.m-auto {
+  margin: auto;
+}
+div.slide div.slide-image {
+  padding: 10px 5px;
+}
+
+</style>
+<div class="slider1">
+  <div class="slide" style="background:#fafafa;">
+    <div class="row">
+      <div class="col-sm-3 col-md-5 m-auto">
+                <div class="text-center slide-image">
+                    <img src="http://www.hellobank.com/img/it-lo.png"></img>
+                </div>
+            </div>
+            <div class="col-sm-9 col-md-7">
+              <div class="text-center">
+                  <h2>Hello Bank en bref</h2>
+              </div>
+                <ul class="fa-ul">
+                    <li><i class="fa fa-check-circle fa-2x" style="color:#64dd17 " aria-hidden="true"></i><span class="carousel-list-item">Carte de credit gratuite</span></li>
+                    <li><i class="fa fa-check-circle fa-2x" style="color:#64dd17 " aria-hidden="true"></i><span class="carousel-list-item">80€ offerts &agrave; l&apos;ouverture de votre compte</span></li>
+                    <li><i class="fa fa-check-circle fa-2x" style="color:#64dd17 " aria-hidden="true"></i><span class="carousel-list-item">1000€ de revenus mensuels ou 5000€ sur un compte</span></li>
+                    <li><i class="fa fa-check-circle fa-2x" style="color:#64dd17 " aria-hidden="true"></i><span class="carousel-list-item">Classée banque la moins chère depuis 9 ans</span></li>
+                </ul>
+                <div class="text-center">
+                  <a class="btn btn-lg btn-success" href="#">
+                      <i class="fa fa-star fa-2x"></i><span style="vertical-align: super;">Voir l&apos;avis complet</span></a>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-overlay">
+              <h2>Hello bank</h2>
+              <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively. I am convenient because I require little markup to use effectively.</p>
+            </div>
+   </div>
+     <div class="slide" style="background:#fafafa;">
+       <div class="row" style="padding: 10px 5px 110px 5px;">
+         <div class="col-sm-3 col-md-5" style="margin: auto;">
+                   <div class="text-center" style="padding: 10px 5px;">
+                       <img src="http://www.culturebanque.com/wp-content/uploads/2016/06/nouveau-logo-monabanq-e1465639221729.jpg"></img>
+                   </div>
+               </div>
+               <div class="col-sm-9 col-md-7">
+                 <div class="text-center">
+                     <h2>Les plus de Monabanq</h2>
+                 </div>
+                   <ul class="fa-ul">
+                       <li><i class="fa fa-check-circle fa-2x" style="color:#64dd17 " aria-hidden="true"></i><span class="carousel-list-item">Carte de credit gratuite</span></li>
+                       <li><i class="fa fa-check-circle fa-2x" style="color:#64dd17 " aria-hidden="true"></i><span class="carousel-list-item">80€ offerts &agrave; l&apos;ouverture de votre compte</span></li>
+                       <li><i class="fa fa-check-circle fa-2x" style="color:#64dd17 " aria-hidden="true"></i><span class="carousel-list-item">1000€ de revenus mensuels ou 5000€ sur un compte</span></li>
+                       <li><i class="fa fa-check-circle fa-2x" style="color:#64dd17 " aria-hidden="true"></i><span class="carousel-list-item">Classée banque la moins chère depuis 9 ans</span></li>
+                   </ul>
+                   <div class="text-center">
+                     <a class="btn btn-lg btn-success" href="#">
+                         <i class="fa fa-star fa-2x"></i><span style="vertical-align: super;">Voir l&apos;avis complet</span></a>
+                   </div>
+                 </div>
+               </div>
+               <div class="carousel-overlay">
+                 <h2>Monabanq</h2>
+                 <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively. I am convenient because I require little markup to use effectively.</p>
+               </div>
+      </div>
+  <!--<div class="slide"><img src="http://placehold.it/800x600&text=FooBar3"></div>
+  <div class="slide"><img src="http://placehold.it/800x600&text=FooBar4"></div>
+  <div class="slide"><img src="http://placehold.it/800x600&text=FooBar5"></div>
+  <div class="slide"><img src="http://placehold.it/800x600&text=FooBar6"></div>
+  <div class="slide"><img src="http://placehold.it/800x600&text=FooBar7"></div>
+  <div class="slide"><img src="http://placehold.it/800x600&text=FooBar8"></div>
+  <div class="slide"><img src="http://placehold.it/800x600&text=FooBar9"></div> -->
+</div>
+
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+  jQuery('.slider1').bxSlider({
+    controls: true,
+    prevText : '<i class="fa fa-chevron-circle-left fa-3x" aria-hidden="true"></i>',
+    nextText : '<i class="fa fa-chevron-circle-right fa-3x" aria-hidden="true"></i>',
+  //  adaptiveHeight:true,
+    slideMargin: 10
+  });
+});
+</script>

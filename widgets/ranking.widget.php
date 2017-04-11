@@ -28,21 +28,6 @@ if (! class_exists('Ranking_Widget')) {
             echo "<br />";
         }
 
-        public function get_icon($value)
-        {
-            return $value == 1 ?  "fa fa-check-circle-o fa-3x" : "fa fa-times fa-3x";
-        }
-
-        public function get_text($value, $text)
-        {
-            return $value == 1 ?  '<i class="fa fa-check" aria-hidden="true"></i>'.$text : '<i class="fa fa-times" aria-hidden="true"></i><s>'.$text."</s>";
-        }
-
-        public function get_bg($value)
-        {
-            return $value == 1 ?  "text-success" : "text-danger";
-        }
-
         public function widget($args, $instance)
         {
             $widget_id = "widget_" . $args["widget_id"];
@@ -52,7 +37,7 @@ if (! class_exists('Ranking_Widget')) {
             $data = $this->repository->get_bank_data($post_object);
             $widget_title = get_field('widget_ranking_title', $widget_id).' '. $data->name;
             if ($data != null) {
-                include(realpath(dirname(__FILE__)) . "/ranking.widget.view.php");
+                echo ViewRenderer::render('ranking.widget.html', $data);
                 $review = new BankReviewJson($data->name,
                                              $data->address,
                                              "0680606073",

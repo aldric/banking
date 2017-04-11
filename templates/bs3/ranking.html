@@ -1,9 +1,7 @@
-<div id="app-compare">
-    <?php echo '>> '.$data[0]->mean.' <<'; ?>
-</div>
+<div id="app-compare"></div>
     <div class="row">
         <div class="col-md-12">
-          <nav class="navbar navbar-default">
+          <?php /* <nav class="navbar navbar-default">
             <div class="container-fluid">
               <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -47,15 +45,68 @@
                 </ul>
               </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
-          </nav>
+          </nav> */ ?>
         </div>
-
+    </div>
+        <div class="row">
+          <div class="col-md-12 col-s-12">
+            <div class=" panel panel-danger">
+              <div class="panel-heading" style="font-size: 24px; line-height: 1.5em;"><i class="fa fa-university" aria-hidden="true"></i> Choisissez les banques &agrave; comparer</div>
+               <div class="panel-body" style="font-size:1em;">
+                 <div class="row">
+                   <?php
+                      foreach($data as $bank) {
+                        echo '<div class="col-md-4">';
+                        echo '<label class="checkbox-inline"><input type="checkbox" value="'.$bank->name.'" checked="checked">'.$bank->name.'</label>';
+                        echo '</div>';
+                      }
+                   ?>
+                 </div>
+               </div>
+             </div>
+          </div>
+          <div class="col-md-12 col-s-12">
+            <div class=" panel panel-success">
+              <div class="panel-heading" style="font-size: 24px; line-height: 1.5em;"><i class="fa fa-mobile" aria-hidden="true"></i> Vos types de mobiles ?</div>
+               <div class="panel-body" style="font-size:1em;">
+                 <div class="row">
+                   <div class="col-md-4">
+                     <i class="fa fa-android fa-2x" aria-hidden="true"></i>
+                   </div>
+                   <div class="col-md-4">
+                   <i class="fa fa-apple fa-2x" aria-hidden="true"></i>
+                   </div>
+                   <div class="col-md-4">
+                    <i class="fa fa-windows fa-2x" aria-hidden="true"></i>
+                    </div>
+                 </div>
+               </div>
+             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-s-12">
+            <div class=" panel panel-info">
+              <div class="panel-heading" style="font-size: 24px; line-height: 1.5em;"><i class="fa fa-list-ul" aria-hidden="true"></i> Affichez les services qui vous intéressent</div>
+               <div class="panel-body" style="font-size:1em;">
+                 <div class="row">
+                   <?php
+                      foreach($data as $bank) {
+                        echo '<div class="col-md-4">';
+                        echo '<label class="checkbox-inline"><input type="checkbox" value="'.$bank->name.'" checked="checked">'.$bank->name.'</label>';
+                        echo '</div>';
+                      }
+                   ?>
+                 </div>
+               </div>
+             </div>
+          </div>
+        </div>
     <div class="row">
       <?php
         foreach($data as $bank) {
           //var_dump($bank);
-          echo ViewRenderer::render(__ROOT__ . '/ranking-single.html', $bank);
+          echo ViewRenderer::render('ranking-single.html', $bank);
         }
       ?>
     </div>
-</div>

@@ -43,7 +43,7 @@ if (! class_exists('BankBanner_Widget')) {
                 if(count($banners) > 0 ) {
                     $key = array_rand($banners);
                     $banner = $banners[$key];
-                    include(realpath(dirname(__FILE__)) . "/bankbanner.widget.view.php");
+                    echo ViewRenderer::render('bankbanner.widget.html', $data);
                 }
             }
         }
@@ -51,7 +51,7 @@ if (! class_exists('BankBanner_Widget')) {
      class BannerData {
         public $image;
         public $url;
-        
+
         function __construct($image, $url)
         {
             $this->image = $image;

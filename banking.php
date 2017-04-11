@@ -12,7 +12,10 @@ Version: 1.6
 */
 define('__ROOT__', realpath(dirname(__FILE__)));
 
-include(__ROOT__.'/Bank_Repository.php');
+
+
+include(__ROOT__.'/class/Bank_Repository.php');
+include(__ROOT__.'/class/Helpers.php');
 include(__ROOT__."/ViewRenderer.php");
 include(__ROOT__. "/widgets/ranking.widget.php");
 include(__ROOT__. "/widgets/bankbanner.widget.php");

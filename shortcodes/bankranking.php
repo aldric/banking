@@ -1,11 +1,9 @@
 <?php
-//require (__ROOT__ .'/widgets/ranking.widget.php');
-//require (__ROOT__ .'/ViewRenderer.php');
-
 //[bankranking display="all"]
 function bankranking_func($atts)
 {
-     $a = shortcode_atts( array(
+
+   $a = shortcode_atts( array(
         'display' => '',
         'sort' => 'desc'
     ), $atts );
@@ -16,7 +14,7 @@ function bankranking_func($atts)
       array_reverse($data);
     }
     //var_dump($data);
-    $out = ViewRenderer::render(__ROOT__ . '/ranking.html', $data);
+    $out = ViewRenderer::render('ranking.html', $data);
     return $out;
 }
 
