@@ -2,19 +2,18 @@
 //[bankranking display="all"]
 function bankranking_func($atts)
 {
-
-   $a = shortcode_atts( array(
+    $a = shortcode_atts(array(
         'display' => '',
         'sort' => 'desc'
-    ), $atts );
+    ), $atts);
     $repo = new Bank_Repository();
     $data = $repo->get_banks_data($a['display']);
-    usort($data,"cmp");
-    if($a['sort'] == 'asc') {
-      array_reverse($data);
+    usort($data, "cmp");
+    if ($a['sort'] == 'asc') {
+        array_reverse($data);
     }
     //var_dump($data);
-    $out = ViewRenderer::render('ranking.html', $data);
+    $out = ViewRenderer::render('ranking.html', new RankingModel($data));
     return $out;
 }
 
@@ -26,6 +25,22 @@ function cmp($a, $b)
     return ($a->mean < $b->mean) ? -1 : 1;
 }
 
-add_shortcode('bankranking', 'bankranking_func');
+class RankingModel
+{
+    public $banks;
+    public $offer = array();
+    public function __construct($banks)
+    {
+        $this->banks = $banks;
+        $o = array();
 
-?>
+        foreach ($banks as $bank) {
+            foreach ($bank->offer as $key => $value) {
+                array_push($o, $key);
+            }
+        }
+        $this->offer = array_unique($o);
+    }
+}
+
+add_shortcode('bankranking', 'bankranking_func');
