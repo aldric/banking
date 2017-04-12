@@ -1,73 +1,40 @@
-<div id="app-compare"></div>
-<div class="row">
-    <div class="col-md-12">
-        <?php /* <nav class="navbar navbar-default">
-            <div class="container-fluid">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Brand</a>
-              </div>
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                  <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                  <li><a href="#">Link</a></li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#">Separated link</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#">One more separated link</a></li>
-                    </ul>
-                  </li>
-                </ul>
-                <form class="navbar-form navbar-left"><div class="form-group"><input type="text" class="form-control" placeholder="Search"></div></form>
-                <ul class="nav navbar-nav navbar-right">
-                  <li><a href="#">Link</a></li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#">Separated link</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-          </nav> */ ?>
-    </div>
-</div>
-<div class="row">
+
+
+
+<script type="text/javascript">
+jQuery(function() {
+  Vue.component('banks-grid', {
+    template: '#ranking-template',
+    props: {
+      banks: Array,
+      offer: Array
+    }
+  });
+
+  var comparer = new Vue({
+    el: '#app-compare',
+    data: { ranking : ranking }
+  })
+});
+</script>
+
+<script type="text/x-template" id="ranking-template">
+  <div class="row">
     <div class="col-md-12 col-s-12">
-        <div class=" panel panel-danger">
+        <div class=" panel panel-tb">
             <div class="panel-heading" style="font-size: 24px; line-height: 1.5em;"><i class="fa fa-university" aria-hidden="true"></i> Choisissez les banques &agrave; comparer</div>
             <div class="panel-body" style="font-size:1em;">
                 <div class="row">
-                    <?php
-                      foreach($data->banks as $bank) {
-                        echo '<div class="col-md-4">';
-                        echo '<label class="checkbox-inline"><input type="checkbox" value="'.$bank->name.'" checked="checked">'.$bank->name.'</label>';
-                        echo '</div>';
-                      }
-                   ?>
+                  <div class="col-md-4" v-for="bank in banks">
+                    <label class="checkbox-inline"><input type="checkbox" v-bind:value="bank.name" checked="checked">{{ bank.name }}</label>
+                  </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-12 col-s-12">
-        <div class=" panel panel-success">
-            <div class="panel-heading" style="font-size: 24px; line-height: 1.5em;"><i class="fa fa-mobile" aria-hidden="true"></i> Vos types de mobiles ?</div>
+        <div class=" panel panel-tb">
+            <div class="panel-heading" style="font-size: 24px; line-height: 1.5em;"><i class="fa fa-mobile" aria-hidden="true"></i> Applications mobiles</div>
             <div class="panel-body" style="font-size:1em;">
                 <div class="row">
                     <div class="col-md-4 text-center">
@@ -83,30 +50,38 @@
             </div>
         </div>
     </div>
-</div>
-<div class="row">
     <div class="col-md-12 col-s-12">
-        <div class=" panel panel-info">
-            <div class="panel-heading" style="font-size: 24px; line-height: 1.5em;"><i class="fa fa-list-ul" aria-hidden="true"></i> Affichez les services qui vous intéressent</div>
+        <div class=" panel panel-tb">
+            <div class="panel-heading" style="font-size: 24px; line-height: 1.5em;"><i class="fa fa-list-ul" aria-hidden="true"></i> Sélectionnez les services qui vous intéressent</div>
             <div class="panel-body" style="font-size:1em;">
                 <div class="row">
-                    <?php
-                      foreach($data->offer as $offer) {
-                        echo '<div class="col-md-4">';
-                        echo '<label class="checkbox-inline"><input type="checkbox" value="'.$offer.'" checked="checked">'.$offer.'</label>';
-                        echo '</div>';
-                      }
-                   ?>
+                  <div class="col-md-4" v-for="o in offer">
+                    <label class="checkbox-inline"><input type="checkbox" v-bind:value="o" checked="checked">{{ o }}</label>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <?php
-        foreach($data->banks as $bank) {
-          //var_dump($bank);
-          echo ViewRenderer::render('ranking-single.html', $bank);
-        }
-      ?>
+  <div class="col-md-4 col-s-12" v-for="bank in banks">
+    <div class=" panel panel-success">
+      <div class="panel-heading">{{ bank.name }}</div>
+       <div class="panel-body">
+         <p>
+           <span class="fa-stack fa-2x">
+               <i class="fa fa-star fa-2x fa-stack-1x gold"></i>
+               <strong class="fa-stack-1x ">{{ bank.mean }} %</strong>
+           </span>
+         </p>
+       </div>
+     </div>
+   </div>
+  </div>
+</script>
+
+<div id="app-compare">
+  <banks-grid
+    :banks="ranking.banks"
+    :offer="ranking.offer"
+  >
+  </banks-grid>
 </div>

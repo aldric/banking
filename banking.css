@@ -45,6 +45,9 @@ div.slide div.m-auto {
 div.slide div.slide-image {
   padding: 10px 5px;
 }
+div.slide div.slide-image > img {
+    margin: auto;
+  }
 div.slide ul.fa-ul i {
   color : #5cb85c;
   vertical-align: middle;
@@ -120,4 +123,17 @@ div.bank-box  a.btn {
 }
 .blue {
   color : #01579b ;
+}
+
+.panel-tb {
+    border-color: #f13600;
+}
+.panel-tb>.panel-heading {
+    color: #2d2d2d;
+    background-color: #f13600;
+    border-color: #f13600;
+}
+
+[v-cloak] {
+  display: none;
 }

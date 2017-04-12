@@ -12,8 +12,9 @@ function bankranking_func($atts)
     if ($a['sort'] == 'asc') {
         array_reverse($data);
     }
-    //var_dump($data);
-    $out = ViewRenderer::render('ranking.html', new RankingModel($data));
+    $banks_model = new RankingModel($data);
+    $out = '<script type="text/javascript"> var ranking=' .json_encode($banks_model, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).';</script>';
+    $out .= ViewRenderer::render('ranking.html', new RankingModel($data));
     return $out;
 }
 
