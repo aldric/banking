@@ -1,87 +1,91 @@
-
-
-
 <script type="text/javascript">
-jQuery(function() {
-  Vue.component('banks-grid', {
-    template: '#ranking-template',
-    props: {
-      banks: Array,
-      offer: Array
-    }
-  });
+    jQuery(function() {
+        Vue.component('banks-grid', {
+            template: '#ranking-template',
+            props: {
+                banks: Array,
+                offer: Array
+            },
+            computed: {
+                filteredBanks: function() {
+                    return this.banks.filter(function(bank) {
+                        console.log(bank);
+                        return true;
+                    })
+                }
+            }
+        });
 
-  var comparer = new Vue({
-    el: '#app-compare',
-    data: { ranking : ranking }
-  })
-});
+        var comparer = new Vue({
+            el: '#app-compare',
+            data: {
+                ranking: ranking
+            }
+        })
+    });
 </script>
 
 <script type="text/x-template" id="ranking-template">
-  <div class="row">
-    <div class="col-md-12 col-s-12">
-        <div class=" panel panel-tb">
-            <div class="panel-heading" style="font-size: 24px; line-height: 1.5em;"><i class="fa fa-university" aria-hidden="true"></i> Choisissez les banques &agrave; comparer</div>
-            <div class="panel-body" style="font-size:1em;">
-                <div class="row">
-                  <div class="col-md-4" v-for="bank in banks">
-                    <label class="checkbox-inline"><input type="checkbox" v-bind:value="bank.name" checked="checked">{{ bank.name }}</label>
-                  </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12 col-s-12">
-        <div class=" panel panel-tb">
-            <div class="panel-heading" style="font-size: 24px; line-height: 1.5em;"><i class="fa fa-mobile" aria-hidden="true"></i> Applications mobiles</div>
-            <div class="panel-body" style="font-size:1em;">
-                <div class="row">
-                    <div class="col-md-4 text-center">
-                        <label class="checkbox"><input type="checkbox" value="android" checked="checked"><i class="fa fa-android fa-4x" aria-hidden="true"></i></label>
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <label class="checkbox"><input type="checkbox" value="apple" checked="checked"><i class="fa fa-apple fa-4x" aria-hidden="true"></i></label>
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <label class="checkbox"><input type="checkbox" value="windows" checked="checked"><i class="fa fa-windows fa-4x" aria-hidden="true"></i></label>
+    <div class="row">
+        <div class="col-md-12 col-s-12">
+            <div class=" panel panel-tb">
+                <div class="panel-heading" style="font-size: 16px; line-height: 1em;"><i class="fa fa-university" aria-hidden="true"></i> Choisissez les banques &agrave; comparer</div>
+                <div class="panel-body" style="font-size:1em;">
+                    <div class="row">
+                        <div class="col-md-4" v-for="bank in banks">
+                            <label class="checkbox-inline"><input type="checkbox" v-bind:value="bank.name" checked="checked">{{ bank.name }}</label>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-12 col-s-12">
-        <div class=" panel panel-tb">
-            <div class="panel-heading" style="font-size: 24px; line-height: 1.5em;"><i class="fa fa-list-ul" aria-hidden="true"></i> Sélectionnez les services qui vous intéressent</div>
-            <div class="panel-body" style="font-size:1em;">
-                <div class="row">
-                  <div class="col-md-4" v-for="o in offer">
-                    <label class="checkbox-inline"><input type="checkbox" v-bind:value="o" checked="checked">{{ o }}</label>
+        <div class="col-md-12 col-s-12">
+            <div class=" panel panel-tb">
+                <div class="panel-heading" style="font-size: 16px; line-height: 1em;"><i class="fa fa-mobile" aria-hidden="true"></i> Applications mobiles</div>
+                <div class="panel-body" style="font-size:1em;">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <label class="checkbox"><input type="checkbox" value="android" checked="checked"><i class="fa fa-android fa-4x" aria-hidden="true"></i></label>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <label class="checkbox"><input type="checkbox" value="apple" checked="checked"><i class="fa fa-apple fa-4x" aria-hidden="true"></i></label>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <label class="checkbox"><input type="checkbox" value="windows" checked="checked"><i class="fa fa-windows fa-4x" aria-hidden="true"></i></label>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-  <div class="col-md-4 col-s-12" v-for="bank in banks">
-    <div class=" panel panel-success">
-      <div class="panel-heading">{{ bank.name }}</div>
-       <div class="panel-body">
-         <p>
-           <span class="fa-stack fa-2x">
+        <div class="col-md-12 col-s-12">
+            <div class=" panel panel-tb">
+                <div class="panel-heading" style="font-size: 16px; line-height: 1em;"><i class="fa fa-list-ul" aria-hidden="true"></i> Sélectionnez les services qui vous intéressent</div>
+                <div class="panel-body" style="font-size:1em;">
+                    <div class="row">
+                        <div class="col-md-4" v-for="o in offer">
+                            <label class="checkbox-inline"><input type="checkbox" v-bind:value="o" checked="checked">{{ o }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-s-12" v-for="bank in filteredBanks">
+            <div class=" panel panel-success">
+                <div class="panel-heading">{{ bank.name }}</div>
+                <div class="panel-body">
+                    <p>
+                        <span class="fa-stack fa-2x">
                <i class="fa fa-star fa-2x fa-stack-1x gold"></i>
                <strong class="fa-stack-1x ">{{ bank.mean }} %</strong>
            </span>
-         </p>
-       </div>
-     </div>
-   </div>
-  </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </script>
 
 <div id="app-compare">
-  <banks-grid
-    :banks="ranking.banks"
-    :offer="ranking.offer"
-  >
-  </banks-grid>
+    <banks-grid :banks="ranking.banks" :offer="ranking.offer">
+    </banks-grid>
 </div>
