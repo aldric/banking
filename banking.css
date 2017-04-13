@@ -134,6 +134,30 @@ div.bank-box  a.btn {
     border-color: #f13600;
 }
 
+.star-box,
+.star-bg {
+  color: gold;
+  position: absolute;
+  margin: 4px 0;
+  display: table;
+}
+.glyphicon {
+  display: table-cell;
+  padding: 0 0 0 2px;
+  font-size: 18px;
+}
+.star-box {
+  z-index: 2;
+}
+.star-bg {
+  color: #555;
+}
+.star-limiter {
+  width:100%;
+  overflow: hidden;
+  position: relative;
+}
+
 [v-cloak] {
   display: none;
 }

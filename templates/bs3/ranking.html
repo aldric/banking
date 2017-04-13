@@ -1,17 +1,70 @@
 <script type="text/javascript">
     jQuery(function() {
+
+      var r =  Vue.component('star-rating', {
+            template: '#star-rating',
+            props: ['percentage'],
+            data : function() {
+              return { value : this.percentage }
+            },
+            mounted: function() {
+              var that = this;
+              jQuery(that.$el).find('div.star-limiter').css('width', that.value +'%');
+            }
+        });
         Vue.component('banks-grid', {
             template: '#ranking-template',
+            components: {
+              'star-rating' : r
+            },
             props: {
                 banks: Array,
                 offer: Array
             },
+            data : function() {
+              var checkedNames = [];
+              this.banks.forEach(function(bank) {
+                checkedNames.push(bank.name);
+              });
+              return {
+                checkedNames : checkedNames
+              }
+            },
             computed: {
                 filteredBanks: function() {
+                    var that = this;
                     return this.banks.filter(function(bank) {
-                        console.log(bank);
-                        return true;
+                        return that.checkedNames.indexOf(bank.name) > -1;
                     })
+                },
+                headers : function() {
+                  var b = this.filteredBanks;
+                  var headers = [];
+                  headers.push({ name : '<i class="fa fa-university" aria-hidden="true"></i>' });
+                    b.forEach(function(bank){
+                      headers.push(
+                        {
+                          name : bank.name,
+                          image : bank.icon
+                        });
+                    });
+                    return headers;
+                },
+                values: function() {
+                  var b = this.filteredBanks;
+                  var values = [];
+                    b.forEach(function(bank){
+                      values.push(
+                        {
+                          mean : bank.mean,
+                          review: bank.review_link,
+                          resume: bank.resume || 'Cette banque c\'est vraiment de la balle. Fonce !',
+                          welcomeOffer : bank.welcome_offer,
+                          minimumWadge : bank.minimum_wadge,
+                          creditCard : bank.credit_card
+                        });
+                    });
+                    return values;
                 }
             }
         });
@@ -21,37 +74,78 @@
             data: {
                 ranking: ranking
             }
-        })
+        });
+
+
     });
 </script>
-
+<script type="text/x-template" id="star-rating">
+  <div class="">
+  <div class="star-box">
+    <div class="star-limiter">
+      <div class="longbar">
+        <span class="glyphicon glyphicon-star"></span>
+        <span class="glyphicon glyphicon-star"></span>
+        <span class="glyphicon glyphicon-star"></span>
+        <span class="glyphicon glyphicon-star"></span>
+        <span class="glyphicon glyphicon-star"></span>
+      </div>
+    </div>
+  </div>
+  <div class="star-bg">
+    <span class="glyphicon glyphicon-star"></span>
+    <span class="glyphicon glyphicon-star"></span>
+    <span class="glyphicon glyphicon-star"></span>
+    <span class="glyphicon glyphicon-star"></span>
+    <span class="glyphicon glyphicon-star"></span>
+  </div>
+</div>
+</script>
 <script type="text/x-template" id="ranking-template">
-    <div class="row">
+    <div>
+      <div class="row">
         <div class="col-md-12 col-s-12">
             <div class=" panel panel-tb">
-                <div class="panel-heading" style="font-size: 16px; line-height: 1em;"><i class="fa fa-university" aria-hidden="true"></i> Choisissez les banques &agrave; comparer</div>
+                <div class="panel-heading" style="font-size: 16px; line-height: 1em;"><i class="fa fa-diamond" aria-hidden="true"></i> Quelles sont vos principales motivations ?</div>
                 <div class="panel-body" style="font-size:1em;">
                     <div class="row">
-                        <div class="col-md-4" v-for="bank in banks">
-                            <label class="checkbox-inline"><input type="checkbox" v-bind:value="bank.name" checked="checked">{{ bank.name }}</label>
+                        <div class="col-md-6">
+                            <label><input type="checkbox" value=""> </input>Carte de crédit gratuite</label>
+                            <label><input type="checkbox" value=""> </input>Frais de tenu de compte au meilleur prix</label>
+                          </div>
+                          <div class="col-md-6">
+                            <label><input type="checkbox" value=""> </input>Envoyer ou recevoir de l'argent &agrave; l'étranger</label>
+                            <label><input type="checkbox" value=""> </input>Ouvrir un compte courant secondaire</label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-12 col-s-12">
+        <div class="col-md-8 col-s-12">
+            <div class=" panel panel-tb">
+                <div class="panel-heading" style="font-size: 16px; line-height: 1em;"><i class="fa fa-university" aria-hidden="true"></i> Choisissez les banques &agrave; comparer</div>
+                <div class="panel-body" style="font-size:1em;">
+                    <div class="row">
+                        <div class="col-md-4" v-for="bank in banks">
+                            <label class="checkbox-inline"><input type="checkbox" v-bind:value="bank.name" v-model="checkedNames"> </input>{{ bank.name }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-s-12">
             <div class=" panel panel-tb">
                 <div class="panel-heading" style="font-size: 16px; line-height: 1em;"><i class="fa fa-mobile" aria-hidden="true"></i> Applications mobiles</div>
                 <div class="panel-body" style="font-size:1em;">
                     <div class="row">
                         <div class="col-md-4 text-center">
-                            <label class="checkbox"><input type="checkbox" value="android" checked="checked"><i class="fa fa-android fa-4x" aria-hidden="true"></i></label>
+                            <label class="checkbox"><input type="checkbox" value="android" checked="checked"><i class="fa fa-android fa-2x" aria-hidden="true"></i></label>
                         </div>
                         <div class="col-md-4 text-center">
-                            <label class="checkbox"><input type="checkbox" value="apple" checked="checked"><i class="fa fa-apple fa-4x" aria-hidden="true"></i></label>
+                            <label class="checkbox"><input type="checkbox" value="apple" checked="checked"><i class="fa fa-apple fa-2x" aria-hidden="true"></i></label>
                         </div>
                         <div class="col-md-4 text-center">
-                            <label class="checkbox"><input type="checkbox" value="windows" checked="checked"><i class="fa fa-windows fa-4x" aria-hidden="true"></i></label>
+                            <label class="checkbox"><input type="checkbox" value="windows" checked="checked"><i class="fa fa-windows fa-2x" aria-hidden="true"></i></label>
                         </div>
                     </div>
                 </div>
@@ -69,20 +163,77 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-s-12" v-for="bank in filteredBanks">
-            <div class=" panel panel-success">
-                <div class="panel-heading">{{ bank.name }}</div>
-                <div class="panel-body">
-                    <p>
-                        <span class="fa-stack fa-2x">
-               <i class="fa fa-star fa-2x fa-stack-1x gold"></i>
-               <strong class="fa-stack-1x ">{{ bank.mean }} %</strong>
-           </span>
-                    </p>
-                </div>
-            </div>
-        </div>
+
+
     </div>
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table">
+            <thead>
+              <tr>
+                <th v-for="header in headers" style="vertical-align: top;text-align:center;margin-bottom:1em;">
+                  <div v-html="header.name"></div>
+                  <div style="width:100px" ><img v-bind:src="header.image" /></div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Note</th>
+                <td v-for="value in values" style="text-align: center;">
+                  <star-rating :percentage="value.mean" v-show="value.mean"></star-rating>
+                  <div class="btn-group-vertical" role="group" style="margin-top: 2.5em;">
+                      <a class="list-group-item" v-bind:href="value.review" style="padding: 10px 5px;">Voir la revue</a>
+                      <a class="list-group-item" href="#" style="padding: 10px 5px;">Visiter le site</a>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>En bref</th>
+                <td v-for="value in values" >
+                  {{ value.resume }}
+                </td>
+              </tr>
+              <tr>
+                <th>Offre</th>
+                <td v-for="value in values" >
+                  {{ value.welcomeOffer }}
+                </td>
+              </tr>
+              <tr>
+                <th>Conditions</th>
+                <td v-for="value in values" >
+                  {{ value.minimumWadge }}
+                </td>
+              </tr>
+              <tr>
+                <th><i class="fa fa-credit-card" aria-hidden="true"></i> Carte de cr&eacute;dit</th>
+                <td v-for="value in values" >
+                  {{ value.creditCard }}
+                </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+    <!--div class="row">
+      <div class="col-md-4 col-s-12" v-for="bank in filteredBanks">
+          <div class=" panel panel-success">
+              <div class="panel-heading">{{ bank.name }}</div>
+              <div class="panel-body">
+                  <p>
+                      <span class="fa-stack fa-2x">
+                        <i class="fa fa-star fa-2x fa-stack-1x gold"></i>
+                        <strong class="fa-stack-1x ">{{ bank.mean }} %</strong>
+                      </span>
+                      <star-rating :percentage="bank.mean"></star-rating>
+                  </p>
+
+              </div>
+          </div>
+      </div>
+    </div -->
+  </div>
 </script>
 
 <div id="app-compare">
