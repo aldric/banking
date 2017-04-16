@@ -20,7 +20,7 @@ function bankbox_func($atts, $content = null)
     $repository = new Bank_Repository();
     $data = $repository->get_banks_data($banks);
     $count = count($data);
-    $columns = 12 /  (($count > 0 ? $count : 1) + 1);
+    $columns = 4; //12 /  (($count > 0 ? $count : 1) + 1);
     $col_css = "col-sm-12 col-md-".$columns;
 
 
