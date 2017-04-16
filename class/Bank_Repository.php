@@ -91,6 +91,11 @@ if (! class_exists('Bank_Repository')) {
                 $ranking_data->other_insurance = $this->coerse_null_value(get_field("other_insurance", $id), 0);
                 $ranking_data->stock = $this->coerse_null_value(get_field("stock", $id), 0);
 
+                $apps = get_field("mobile_apps", $id);
+                $ranking_data->mobile_apps["iOS"] = array_search("iOS", $apps) == false;
+                $ranking_data->mobile_apps["Android"] = array_search("Android", $apps) == false;
+                $ranking_data->mobile_apps["Windows"] = array_search("Windows", $apps) == false;
+
                 $ranking_data->offer[ "Offre jeune"] = $ranking_data->young_offer;
                 $ranking_data->offer[ "Compte professionnel"] = $ranking_data->prof_account;
                 $ranking_data->offer["Compte courant"] = $ranking_data->saving_account;
@@ -102,6 +107,7 @@ if (! class_exists('Bank_Repository')) {
                 $ranking_data->offer[ "Assurance habitation" ]= $ranking_data->home_insurance;
                 $ranking_data->offer[ "Autre assurance" ]= $ranking_data->other_insurance;
                 $ranking_data->offer[ "Bourse en ligne" ]= $ranking_data->stock;
+
 
                 if (have_rows('points_forts', $id)) {
                     while (have_rows('points_forts', $id)) {
@@ -175,6 +181,9 @@ if (! class_exists('Bank_Repository')) {
         public $home_insurance;
         public $other_insurance;
         public $stock;
+        public $app_android;
+        public $app_ios;
+        public $app_windows;
 
         public $widget_title;
 
@@ -183,6 +192,7 @@ if (! class_exists('Bank_Repository')) {
         public $pros = array();
         public $cons = array();
         public $offer = array();
+        public $mobile_apps = array();
 
         public function __construct($name, $id)
         {

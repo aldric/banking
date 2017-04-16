@@ -36,7 +36,7 @@ function banking_plugin_enqueue_styles()
 
 add_action('wp_enqueue_scripts', 'banking_plugin_enqueue_styles', 16);
 
-add_filter('no_texturize_shortcodes', 'shortcodes_to_exempt_from_wptexturize', 10, 1);
+add_filter('no_texturize_shortcodes', 'shortcodes_to_exempt_from_wptexturize', 9, 1);
 function shortcodes_to_exempt_from_wptexturize($shortcodes)
 {
     $shortcodes[] = 'bankcarousel';
@@ -47,17 +47,19 @@ function shortcodes_to_exempt_from_wptexturize($shortcodes)
     return $shortcodes;
 }
 
-function custom_wpautop($content)
+function wpex_fix_shortcodes($content)
 {
-    if (get_post_meta(get_the_ID(), 'wpautop', true) == 'false') {
-        return $content;
-    } else {
-        return wpautop($content);
-    }
+    return strtr($content, [
+        '<p>[' => '[',
+        ']</p>' => ']',
+        ']<br />' => ']'
+    ]);
 }
-
 remove_filter('the_content', 'wpautop');
-add_filter('the_content', 'custom_wpautop', 12);
+remove_filter('the_content', 'do_shortcode', 11);
+add_filter('the_content', 'wpautop', 100);
+add_filter('the_content', 'wpex_fix_shortcodes', 105);
+add_filter('the_content', 'do_shortcode', 110);
 
 function add_scriptfilter($string)
 {
