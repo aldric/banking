@@ -32,10 +32,15 @@ if (! class_exists('Ranking_Widget')) {
         {
             $widget_id = "widget_" . $args["widget_id"];
             $template = get_field('side_template', $widget_id);
-            $post_object = get_field('associated_bank');
-            if($post_object == null) return;
-            $data = $this->repository->get_bank_data($post_object);
-            $widget_title = get_field('widget_ranking_title', $widget_id).' '. $data->name;
+            global $post;
+            $current_id = $post->ID;
+            $post_object = get_field('associated_bank', $current_id);
+            if ($post_object == null) {
+                return;
+            }
+
+            $data = $this->repository->get_bank_data($post_object->post_name);
+            $data->widget_title = get_field('widget_ranking_title', $widget_id).' '. $data->name;
             if ($data != null) {
                 echo ViewRenderer::render('ranking.widget.html', $data);
                 $review = new BankReviewJson($data->name,

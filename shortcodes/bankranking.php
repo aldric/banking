@@ -3,11 +3,14 @@
 function bankranking_func($atts)
 {
     $a = shortcode_atts(array(
-        'display' => '',
+        'banks' => '',
         'sort' => 'desc'
     ), $atts);
     $repo = new Bank_Repository();
-    $data = $repo->get_banks_data($a['display']);
+    $banks_input = $a['banks'];
+    $banks = explode("|", $banks_input);
+
+    $data = $repo->get_banks_data($banks);
     usort($data, "cmp");
     if ($a['sort'] == 'asc') {
         array_reverse($data);

@@ -29,28 +29,40 @@ include(__ROOT__."/class/BankReviewJson.php");
 
 function banking_plugin_enqueue_styles()
 {
-     $template_directory = plugin_dir_url( __FILE__ );
-     wp_register_style('banking-css', $template_directory.'/banking.css', false, null, 'all');
-     wp_enqueue_style('banking-css');
+    $template_directory = plugin_dir_url(__FILE__);
+    wp_register_style('banking-css', $template_directory.'/banking.css', false, null, 'all');
+    wp_enqueue_style('banking-css');
 }
 
 add_action('wp_enqueue_scripts', 'banking_plugin_enqueue_styles', 16);
 
-add_filter( 'no_texturize_shortcodes', 'shortcodes_to_exempt_from_wptexturize', 10, 1 );
-function shortcodes_to_exempt_from_wptexturize( $shortcodes ) {
-  $shortcodes[] = 'bankcarousel';
-  $shortcodes[] = 'bank-slide';
-  $shortcodes[] = 'bankranking';
-  $shortcodes[] = 'bank-box';
-  $shortcodes[] = 'proscons';
-return $shortcodes;
+add_filter('no_texturize_shortcodes', 'shortcodes_to_exempt_from_wptexturize', 10, 1);
+function shortcodes_to_exempt_from_wptexturize($shortcodes)
+{
+    $shortcodes[] = 'bankcarousel';
+    $shortcodes[] = 'bank-slide';
+    $shortcodes[] = 'bankranking';
+    $shortcodes[] = 'bank-box';
+    $shortcodes[] = 'proscons';
+    return $shortcodes;
 }
-remove_filter( 'the_content', 'wpautop' );
-//add_filter( 'the_content', 'wpautop' , 20);
 
-function add_scriptfilter( $string ) {
-  global $allowedtags;
-  $allowedtags['script'] = array( 'src' => array () );
-  return $string;
+function custom_wpautop($content)
+{
+    if (get_post_meta(get_the_ID(), 'wpautop', true) == 'false') {
+        return $content;
+    } else {
+        return wpautop($content);
+    }
 }
-add_filter( 'pre_kses', 'add_scriptfilter' );
+
+remove_filter('the_content', 'wpautop');
+add_filter('the_content', 'custom_wpautop', 12);
+
+function add_scriptfilter($string)
+{
+    global $allowedtags;
+    $allowedtags['script'] = array( 'src' => array() );
+    return $string;
+}
+add_filter('pre_kses', 'add_scriptfilter');

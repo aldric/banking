@@ -13,15 +13,15 @@ if (! class_exists('Bank_Repository')) {
             'name' => $bank_name
         ));
             $data;
-            global $post;
             if ($the_query->have_posts()) {
+                global $post;
                 while ($the_query->have_posts()) {
                     $the_query->the_post();
                     setup_postdata($post);
                     $data = $this->get_ranking_data($post);
                 }
+                wp_reset_postdata();
             }
-            wp_reset_postdata();
             return $data;
         }
 
@@ -32,15 +32,16 @@ if (! class_exists('Bank_Repository')) {
             'post_name__in' => $bank_name_array
         ));
             $data = array();
-            global $post;
+
             if ($the_query->have_posts()) {
+                global $post;
                 while ($the_query->have_posts()) {
                     $the_query->the_post();
                     setup_postdata($post);
                     array_push($data, $this->get_ranking_data($post));
                 }
+                wp_reset_postdata();
             }
-            wp_reset_postdata();
             return $data;
         }
 
@@ -74,6 +75,9 @@ if (! class_exists('Bank_Repository')) {
                 $ranking_data->welcome_offer = get_field("welcome_offer", $id);
                 $ranking_data->minimum_wadge = get_field("minimum_wadge", $id);
                 $ranking_data->credit_card = get_field("credit_card", $id);
+
+                $ranking_data->opinion_title = get_field("avis_title", $id);
+                $ranking_data->opinion_text = get_field("avis_resume", $id);
 
                 $ranking_data->young_offer = $this->coerse_null_value(get_field("young_offer", $id), 0);
                 $ranking_data->prof_account = $this->coerse_null_value(get_field("prof_account", $id), 0);
@@ -157,6 +161,8 @@ if (! class_exists('Bank_Repository')) {
         public $welcome_offer;
         public $minimum_wadge;
         public $credit_card;
+        public $opinion_title;
+        public $opinion_text;
 
         public $young_offer;
         public $prof_account;
@@ -170,6 +176,7 @@ if (! class_exists('Bank_Repository')) {
         public $other_insurance;
         public $stock;
 
+        public $widget_title;
 
         public $mean;
         public $eval_data = array();

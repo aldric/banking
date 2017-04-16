@@ -55,8 +55,10 @@ function bankslide_func($atts, $content = null)
     $credit_card = $data->credit_card == '' ? '&nbsp;' : $data->credit_card;
     $welcome_offer = $data->welcome_offer == '' ? '&nbsp;' : $data->welcome_offer;
 
-    $pros_one   = count($data->pros) == 1 ? $data->pros[0] : '&nbsp;';
-    $pros_two   = count($data->pros) == 2 ? $data->pros[1] : '';
+    $pros_one   = count($data->pros) > 0  ? $data->pros[0] : '&nbsp;';
+    $pros_two   = count($data->pros) > 1 ? $data->pros[1] : '';
+
+    $holding = $data->holding_label ." ". $data->holding_name;
 
     $content .= '<div class="slide" style="background:'.$bg.';">
    <div class="row" >
@@ -74,6 +76,7 @@ function bankslide_func($atts, $content = null)
                    <li class="gift"><span>'.$welcome_offer.'</span></li>
                    <li class="check"><span>'.$pros_one.'</span></li>
                    <li class="check"><span>'.$pros_two.'</span></li>
+                   <li class="check"><span>'.$holding.'</span></li>
                </ul>
                <div class="text-center"><a class="btn btn-lg btn-'.$button_type.'" href="#"><i class="fa '.$button_icon.' fa-2x"></i><span style="vertical-align: super;">'.$button_text.'</span></a></div>             </div>
            </div>

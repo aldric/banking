@@ -14,7 +14,7 @@
 .carousel-overlay p {
       color:white;
       margin:0;
-      padding: 0 5px;
+      padding: 5px 5px;
 }
 .bx-viewport {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)!important;
@@ -68,7 +68,7 @@ ul.faul {
 ul.faul li {
   padding-left: 1.3em;
   padding-top: 1em;
-  font-size: 2em;
+  font-size: 1.2em;
 }
 li.cc:before {
   content: "\f09d"; /* FontAwesome Unicode */
@@ -115,11 +115,15 @@ li.check:before {
 div.bank-box  a.btn {
   margin: 0 2px;
 }
+
+div.bank-box p.bold {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0;
+    font-size: 1.2em;
+}
 .gold {
   color : gold;
-}
-.green {
-  color : #69f0ae
 }
 .blue {
   color : #01579b ;
