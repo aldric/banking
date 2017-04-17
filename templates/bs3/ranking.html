@@ -53,6 +53,25 @@
                     });
                     return headers;
                 },
+                evaluations: function() {
+                    var b = this.filteredBanks;
+                    var evaluations = { };
+
+                    b.forEach(function(bank) {
+                      bank.eval_data.forEach(function(data) {
+
+                        if(!evaluations[data.label])
+                          evaluations[data.label] = [];
+
+                          evaluations[data.label].push({
+                              description: data.description,
+                              note: data.note
+                          });
+                      });
+                    });
+                    console.log(evaluations);
+                    return evaluations;
+                },
                 values: function() {
                     var b = this.filteredBanks;
                     var values = [];
@@ -201,10 +220,24 @@
                             </th>
                             <td v-for="value in values" style="text-align: center;">
                                 <star-rating :percentage="value.mean" v-show="value.mean"></star-rating>
-                                <div style="margin-top: 2.5em;">
-                                    <a class="btn btn-success btn-block text-center" v-bind:href="value.review" style="padding: 10px 5px;">Voir la revue</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="text-align:center;">
+
+                            </th>
+                            <td v-for="value in values" style="text-align: center;">
+                                <div>
+                                  <a class="btn btn-success btn-block text-center" v-bind:href="value.review" style="padding: 10px 5px;">Voir la revue</a>
                                 </div>
-                                <div style="margin-top: 1em;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="text-align:center;">
+
+                            </th>
+                            <td v-for="value in values" style="text-align: center;">
+                                <div>
                                     <a class="btn btn-info btn-block text-center" href="#" style="padding: 10px 5px;">Visiter le site</a>
                                 </div>
                             </td>
@@ -215,16 +248,15 @@
                                 {{ value.opinionText }}
                             </td>
                         </tr>
-                        <tr>
-                            <th>Les notes en détail</th>
-                            <td v-for="value in values">
-                                <div v-for="data in value.evalData">
+                        <tr v-for="(values, key) in evaluations">
+                            <th> {{ key }}</th>
+                            <td  v-for="data in values">
+                                <div>
                                     <div>
                                         <star-rating :percentage="data.note" v-show="data.note"></star-rating>
                                     </div>
-                                    <div style="text-align:center">
-                                        <div>{{ data.label}}</div>
-                                        <div>{{ data.description}}</div>
+                                    <div style="padding-top: 25px;">
+                                        {{ data.description }}
                                     </div>
                                 </div>
                             </td>

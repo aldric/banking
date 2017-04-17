@@ -1,12 +1,14 @@
 <?php
 require(__ROOT__.'/widgets/ranking.widget.php');
 
-//[bank-box banks='hellobank|monabanq|ingdirect']
+//[bank-box banks='hellobank|monabanq|ingdirect' col-small=1 col-large=3]
 function bankbox_func($atts, $content = null)
 {
     $a = shortcode_atts(array(
      'background' => '#fafafa',
      'banks' => '',
+     'col-small' => '1',
+     'col-large' => '3'
       ), $atts);
 
     $banks_input = $a['banks'];
@@ -19,19 +21,17 @@ function bankbox_func($atts, $content = null)
     $banks = explode("|", $banks_input);
     $repository = new Bank_Repository();
     $data = $repository->get_banks_data($banks);
-    $count = count($data);
-    $columns = 4; //12 /  (($count > 0 ? $count : 1) + 1);
-    $col_css = "col-sm-12 col-md-".$columns;
 
-
-
+    $column_sm = 12 / $a['col-small'];
+    $column_lg = 12 / $a['col-large'];
+    $col_css = "col-sm-".$column_sm." col-md-".$column_lg;
 
     $content = '<div class="row">';
     foreach ($data as $bank) {
         $pros_one   = count($bank->pros) == 1 ? $bank->pros[0] : '';
         $pros_two   = count($bank->pros) == 2 ? $bank->pros[1] : '';
         $content .= '<div class="bank-box '.$col_css.'">';
-        $content .= '<span class="thumbnail text-center"><img src="'.$bank->icon.'" style="max-width:200px;max-height: 200px;" alt="Icône "'.$bank->name.' />';
+        $content .= '<span class="thumbnail text-center"><img src="'.$bank->icon.'" alt="Icône "'.$bank->name.' />';
         $content .= '<h1 class="text-danger">'.$bank->name.'</h1>';
         $content .= '<div class="ratings">'.get_stars($bank->mean, '', 'fa-3x', false).'</div>';
         $content .= '<p>'.$pros_one.'</p>';
