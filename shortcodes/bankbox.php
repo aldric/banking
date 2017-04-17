@@ -28,29 +28,30 @@ function bankbox_func($atts, $content = null)
 
     $content = '<div class="row">';
     foreach ($data as $bank) {
-        $pros_one   = count($bank->pros) == 1 ? $bank->pros[0] : '';
-        $pros_two   = count($bank->pros) == 2 ? $bank->pros[1] : '';
-        $content .= '<div class="bank-box '.$col_css.'">';
-        $content .= '<span class="thumbnail text-center"><img src="'.$bank->icon.'" alt="Icône "'.$bank->name.' />';
-        $content .= '<h1 class="text-danger">'.$bank->name.'</h1>';
-        $content .= '<div class="ratings">'.get_stars($bank->mean, '', 'fa-3x', false).'</div>';
-        $content .= '<p>'.$pros_one.'</p>';
-        $content .= '<p>'.$pros_two.'</p>';
-        $content .= '<p class="bold">Offre de bienvenue</p>';
-        $content .= '<p>'.$bank->welcome_offer.'</p>';
-        $content .= '<p class="bold">Conditions d\'accès</p>';
-        $content .= '<p>'.$bank->minimum_wadge.'</p>';
-        $content .= '<p class="bold">'.$bank->eval_data[0]['label'].'</p>';
-        $content .= get_stars($bank->eval_data[0]['note'], 'fa-lock', 'fa-2x', true, 'blue');
-        $content .= '<p class="bold">'.$bank->eval_data[1]['label'].'</p>';
-        $content .= get_stars($bank->eval_data[1]['note'], 'fa-money', 'fa-2x', true, 'blue');
-        $content .= '<p class="bold">'.$bank->eval_data[2]['label'].'</p>';
-        $content .= get_stars($bank->eval_data[2]['note'], 'fa-users', 'fa-2x', true, 'blue');
-        $content .= '<p class="bold">'.$bank->eval_data[3]['label'].'</p>';
-        $content .= get_stars($bank->eval_data[3]['note'], 'fa-mobile', 'fa-2x', true, 'blue');
-
-        $content .= '<a class="btn btn-danger" href="'.$ranking_data->review_link.'"><i class="fa fa-info-circle fa-lg"></i> Revue</a><a class="btn btn-success" href="#"><i class="fa fa-external-link fa-lg"></i> Visiter</a>';
-        $content .= '</div>';
+        $content .= ViewRenderer::render('bankbox.html', $bank);
+        // $pros_one   = count($bank->pros) == 1 ? $bank->pros[0] : '';
+        // $pros_two   = count($bank->pros) == 2 ? $bank->pros[1] : '';
+        // $content .= '<div class="bank-box '.$col_css.'">';
+        // $content .= '<span class="thumbnail text-center"><img src="'.$bank->icon.'" alt="Icône "'.$bank->name.' />';
+        // $content .= '<h1 class="text-danger">'.$bank->name.'</h1>';
+        // $content .= '<div class="ratings">'.get_stars($bank->mean, '', 'fa-3x', false).'</div>';
+        // $content .= '<p>'.$pros_one.'</p>';
+        // $content .= '<p>'.$pros_two.'</p>';
+        // $content .= '<p class="bold">Offre de bienvenue</p>';
+        // $content .= '<p>'.$bank->welcome_offer.'</p>';
+        // $content .= '<p class="bold">Conditions d\'accès</p>';
+        // $content .= '<p>'.$bank->minimum_wadge.'</p>';
+        // $content .= '<p class="bold">'.$bank->eval_data[0]['label'].'</p>';
+        // $content .= get_stars($bank->eval_data[0]['note'], 'fa-lock', 'fa-2x', true, 'blue');
+        // $content .= '<p class="bold">'.$bank->eval_data[1]['label'].'</p>';
+        // $content .= get_stars($bank->eval_data[1]['note'], 'fa-money', 'fa-2x', true, 'blue');
+        // $content .= '<p class="bold">'.$bank->eval_data[2]['label'].'</p>';
+        // $content .= get_stars($bank->eval_data[2]['note'], 'fa-users', 'fa-2x', true, 'blue');
+        // $content .= '<p class="bold">'.$bank->eval_data[3]['label'].'</p>';
+        // $content .= get_stars($bank->eval_data[3]['note'], 'fa-mobile', 'fa-2x', true, 'blue');
+        //
+        // $content .= '<a class="btn btn-danger" href="'.$bank->review_link.'"><i class="fa fa-info-circle fa-lg"></i> Revue</a><a class="btn btn-success" href="#"><i class="fa fa-external-link fa-lg"></i> Visiter</a>';
+        // $content .= '</div>';
     }
     $content .= '</div>';
     return $content;
@@ -80,6 +81,7 @@ function get_stars($raw_note, $icon = 'fa-check', $size = '', $enclose = true, $
     }
     return $content;
 }
+
 
 //http://www.cssscript.com/creating-fast-and-responsive-gauges-with-pure-css/
 add_shortcode('bank-box', 'bankbox_func');
