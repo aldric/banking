@@ -186,3 +186,6 @@ div#table-ranking ul.fa-ul {
   padding-left:0;
   text-align: left;
 }
+div#table-ranking th {
+  text-align: center;
+}

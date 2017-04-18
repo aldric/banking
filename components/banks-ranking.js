@@ -16,6 +16,11 @@ var bankRankingComponent = Vue.component('banks-grid', {
             checkedNames: checkedNames
         }
     },
+    methods: {
+      getNote : function(note){
+        return Math.trunc(note/10) + '/10';
+      }
+    },
     computed: {
         filteredBanks: function() {
             var that = this;
@@ -32,7 +37,8 @@ var bankRankingComponent = Vue.component('banks-grid', {
             b.forEach(function(bank) {
                 headers.push({
                     name: bank.name,
-                    image: bank.icon
+                    image: bank.icon,
+                    icon: bank.favicon
                 });
             });
             return headers;
@@ -53,7 +59,6 @@ var bankRankingComponent = Vue.component('banks-grid', {
                   });
               });
             });
-            console.log(evaluations);
             return evaluations;
         },
         values: function() {
@@ -77,7 +82,10 @@ var bankRankingComponent = Vue.component('banks-grid', {
                     holdingImage: bank.holding_image,
                     customerCountLabel: bank.customer_count_label,
                     customerCount: bank.customer_count,
-                    mobileApps: bank.mobile_apps
+                    mobileApps: bank.mobile_apps,
+                    name: bank.name,
+                    image: bank.icon,
+                    icon: bank.favicon
 
                 });
             });

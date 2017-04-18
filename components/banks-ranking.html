@@ -65,30 +65,30 @@
 
 
         </div>
-        <div class="row">
+
             <div class="table-responsive" id="table-ranking">
                 <table class="table table-bordered table-condensed table-hover" style="text-align: center;">
                     <thead>
                         <tr>
                             <th v-for="header in headers" style="vertical-align: top;text-align:center;margin-bottom:1em;">
                                 <div v-html="header.name"></div>
-                                <div style="width:100px;margin-left: auto;margin-right: auto;"><img v-bind:src="header.image" /></div>
+                                <div style="max-width:100px;margin-left: auto;margin-right: auto;"><img v-bind:src="header.image" /></div>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th style="text-align:center;">
-                                <div>Note générale</div>
+                                <div class="hidden-xs hidden-sm">Note générale</div>
                                 <div><i class="fa fa-trophy fa-3x" style="color:gold" aria-hidden="true"></i></div>
                             </th>
                             <td v-for="value in values" style="text-align: center;">
-                                <star-rating :percentage="value.mean" v-show="value.mean"></star-rating>
+                                <div class="hidden-xs hidden-sm"><star-rating :percentage="value.mean" v-show="value.mean"></star-rating></div>
+                                <div class="visible-xs-block visible-sm-block" v-html="getNote(value.mean)"></div>
                             </td>
                         </tr>
                         <tr>
                             <th style="text-align:center;">
-
                             </th>
                             <td v-for="value in values" style="text-align: center;">
                                 <div>
@@ -116,8 +116,10 @@
                             <th> {{ key }}</th>
                             <td  v-for="data in values">
                                 <div>
-                                    <div>
+                                    <div class="hidden-xs hidden-sm">
                                         <star-rating :percentage="data.note" v-show="data.note"></star-rating>
+                                    </div>
+                                    <div class="visible-xs-block visible-sm-block" v-html="getNote(data.note)">
                                     </div>
                                     <div style="padding-top: 25px;">
                                         {{ data.description }}
@@ -126,31 +128,31 @@
                             </td>
                         </tr>
                         <tr>
-                            <th><i class="fa fa-users fa-2x" aria-hidden="true"></i> Nombre de clients</th>
+                            <th><i class="fa fa-user-plus fa-2x" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Nombre de clients</span></th>
                             <td v-for="value in values">
                                 {{ value.customerCount }}
                             </td>
                         </tr>
                         <tr>
-                            <th><i class="fa fa-gift fa-2x" aria-hidden="true"></i> Offre de bienvenue</th>
+                            <th><i class="fa fa-gift fa-2x" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Offre de bienvenue</span></th>
                             <td v-for="value in values">
                                 {{ value.welcomeOffer }}
                             </td>
                         </tr>
                         <tr>
-                            <th>Conditions d'accès</th>
+                            <th><i class="fa fa-key fa-2x" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Conditions d'accès</span></th>
                             <td v-for="value in values">
                                 {{ value.minimumWadge }}
                             </td>
                         </tr>
                         <tr>
-                            <th><i class="fa fa-credit-card fa-2x" aria-hidden="true"></i> Carte de cr&eacute;dit</th>
+                            <th><i class="fa fa-credit-card fa-2x" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Carte de cr&eacute;dit</span></th>
                             <td v-for="value in values">
                                 {{ value.creditCard }}
                             </td>
                         </tr>
                         <tr>
-                            <th><i class="fa fa-mobile fa-2x" aria-hidden="true"></i> Application mobile</th>
+                            <th><i class="fa fa-mobile fa-2x" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Application mobile</span></th>
                             <td v-for="value in values">
                                 <ul class="fa-ul">
                                     <li v-for="(key, value) in value.mobileApps" v-bind:class="[ key == '1' ? 'text-success' : 'text-danger']"><i v-bind:class="[ key == '1' ? 'fa-li fa fa-check' : 'fa-li fa fa-times']"></i>{{ value }}</li>
@@ -158,7 +160,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th><i class="fa fa-plus-circle fa-2x text-success" aria-hidden="true"></i> Points positifs</th>
+                            <th><i class="fa fa-plus-circle fa-2x text-success" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Points positifs</span></th>
                             <td v-for="value in values">
                                 <ul class="fa-ul">
                                     <li v-for="pro in value.pros"><i class="fa-li fa fa-plus-circle"></i>{{ pro }}</li>
@@ -166,7 +168,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th><i class="fa fa-minus-circle fa-2x text-danger" aria-hidden="true"></i> Points négatifs</th>
+                            <th><i class="fa fa-minus-circle fa-2x text-danger" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Points négatifs</span></th>
                             <td v-for="value in values">
                                 <ul class="fa-ul">
                                     <li v-for="con in value.cons"><i class="fa-li fa fa-minus-circle"></i>{{ con }}</li>
@@ -174,7 +176,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th><i class="fa fa-cubes fa-2x" aria-hidden="true"></i> Les services et produits proposés</th>
+                            <th><i class="fa fa-cubes fa-2x" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Les services et produits proposés</span></th>
                             <td v-for="value in values">
                                 <ul class="fa-ul">
                                     <li v-for="(key, value) in value.offer" v-bind:class="[ key == '1' ? 'text-success' : 'text-danger']"><i v-bind:class="[ key == '1' ? 'fa-li fa fa-check' : 'fa-li fa fa-times']"></i>{{ value }}</li>
@@ -182,7 +184,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th><i class="fa fa-cubes fa-2x" aria-hidden="true"></i> Appartient groupe</th>
+                            <th><i class="fa fa-cubes fa-2x" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Filliale du groupe</span></th>
                             <td v-for="value in values">
                                 <div v-html="value.holdingName" style="font-weight:bold; font-size:1.1em;"></div>
                                 <div style="width:100px;margin-left: auto;margin-right: auto;"> <img v-bind:src="value.holdingImage" /></div>
