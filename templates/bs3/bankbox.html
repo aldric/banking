@@ -1,32 +1,84 @@
+<script type="text/javascript">
+  jQuery(function() {
+    <?php include(__ROOT__ .'/components/star-rating.js') ?>
 
-    <div class="bank-box col-sm-12 col-md-4">
+    var boxes = new Vue({
+        el: '#bank-box',
+        data: {
+            bankBoxes: bankBoxes
+        },
+        components: {
+            'star-rating': starRatingComponent
+        },
+        computed : {
+          rowClass : function() {
+            return this.bankBoxes.banks.length > 1 ? 'row' : '';
+          },
+          banks : function() {
+            return this.bankBoxes.banks;
+          }
+        },
+        methods : {
+          altText : function(name) {
+            return "Icône " + name;
+          },
+          notes : function(bank) {
+            var notes = [];
+            var notesToDisplay = this.bankBoxes.notes;
+            var icons = this.bankBoxes.icons;
+            notesToDisplay.forEach(function(el, i){
+                var idx = parseInt(el);
+                if(bank.eval_data[idx] !== undefined) {
+                  var found = bank.eval_data[idx];
+                  notes.push({
+                    label : found.label,
+                    description : found.description,
+                    note: found.note,
+                    icon : i < icons.length ? 'fa ' + icons[i] + ' ' : ''
+                  });
+                }
+            });
+            return notes;
+          },
+          displayOffer:function(text) {
+            return this.bankBoxes.welcomeOffer && text !== undefined && text.length > 0;
+          },
+          displayAccess:function(text) {
+            return this.bankBoxes.conditions && text !== undefined && text.length > 0;
+          }
+        }
+    });
+  });
+</script>
+<?php include(__ROOT__ .'/components/star-rating.html') ?>
+
+<div id="bank-box">
+  <div v-bind:class="rowClass">
+    <div v-for="bank in banks" :class="bankBoxes.colCss">
       <span class="thumbnail text-center">
-        <img src="<?php echo $data->icon; ?>" alt="Icône <?php echo $data->name; ?>" />
-      <h1 class="text-danger">
-        <?php echo $data->name; ?>
-      </h1>
-      <div class="ratings"></div>
-      <p class="bold">
-        Offre de bienvenue
-      </p>
-      <p class="bold">
-        Conditions d&#39;accès
-      </p>
-      <p class="bold">
-        Epargne
-      </p>
-      <p class="bold">
-        Crédits
-      </p>
-      <p class="bold">
-        Service client
-      </p>
-      <p class="bold">
-        Application
-      </p>
-      <span class="thumbnail text-center">
-        <a class="btn btn-danger" href=""> Revue</a>
-        <a class="btn btn-success" href="#"> Visiter</a>
-      </span>
+        <img :src="bank.icon" :alt="altText(bank.name)" />
+        <h1 class="text-danger" style="margin-bottom:0;">{{ bank.name }}</h1>
+         <div class="ratings" style="height: 30px;">
+          <star-rating :percentage="bank.mean" v-show="bank.mean"></star-rating>
+         </div>
+         <hr v-show="displayOffer(bank.welcome_offer)" />
+         <div class="bold" v-show="displayOffer(bank.welcome_offer)">Offre de bienvenue</div>
+         <div v-show="displayOffer(bank.welcome_offer)">{{ bank.welcome_offer }}</div>
+         <hr v-show="displayOffer(bank.welcome_offer)" />
+         <div class="bold" v-show="displayOffer(bank.minimum_wadge)">Conditions d&#39;accès</div>
+         <div v-show="displayOffer(bank.minimum_wadge)">{{ bank.minimum_wadge }}</div>
+         <div v-for="note in notes(bank)">
+            <hr />
+            <div class="bold">
+              <i :class="note.icon" aria-hidden="true"></i>{{ note.label }}
+            </div>
+            <div style="height: 24px;">
+              <star-rating :percentage="note.note" v-show="note.note"></star-rating>
+            </div>
+          </div>
+          <a class="btn btn-danger box-button" href=""><i class="fa fa-info-circle fa-lg"></i> Revue</a>
+          <a class="btn btn-success box-button" href="#"><i class="fa fa-external-link fa-lg"></i> Visiter</a>
       </span>
     </div>
+  </div>
+</div>
