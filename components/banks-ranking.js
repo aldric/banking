@@ -19,6 +19,15 @@ var bankRankingComponent = Vue.component('banks-grid', {
     methods: {
       getNote : function(note){
         return Math.trunc(note/10) + '/10';
+      },
+      getMobileIcon : function(m, isStacked) {
+        if(m == 'iOS')
+          return isStacked ? 'fa fa-apple fa-stack-1x' : 'fa fa-apple fa-2x';
+        if(m == 'Android')
+          return isStacked ? 'fa fa-android fa-stack-1x' : 'fa fa-android fa-2x';
+        if(m == 'Windows')
+          return isStacked ? 'fa fa-windows fa-stack-1x' : 'fa fa-windows fa-2x';
+        return '';
       }
     },
     computed: {
