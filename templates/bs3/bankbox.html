@@ -76,8 +76,8 @@
               <star-rating :percentage="note.note" v-show="note.note"></star-rating>
             </div>
           </div>
-          <a class="btn btn-danger box-button" href=""><i class="fa fa-info-circle fa-lg"></i> Revue</a>
-          <a class="btn btn-success box-button" href="#"><i class="fa fa-external-link fa-lg"></i> Visiter</a>
+          <a class="btn btn-danger box-button" v-bind:href="bank.review_link"><i class="fa fa-info-circle fa-lg"></i> Revue</a>
+          <a class="btn btn-success box-button" v-bind:href="bank.affiliate_link" target="_blank" rel="nofollow"><i class="fa fa-external-link fa-lg"></i> Visiter</a>
       </span>
     </div>
   </div>

@@ -78,7 +78,7 @@ function bankslide_func($atts, $content = null)
                    <li class="check"><span>'.$pros_two.'</span></li>
                    <li class="check"><span>'.$holding.'</span></li>
                </ul>
-               <div class="text-center"><a class="btn btn-lg btn-'.$button_type.'" href="#"><i class="fa '.$button_icon.' fa-2x"></i><span style="vertical-align: super;">'.$button_text.'</span></a></div>             </div>
+               <div class="text-center"><a class="btn btn-lg btn-'.$button_type.'" href="'.$data->review_link.'"><i class="fa '.$button_icon.' fa-2x"></i><span style="vertical-align: super;">'.$button_text.'</span></a></div>             </div>
            </div>
            <div class="carousel-overlay">
              <h2>'.$cover_title.'</h2>

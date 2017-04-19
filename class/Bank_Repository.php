@@ -79,6 +79,8 @@ if (! class_exists('Bank_Repository')) {
                 $ranking_data->opinion_title = get_field("avis_title", $id);
                 $ranking_data->opinion_text = get_field("avis_resume", $id);
 
+                $ranking_data->affiliate_link = get_field("affiliate_link", $id);
+
                 $ranking_data->young_offer = $this->coerse_null_value(get_field("young_offer", $id), 0);
                 $ranking_data->prof_account = $this->coerse_null_value(get_field("prof_account", $id), 0);
                 $ranking_data->saving_account = $this->coerse_null_value(get_field("saving_account", $id), 0);
@@ -158,6 +160,7 @@ if (! class_exists('Bank_Repository')) {
         public $holding_image;
         public $review_link;
         public $review_link_text;
+        public $affiliate_link;
 
         public $holding_label;
         public $holding_name;

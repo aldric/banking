@@ -85,7 +85,8 @@ var bankRankingComponent = Vue.component('banks-grid', {
                     mobileApps: bank.mobile_apps,
                     name: bank.name,
                     image: bank.icon,
-                    icon: bank.favicon
+                    icon: bank.favicon,
+                    affiliate : bank.affiliate_link
 
                 });
             });
