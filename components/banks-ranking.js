@@ -22,11 +22,11 @@ var bankRankingComponent = Vue.component('banks-grid', {
       },
       getMobileIcon : function(m, isStacked) {
         if(m == 'iOS')
-          return isStacked ? 'fa fa-apple fa-stack-1x' : 'fa fa-apple fa-2x';
+          return isStacked ? 'fa fa-apple fa-stack-1x apple-grey' : 'fa fa-apple fa-2x apple-grey';
         if(m == 'Android')
-          return isStacked ? 'fa fa-android fa-stack-1x' : 'fa fa-android fa-2x';
+          return isStacked ? 'fa fa-android fa-stack-1x android-green' : 'fa fa-android fa-2x android-green';
         if(m == 'Windows')
-          return isStacked ? 'fa fa-windows fa-stack-1x' : 'fa fa-windows fa-2x';
+          return isStacked ? 'fa fa-windows fa-stack-1x windows-purple' : 'fa fa-windows fa-2x windows-purple';
         return '';
       }
     },

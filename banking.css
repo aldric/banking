@@ -189,3 +189,12 @@ div#table-ranking ul.fa-ul {
 div#table-ranking th {
   text-align: center;
 }
+.android-green {
+  color: #a4c639;
+}
+.apple-grey {
+  color: #999999;
+}
+.windows-purple {
+  color:#68217a;
+}
