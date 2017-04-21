@@ -1,6 +1,25 @@
 <script type="text/x-template" id="ranking-template">
     <div>
         <div class="row">
+            <div class="col-md-12 col-s-12">
+                <div class=" panel panel-tb">
+                    <div class="panel-heading" style="font-size: 16px; line-height: 1em;"><i class="fa fa-diamond" aria-hidden="true"></i> Pourquoi voulez-vous changer de banque ?</div>
+                    <div class="panel-body" style="font-size:1em;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label><input type="checkbox" value=""> </input>Obtenir une carte bancaire gratuite</label>
+                                <label><input type="checkbox" value=""> </input>Profiter de frais bancaires réduits</label>
+                                <label><input type="checkbox" value=""> </input>Trouver un crédit au meilleur prix</label>
+                            </div>
+                            <div class="col-md-6">
+                                <label><input type="checkbox" value=""> </input>Gérer vos finances de manière autonome</label>
+                                <label><input type="checkbox" value=""> </input>Envoyer ou recevoir de l’argent à l’étranger</label>
+                                <label><input type="checkbox" value=""> </input>Ouvrir un compte bancaire secondaire</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-8 col-s-12">
                 <div class=" panel panel-tb">
                     <div class="panel-heading" style="font-size: 16px; line-height: 1em;"><i class="fa fa-university" aria-hidden="true"></i> Quelles banques souhaitez-vous comparer ?</div>
@@ -87,29 +106,7 @@
                         <th><i class="fa fa-check-square fa-2x hidden-xs hidden-sm gold" aria-hidden="true"></i></th>
                       </th>
                         <td v-for="value in values">
-                          <div class="opinion">{{ value.opinionText }}</div>
-                          <button type="button" class="btn btn-lg btn-success btn-xs" data-toggle="popover" data-trigger="focus"  title="Notre avis" v-bind:data-content="value.opinionText" ><i class="fa fa-search-plus fa-2c text-success" aria-hidden="true"></i> En savoir plus</button>
-                        </td>
-                    </tr>
-                    <tr><th v-bind:colspan="colspan">Offre de bienvenue</th></tr>
-                    <tr>
-                        <th><i class="fa fa-gift fa-2x hidden-xs hidden-sm" aria-hidden="true"></i></th>
-                        <td v-for="value in values">
-                            {{ value.welcomeOffer }}
-                        </td>
-                    </tr>
-                    <tr><th v-bind:colspan="colspan">Conditions d'acc&egrave;s</th></tr>
-                    <tr>
-                        <th><i class="fa fa-key fa-2x hidden-xs hidden-sm" aria-hidden="true"></i></th>
-                        <td v-for="value in values">
-                            {{ value.minimumWadge }}
-                        </td>
-                    </tr>
-                    <tr><th v-bind:colspan="colspan">Carte de cr&eacute;dit</th></tr>
-                    <tr>
-                        <th><i class="fa fa-credit-card fa-2x hidden-xs hidden-sm" aria-hidden="true"></i></th>
-                        <td v-for="value in values">
-                            {{ value.creditCard }}
+                            {{ value.opinionText }}
                         </td>
                     </tr>
                     <tr><th v-bind:colspan="colspan">Application mobile</th></tr>
@@ -158,7 +155,45 @@
                             {{ value.customerCount }}
                         </td>
                     </tr>
-
+                    <tr><th v-bind:colspan="colspan">Offre de bienvenue</th></tr>
+                    <tr>
+                        <th><i class="fa fa-gift fa-2x hidden-xs hidden-sm" aria-hidden="true"></i></th>
+                        <td v-for="value in values">
+                            {{ value.welcomeOffer }}
+                        </td>
+                    </tr>
+                    <tr><th v-bind:colspan="colspan">Conditions d'acc&egrave;s</th></tr>
+                    <tr>
+                        <th><i class="fa fa-key fa-2x hidden-xs hidden-sm" aria-hidden="true"></i></th>
+                        <td v-for="value in values">
+                            {{ value.minimumWadge }}
+                        </td>
+                    </tr>
+                    <tr><th v-bind:colspan="colspan">Carte de cr&eacute;dit</th></tr>
+                    <tr>
+                        <th><i class="fa fa-credit-card fa-2x hidden-xs hidden-sm" aria-hidden="true"></i></th>
+                        <td v-for="value in values">
+                            {{ value.creditCard }}
+                        </td>
+                    </tr>
+                    <tr><th v-bind:colspan="colspan">Points positifs</th></tr>
+                    <tr>
+                        <th><i class="fa fa-plus-circle fa-2x text-success hidden-xs hidden-sm" aria-hidden="true"></i> </th>
+                        <td v-for="value in values">
+                            <ul class="fa-ul">
+                                <li v-for="pro in value.pros"><i class="fa-li fa fa-plus-circle"></i>{{ pro }}</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr><th v-bind:colspan="colspan">Points négatifs</th></tr>
+                    <tr>
+                        <th><i class="fa fa-minus-circle fa-2x text-danger hidden-xs hidden-sm" aria-hidden="true"></i></th>
+                        <td v-for="value in values">
+                            <ul class="fa-ul">
+                                <li v-for="con in value.cons"><i class="fa-li fa fa-minus-circle"></i>{{ con }}</li>
+                            </ul>
+                        </td>
+                    </tr>
                     <tr><th v-bind:colspan="colspan">Les services et produits proposés</th></tr>
                     <tr>
                         <th><i class="fa fa-list fa-2x hidden-xs hidden-sm" aria-hidden="true"></i></th>

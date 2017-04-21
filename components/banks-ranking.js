@@ -12,9 +12,13 @@ var bankRankingComponent = Vue.component('banks-grid', {
         this.banks.forEach(function(bank) {
             checkedNames.push(bank.name);
         });
+        this.offer.sort();
         return {
             checkedNames: checkedNames
         }
+    },
+    mounted: function(){
+      jQuery('button[data-toggle]').popover();
     },
     methods: {
       getNote : function(note){
@@ -100,6 +104,9 @@ var bankRankingComponent = Vue.component('banks-grid', {
                 });
             });
             return values;
+        },
+        colspan:function() {
+          return this.filteredBanks.length + 1;
         }
     }
 });
