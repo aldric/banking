@@ -7,6 +7,20 @@ var bankRankingComponent = Vue.component('banks-grid', {
         banks: Array,
         offer: Array
     },
+    directives: {
+      score:
+        function(el, binding, vNode) {
+          var badgeChild = el.children[0];
+          if(badgeChild.className === 'badge-num')
+            el.removeChild(el.children[0]);
+          badgeNum = document.createElement('div');
+          badgeNum.setAttribute('class','badge-num');
+          badgeNum.innerText = binding.value;
+          console.log("bv : " + binding.value);
+          var insertedElement = el.insertBefore(badgeNum,el.firstChild);
+        
+      }
+    },
     data: function() {
         var checkedNames = [];
         this.banks.forEach(function(bank) {
@@ -14,7 +28,9 @@ var bankRankingComponent = Vue.component('banks-grid', {
         });
         this.offer.sort();
         return {
-            checkedNames: checkedNames
+            checkedNames: checkedNames,
+            mobileApps: [],
+            selectedServices:[]
         }
     },
     mounted: function(){
@@ -32,6 +48,31 @@ var bankRankingComponent = Vue.component('banks-grid', {
         if(m == 'Windows')
           return isStacked ? 'fa fa-windows fa-stack-1x windows-purple' : 'fa fa-windows fa-2x windows-purple';
         return '';
+      },
+      findOne : function (haystack, arr) {
+        return arr.some(function (v) {
+          return haystack.indexOf(v) >= 0;
+        });
+      },
+      mobileAppScore : function(bank) {
+        var score = 0;
+        for(var i in bank.mobile_apps) {
+          if(bank.mobile_apps[i] === true && this.mobileApps.indexOf(i) > -1)
+            score++;
+        }
+        return score;
+      },
+      serviceScore : function(bank) {
+        var score = 0;
+        for(var i in bank.offer) {
+          if(bank.offer[i] === "1" && this.selectedServices.indexOf(i) > -1)
+          score++;
+        }
+        return score;
+      },
+      resetFilters: function() {
+        this.selectedServices.splice(0);
+        this.mobileApps.splice(0);
       }
     },
     computed: {
@@ -47,11 +88,14 @@ var bankRankingComponent = Vue.component('banks-grid', {
             headers.push({
                 name: '<i class="fa fa-university fa-2x" aria-hidden="true"></i>'
             });
+            var that = this;
             b.forEach(function(bank) {
+              console.log(bank.name + " :: " + that.mobileAppScore(bank) + that.serviceScore(bank));
                 headers.push({
                     name: bank.name,
                     image: bank.icon,
-                    icon: bank.favicon
+                    icon: bank.favicon,
+                    score: that.mobileAppScore(bank) + that.serviceScore(bank)
                 });
             });
             return headers;
@@ -62,7 +106,6 @@ var bankRankingComponent = Vue.component('banks-grid', {
 
             b.forEach(function(bank) {
               bank.eval_data.forEach(function(data) {
-
                 if(!evaluations[data.label])
                   evaluations[data.label] = [];
 
@@ -75,34 +118,33 @@ var bankRankingComponent = Vue.component('banks-grid', {
             return evaluations;
         },
         values: function() {
-            var b = this.filteredBanks;
-            var values = [];
-            b.forEach(function(bank) {
-                values.push({
-                    mean: bank.mean,
-                    review: bank.review_link,
-                    welcomeOffer: bank.welcome_offer,
-                    minimumWadge: bank.minimum_wadge,
-                    creditCard: bank.credit_card,
-                    pros: bank.pros,
-                    cons: bank.cons,
-                    evalData: bank.eval_data,
-                    opinionTitle: bank.opinion_title,
-                    opinionText: bank.opinion_text,
-                    offer: bank.offer,
-                    holdingLabel: bank.holding_label,
-                    holdingName: bank.holding_name,
-                    holdingImage: bank.holding_image,
-                    customerCountLabel: bank.customer_count_label,
-                    customerCount: bank.customer_count,
-                    mobileApps: bank.mobile_apps,
-                    name: bank.name,
-                    image: bank.icon,
-                    icon: bank.favicon,
-                    affiliate : bank.affiliate_link
-
-                });
+          var b = this.filteredBanks;
+          var values = [];
+          b.forEach(function(bank) {
+            values.push({
+              mean: bank.mean,
+              review: bank.review_link,
+              welcomeOffer: bank.welcome_offer,
+              minimumWadge: bank.minimum_wadge,
+              creditCard: bank.credit_card,
+              pros: bank.pros,
+              cons: bank.cons,
+              evalData: bank.eval_data,
+              opinionTitle: bank.opinion_title,
+              opinionText: bank.opinion_text,
+              offer: bank.offer,
+              holdingLabel: bank.holding_label,
+              holdingName: bank.holding_name,
+              holdingImage: bank.holding_image,
+              customerCountLabel: bank.customer_count_label,
+              customerCount: bank.customer_count,
+              mobileApps: bank.mobile_apps,
+              name: bank.name,
+              image: bank.icon,
+              icon: bank.favicon,
+              affiliate : bank.affiliate_link
             });
+          });
             return values;
         },
         colspan:function() {

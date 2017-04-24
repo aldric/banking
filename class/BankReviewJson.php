@@ -5,18 +5,16 @@ class BankReviewJson
     private $bankName;
     private $address;
     private $priceRange;
-    private $telephone;
     private $url;
     private $rating;
     private $reviewName;
     private $reviewBody;
-    public function __construct($bankName, $address, $telephone, $image, $priceRange, $url, $rating, $reviewName, $reviewBody)
+    public function __construct($bankName, $address, $image, $priceRange, $url, $rating, $reviewName, $reviewBody)
     {
         $this->image = $image;
         $this->bankName = $bankName;
         $this->address = $address;
         $this->priceRange = $priceRange;
-        $this->telephone = $telephone;
         $this->url = $url;
         $this->rating = $rating;
         $this->reviewName = $reviewName;
@@ -33,7 +31,6 @@ class BankReviewJson
           "name"=>  $this->bankName,
           "address"=>  $this->address,
           "priceRange"=>  $this->priceRange,
-          "telephone"=>  $this->telephone,
           "url"=>  $this->url
         ),
         "reviewRating" => array(

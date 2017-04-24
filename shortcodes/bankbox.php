@@ -1,5 +1,4 @@
 <?php
-require(__ROOT__.'/widgets/ranking.widget.php');
 
 //[bank-box banks='hellobank|monabanq|ingdirect' col-xsmall=1 col-small=2 col-large=3 welcome_offer=true conditions=true pros='0,1' notes='0,1,2,3' notes-icons='fa-lock, fa-money, fa-users, fa-mobile']
 function bankbox_func($atts, $content = null)
