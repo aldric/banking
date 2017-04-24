@@ -16,9 +16,8 @@ var bankRankingComponent = Vue.component('banks-grid', {
           badgeNum = document.createElement('div');
           badgeNum.setAttribute('class','badge-num');
           badgeNum.innerText = binding.value;
-          console.log("bv : " + binding.value);
           var insertedElement = el.insertBefore(badgeNum,el.firstChild);
-        
+
       }
     },
     data: function() {
@@ -90,7 +89,6 @@ var bankRankingComponent = Vue.component('banks-grid', {
             });
             var that = this;
             b.forEach(function(bank) {
-              console.log(bank.name + " :: " + that.mobileAppScore(bank) + that.serviceScore(bank));
                 headers.push({
                     name: bank.name,
                     image: bank.icon,
