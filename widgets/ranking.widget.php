@@ -45,13 +45,12 @@ if (! class_exists('Ranking_Widget')) {
                 echo ViewRenderer::render('ranking.widget.html', $data);
                 $review = new BankReviewJson($data->name,
                                              $data->address,
-                                             "0680606073",
-                                             "http://www.example.com/monabanq.jpg",
-                                             "Le banque en ligne au meilleur prix",
-                                             "https://topbanque.net/linkAffiliate",
+                                             $data->image,
+                                             $data->welcome_offer,
+                                             $data->affiliate_link,
                                              round($data->mean / 20, 2),
-                                             "Revue de la banque en ligne Monabanq.",
-                                             "Ici on pourrait mettre le recap en une ligne de notre avis");
+                                             "Revue de la banque en ligne : ".$data->name,
+                                             $data->opinion_text);
                 echo '<script type = "application/ld+json" >'.$review->toJson().'</script>';
             }
         }
