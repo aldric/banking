@@ -116,9 +116,24 @@ div#bank-box  a.btn {
   margin: 15px 2px 10px 2px ;
 }
 
+span.thumbnail > img {
+  max-height:120px;
+}
+
 div#bank-box hr {
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+div.box-offer {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+div.box-offer > span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
 }
 
 .bold {
@@ -210,6 +225,39 @@ div.opinion {
 }
 span.opinion-plus {
   text-decoration: underline;
+}
+div.exit-button {
+  margin:auto;
+}
+table div.opinion {
+  margin-bottom: 5px;
+}
+@media screen and (max-width: 767px) {
+  td ul.fa-ul {
+    font-size: 0.8em;
+  }
+  div.exit-button {
+    width:100px;
+  }
+  div.holding-image {
+    width:80px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  div.small-note {
+    font-weight: bold;
+    font-size: 1.2em;
+    color : #5cb85c;
+  }
+  table div.small-pros, table div.holding-name {
+    font-size: 0.9em;
+  }
+button[data-toggle=popover]  i.fa {
+    margin-right: 0;
+    font-size: 2em;
+
+  }
+
 }
 .badge-container{position:relative;-webkit-perspective: 1000;-webkit-backface-visibility: hidden;}
 .badge-num {

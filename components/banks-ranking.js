@@ -23,7 +23,8 @@ var bankRankingComponent = Vue.component('banks-grid', {
     },
     data: function() {
         var checkedNames = [];
-        this.banks.forEach(function(bank) {
+        this.banks.forEach(function(bank, idx) {
+          if(idx < 3)
             checkedNames.push(bank.name);
         });
         this.offer.sort();
@@ -85,9 +86,6 @@ var bankRankingComponent = Vue.component('banks-grid', {
         headers: function() {
             var b = this.filteredBanks;
             var headers = [];
-            headers.push({
-                name: '<i class="fa fa-university fa-2x" aria-hidden="true"></i>'
-            });
             var that = this;
             b.forEach(function(bank) {
                 headers.push({
@@ -147,7 +145,7 @@ var bankRankingComponent = Vue.component('banks-grid', {
             return values;
         },
         colspan: function() {
-            return this.filteredBanks.length + 1;
+            return this.filteredBanks.length;
         }
     }
 });

@@ -63,10 +63,10 @@
          </div>
          <hr v-show="displayOffer(bank.welcome_offer)" />
          <div class="bold" v-show="displayOffer(bank.welcome_offer)">Offre de bienvenue</div>
-         <div v-show="displayOffer(bank.welcome_offer)">{{ bank.welcome_offer }}</div>
+         <div v-show="displayOffer(bank.welcome_offer)" class="box-offer"><span>{{ bank.welcome_offer }}</span></div>
          <hr v-show="displayOffer(bank.welcome_offer)" />
          <div class="bold" v-show="displayOffer(bank.minimum_wadge)">Conditions d&#39;accès</div>
-         <div v-show="displayOffer(bank.minimum_wadge)">{{ bank.minimum_wadge }}</div>
+         <div v-show="displayOffer(bank.minimum_wadge)" class="box-offer"><span>{{ bank.minimum_wadge }}</span></div>
          <div v-for="note in notes(bank)">
             <hr />
             <div class="bold">
