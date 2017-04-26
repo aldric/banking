@@ -7,20 +7,6 @@ var bankRankingComponent = Vue.component('banks-grid', {
         banks: Array,
         offer: Array
     },
-    directives: {
-        score: function(el, binding, vNode) {
-            var badgeChild = el.children[0];
-            if (badgeChild.innerText == binding.value)
-                return;
-            if (badgeChild.className === 'badge-num')
-                el.removeChild(el.children[0]);
-            badgeNum = document.createElement('div');
-            badgeNum.setAttribute('class', 'badge-num');
-            badgeNum.innerText = binding.value;
-            var insertedElement = el.insertBefore(badgeNum, el.firstChild);
-
-        }
-    },
     data: function() {
         var checkedNames = [];
         this.banks.forEach(function(bank, idx) {
@@ -39,7 +25,8 @@ var bankRankingComponent = Vue.component('banks-grid', {
     },
     methods: {
         getNote: function(note) {
-            return Math.trunc(note / 10) + '/10';
+            var n = (note / 10);
+            return (Math.round(n) == n ? n : n.toFixed(1)) + '/10';
         },
         getMobileIcon: function(m, isStacked) {
             if (m == 'iOS')
@@ -56,43 +43,72 @@ var bankRankingComponent = Vue.component('banks-grid', {
             });
         },
         mobileAppScore: function(bank) {
-            var score = 0;
+            var mobileApps = [];
             for (var i in bank.mobile_apps) {
-                if (bank.mobile_apps[i] === true && this.mobileApps.indexOf(i) > -1)
-                    score++;
+                if (bank.mobile_apps[i] === true && this.mobileApps.indexOf(i) > -1) {
+                  mobileApps.push(i);
+                }
             }
-            return score;
+            return { score : mobileApps.length, mobileApps : mobileApps };
         },
         serviceScore: function(bank) {
-            var score = 0;
+            var services = [];
             for (var i in bank.offer) {
-                if (bank.offer[i] === "1" && this.selectedServices.indexOf(i) > -1)
-                    score++;
+                if (bank.offer[i] === "1" && this.selectedServices.indexOf(i) > -1) {
+                  services.push(i);
+                }
             }
-            return score;
+            return { score : services.length, services : services };
         },
         resetFilters: function() {
             this.selectedServices.splice(0);
             this.mobileApps.splice(0);
+        },
+        numberOfBanks : function() {
+          var nb = this.banks.length;
+          if(screen.width < 768)
+            return 3;
+          if(screen.width < 992)
+            return 5;
+          return nb;
         }
     },
     computed: {
+        searchStarted: function() {
+          return (this.selectedServices && this.selectedServices.length > 0) || (this.mobileApps && this.mobileApps.length > 0);
+        },
         filteredBanks: function() {
             var that = this;
             return this.banks.filter(function(bank) {
                 return that.checkedNames.indexOf(bank.name) > -1;
-            })
+            }).sort(function(a, b) {
+              return a.mean < b.mean;
+            });
+        },
+        topBanks: function() {
+          return this.headers.slice().sort(function(a, b) {
+            return a.score < b.score;
+          }).sort(function(a, b) {
+              if(a.score == b.score)
+                return a.mean < b.mean;
+              return 0;
+          });
         },
         headers: function() {
             var b = this.filteredBanks;
             var headers = [];
             var that = this;
             b.forEach(function(bank) {
+               var apps = that.mobileAppScore(bank);
+               var services = that.serviceScore(bank);
                 headers.push({
                     name: bank.name,
+                    mean: bank.mean,
                     image: bank.icon,
                     icon: bank.favicon,
-                    score: that.mobileAppScore(bank) + that.serviceScore(bank)
+                    score: apps.score + services.score,
+                    apps : apps.mobileApps,
+                    services : services.services
                 });
             });
             return headers;
