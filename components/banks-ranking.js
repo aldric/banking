@@ -144,14 +144,17 @@ var bankRankingComponent = Vue.component('banks-grid', {
                 });
             });
 
-            this.topBanks.forEach(function(bank){
-                var found = headers.find(function(b) {
-                    return b.name == bank.name;
-                });
-                if(found) {
-                  found.reward = bank.reward;
-                  found.rank = bank.rank;
-                }
+            headers.forEach(function(bank){
+              var found = that.topBanks.find(function(b) {
+                return b.name == bank.name;
+              });
+              if(found) {
+                bank.reward = found.reward;
+                bank.rank = found.rank;
+              } else {
+                bank.reward = undefined;
+                bank.rank = undefined;
+              }
             });
             return headers;
         },
