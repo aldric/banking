@@ -1,3 +1,12 @@
+Array.prototype.removeIf = function(callback) {
+    var i = this.length;
+    while (i--) {
+        if (callback(this[i], i)) {
+            this.splice(i, 1);
+        }
+    }
+};
+
 var bankRankingComponent = Vue.component('banks-grid', {
     template: '#ranking-template',
     components: {
@@ -20,8 +29,14 @@ var bankRankingComponent = Vue.component('banks-grid', {
             selectedServices: []
         }
     },
+    beforeUpdate: function () {
+
+    },
+    updated: function () {
+      jQuery('button[data-toggle]').popover();
+    },
     mounted: function() {
-        jQuery('button[data-toggle]').popover();
+      jQuery('button[data-toggle]').popover();
     },
     methods: {
         getNote: function(note) {
@@ -63,17 +78,21 @@ var bankRankingComponent = Vue.component('banks-grid', {
         resetFilters: function() {
             this.selectedServices.splice(0);
             this.mobileApps.splice(0);
-        },
-        numberOfBanks : function() {
-          var nb = this.banks.length;
-          if(screen.width < 768)
-            return 3;
-          if(screen.width < 992)
-            return 5;
-          return nb;
         }
     },
     computed: {
+      numberOfBanks : function() {
+        var nb = this.banks.length;
+        if(screen.width < 415) {
+          nb = 3;
+        } else if(screen.width < 601) {
+          nb = 4;
+        }  else if(screen.width < 1025) {
+          nb = 5;
+        }
+        var value = Math.min(this.banks.length, nb);
+        return value;
+      },
         searchStarted: function() {
           return (this.selectedServices && this.selectedServices.length > 0) || (this.mobileApps && this.mobileApps.length > 0);
         },
@@ -86,13 +105,24 @@ var bankRankingComponent = Vue.component('banks-grid', {
             });
         },
         topBanks: function() {
-          return this.headers.slice().sort(function(a, b) {
+          var topBanks = this.filteredBanks.slice().sort(function(a, b) {
             return a.score < b.score;
           }).sort(function(a, b) {
               if(a.score == b.score)
                 return a.mean < b.mean;
               return 0;
           });
+          var rewards = [ 'gold-medal', 'silver-medal', 'bronze-medal'];
+          var idx = 0;
+          topBanks.forEach(function(bank, i) {
+            bank.reward = rewards[idx];
+            bank.rank = idx + 1;
+            if(topBanks[i + 1] == undefined) return;
+            var nextBank = topBanks[i + 1];
+            if(bank.score != nextBank.score || bank.mean != nextBank.mean)
+              idx++;
+          });
+          return topBanks;
         },
         headers: function() {
             var b = this.filteredBanks;
@@ -108,8 +138,20 @@ var bankRankingComponent = Vue.component('banks-grid', {
                     icon: bank.favicon,
                     score: apps.score + services.score,
                     apps : apps.mobileApps,
-                    services : services.services
+                    services : services.services,
+                    reward: undefined,
+                    rank: undefined
                 });
+            });
+
+            this.topBanks.forEach(function(bank){
+                var found = headers.find(function(b) {
+                    return b.name == bank.name;
+                });
+                if(found) {
+                  found.reward = bank.reward;
+                  found.rank = bank.rank;
+                }
             });
             return headers;
         },

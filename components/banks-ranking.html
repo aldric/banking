@@ -7,7 +7,10 @@
                     <div class="panel-body" style="font-size:1em;">
                         <div class="row">
                             <div class="col-md-4" v-for="bank in banks">
-                                <label class="checkbox-inline"><input type="checkbox" v-bind:value="bank.name" v-model="checkedNames"> </input>{{ bank.name }}</label>
+                                <label class="checkbox-inline"><input type="checkbox" v-bind:value="bank.name" v-model="checkedNames"  v-bind:disabled="checkedNames.length >= numberOfBanks && checkedNames.indexOf(bank.name) === -1" > </input>{{ bank.name }}</label>
+                            </div>
+                            <div class="col-md-12 text-center text-danger" v-show="numberOfBanks < banks.length">
+                              Vous ne pouvez comparer que {{ numberOfBanks }} banques simultan&eacute;ment.
                             </div>
                         </div>
                     </div>
@@ -50,12 +53,6 @@
                 </div>
             </div>
         </div>
-        <div v-show="searchStarted">
-          <div>Les  Topbanques</div>
-          <div v-for="tb in topBanks">
-            <img v-bind:src="tb.icon" />  {{ tb.name }} : {{tb.score }}
-          </div>
-        </div>
         <div id="table-ranking">
             <table class="table table-responsive table-bordered table-condensed table-hover" style="text-align: center;">
                 <thead>
@@ -63,7 +60,12 @@
                       <th class="hidden-xs hidden-sm"><i class="fa fa-university fa-2x" aria-hidden="true"></i></th>
                         <th v-for="header in headers" style="vertical-align: top;text-align:center;margin-bottom:1em;">
                           <div style="max-width:100px;margin-left: auto;margin-right: auto;">
-                            <div v-html="header.name"></div>
+                            <div style="height:32px;">
+                              <span style="vertical-align:middle;line-height:32px">{{ header.name }}</span>
+                              <span v-show="header.reward && searchStarted">
+                                <span class="tb-rank" v-bind:class="header.reward" v-html="header.rank"></span>
+                              </span>
+                            </div>
                             <img v-bind:src="header.image" />
                             </div>
                         </th>

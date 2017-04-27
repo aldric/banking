@@ -148,7 +148,7 @@ div.box-offer > span {
 .blue {
   color : #01579b ;
 }
-
+.trophy-text { margin-top: .3em; }
 .panel-tb {
     border-color: #f13600;
 }
@@ -259,21 +259,45 @@ button[data-toggle=popover]  i.fa {
   }
 
 }
-.badge-container{
-  position:relative;
-  -webkit-perspective: 1000;
-  -webkit-backface-visibility: hidden;
-
+span.tb-rank {
+  display: inline-block;
+  width: 30px;
+  height:32px;
+  line-height: 32px;
+  text-align: center;
+  vertical-align: middle;
+  color:black;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+span.tb-bank {
+  display: inline-block;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  vertical-align: middle;
+  color:black;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.tb-reward {
+  position: absolute;
 }
 .gold-medal {
   background-image: url('gold-medal.png');
   background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .silver-medal {
   background-image: url('silver-medal.png');
   background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .bronze-medal {
   background-image: url('bronze-medal.png');
   background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
