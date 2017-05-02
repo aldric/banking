@@ -1,5 +1,6 @@
 <?php
-if (! class_exists('Bank_Repository')) {
+
+if (!class_exists('Bank_Repository')) {
     class Bank_Repository
     {
         public function __construct()
@@ -10,7 +11,7 @@ if (! class_exists('Bank_Repository')) {
         {
             $the_query = new WP_Query(array(
             'post_type' => 'fiche_banque',
-            'name' => $bank_name
+            'name' => $bank_name,
         ));
             $data;
             if ($the_query->have_posts()) {
@@ -22,6 +23,7 @@ if (! class_exists('Bank_Repository')) {
                 }
                 wp_reset_postdata();
             }
+
             return $data;
         }
 
@@ -29,7 +31,7 @@ if (! class_exists('Bank_Repository')) {
         {
             $the_query = new WP_Query(array(
             'post_type' => 'fiche_banque',
-            'post_name__in' => $bank_name_array
+            'post_name__in' => $bank_name_array,
         ));
             $data = array();
 
@@ -42,6 +44,7 @@ if (! class_exists('Bank_Repository')) {
                 }
                 wp_reset_postdata();
             }
+
             return $data;
         }
 
@@ -56,60 +59,59 @@ if (! class_exists('Bank_Repository')) {
             if ($p) {
                 $id = $p->ID;
                 $name = get_field('bank_name_label', $id);
-                $ranking_data  = new RankingData($name, $id);
+                $ranking_data = new RankingData($name, $id);
 
-                $ranking_data->favicon = get_field("bank_favicon", $id);
-                $ranking_data->icon = get_field("bank_icon", $id);
-                $ranking_data->image = get_field("bank_image", $id);
+                $ranking_data->favicon = get_field('bank_favicon', $id);
+                $ranking_data->icon = get_field('bank_icon', $id);
+                $ranking_data->image = get_field('bank_image', $id);
 
-                $ranking_data->address = get_field("address", $id);
-                $ranking_data->holding_label = get_field("holding_label", $id);
-                $ranking_data->holding_name = get_field("holding", $id);
-                $ranking_data->holding_image = get_field("holding_image", $id);
-                $ranking_data->customer_count_label = get_field("numbers_of_customers_label", $id);
-                $ranking_data->customer_count = get_field("numbers_of_customers", $id);
+                $ranking_data->address = get_field('address', $id);
+                $ranking_data->holding_label = get_field('holding_label', $id);
+                $ranking_data->holding_name = get_field('holding', $id);
+                $ranking_data->holding_image = get_field('holding_image', $id);
+                $ranking_data->customer_count_label = get_field('numbers_of_customers_label', $id);
+                $ranking_data->customer_count = get_field('numbers_of_customers', $id);
 
-                $ranking_data->review_link = get_field("review_link", $id);
-                $ranking_data->review_link_text = get_field("review_link_text", $id);
+                $ranking_data->review_link = get_field('review_link', $id);
+                $ranking_data->review_link_text = get_field('review_link_text', $id);
 
-                $ranking_data->welcome_offer = get_field("welcome_offer", $id);
-                $ranking_data->minimum_wadge = get_field("minimum_wadge", $id);
-                $ranking_data->credit_card = get_field("credit_card", $id);
+                $ranking_data->welcome_offer = get_field('welcome_offer', $id);
+                $ranking_data->minimum_wadge = get_field('minimum_wadge', $id);
+                $ranking_data->credit_card = get_field('credit_card', $id);
 
-                $ranking_data->opinion_title = get_field("avis_title", $id);
-                $ranking_data->opinion_text = get_field("avis_resume", $id);
+                $ranking_data->opinion_title = get_field('avis_title', $id);
+                $ranking_data->opinion_text = get_field('avis_resume', $id);
 
-                $ranking_data->affiliate_link = get_field("affiliate_link", $id);
+                $ranking_data->affiliate_link = get_field('affiliate_link', $id);
 
-                $ranking_data->young_offer = $this->coerse_null_value(get_field("young_offer", $id), 0);
-                $ranking_data->prof_account = $this->coerse_null_value(get_field("prof_account", $id), 0);
-                $ranking_data->saving_account = $this->coerse_null_value(get_field("saving_account", $id), 0);
-                $ranking_data->revolving_credit = $this->coerse_null_value(get_field("revolving_credit", $id), 0);
-                $ranking_data->mortgage = $this->coerse_null_value(get_field("mortgage", $id), 0);
-                $ranking_data->credit_rebuy = $this->coerse_null_value(get_field("credit_rebuy", $id), 0);
-                $ranking_data->life_insurance = $this->coerse_null_value(get_field("life_insurance", $id), 0);
-                $ranking_data->car_insurance = $this->coerse_null_value(get_field("car_insurance", $id), 0);
-                $ranking_data->home_insurance = $this->coerse_null_value(get_field("home_insurance", $id), 0);
-                $ranking_data->other_insurance = $this->coerse_null_value(get_field("other_insurance", $id), 0);
-                $ranking_data->stock = $this->coerse_null_value(get_field("stock", $id), 0);
+                $ranking_data->young_offer = $this->coerse_null_value(get_field('young_offer', $id), 0);
+                $ranking_data->prof_account = $this->coerse_null_value(get_field('prof_account', $id), 0);
+                $ranking_data->saving_account = $this->coerse_null_value(get_field('saving_account', $id), 0);
+                $ranking_data->revolving_credit = $this->coerse_null_value(get_field('revolving_credit', $id), 0);
+                $ranking_data->mortgage = $this->coerse_null_value(get_field('mortgage', $id), 0);
+                $ranking_data->credit_rebuy = $this->coerse_null_value(get_field('credit_rebuy', $id), 0);
+                $ranking_data->life_insurance = $this->coerse_null_value(get_field('life_insurance', $id), 0);
+                $ranking_data->car_insurance = $this->coerse_null_value(get_field('car_insurance', $id), 0);
+                $ranking_data->home_insurance = $this->coerse_null_value(get_field('home_insurance', $id), 0);
+                $ranking_data->other_insurance = $this->coerse_null_value(get_field('other_insurance', $id), 0);
+                $ranking_data->stock = $this->coerse_null_value(get_field('stock', $id), 0);
 
-                $apps = get_field("mobile_apps", $id);
-                $ranking_data->mobile_apps["iOS"] = array_search("iOS", $apps) == false;
-                $ranking_data->mobile_apps["Android"] = array_search("Android", $apps) == false;
-                $ranking_data->mobile_apps["Windows"] = array_search("Windows", $apps) == false;
+                $apps = get_field('mobile_apps', $id);
+                $ranking_data->mobile_apps['iOS'] = array_search('iOS', $apps) == false;
+                $ranking_data->mobile_apps['Android'] = array_search('Android', $apps) == false;
+                $ranking_data->mobile_apps['Windows'] = array_search('Windows', $apps) == false;
 
-                $ranking_data->offer[ "Offre jeune"] = $ranking_data->young_offer;
-                $ranking_data->offer[ "Compte professionnel"] = $ranking_data->prof_account;
-                $ranking_data->offer["Compte courant"] = $ranking_data->saving_account;
-                $ranking_data->offer[ "Crédit à la consommation" ]= $ranking_data->revolving_credit;
-                $ranking_data->offer[ "Crédit immobilier" ]= $ranking_data->mortgage;
-                $ranking_data->offer[ "Rachat de crédit" ]= $ranking_data->credit_rebuy;
-                $ranking_data->offer[ "Assurance vie" ]= $ranking_data->life_insurance;
-                $ranking_data->offer[ "Assurance automobile" ]= $ranking_data->car_insurance;
-                $ranking_data->offer[ "Assurance habitation" ]= $ranking_data->home_insurance;
-                $ranking_data->offer[ "Autre assurance" ]= $ranking_data->other_insurance;
-                $ranking_data->offer[ "Bourse en ligne" ]= $ranking_data->stock;
-
+                $ranking_data->offer[ 'Compte courant'] = $ranking_data->saving_account;
+                $ranking_data->offer[ 'Offre jeune'] = $ranking_data->young_offer;
+                $ranking_data->offer[ 'Compte professionnel'] = $ranking_data->prof_account;
+                $ranking_data->offer[ 'Crédit à la consommation' ] = $ranking_data->revolving_credit;
+                $ranking_data->offer[ 'Crédit immobilier' ] = $ranking_data->mortgage;
+                $ranking_data->offer[ 'Rachat de crédit' ] = $ranking_data->credit_rebuy;
+                $ranking_data->offer[ 'Assurance vie' ] = $ranking_data->life_insurance;
+                $ranking_data->offer[ 'Assurance automobile' ] = $ranking_data->car_insurance;
+                $ranking_data->offer[ 'Assurance habitation' ] = $ranking_data->home_insurance;
+                $ranking_data->offer[ 'Autre assurance' ] = $ranking_data->other_insurance;
+                $ranking_data->offer[ 'Bourse en ligne' ] = $ranking_data->stock;
 
                 if (have_rows('points_forts', $id)) {
                     while (have_rows('points_forts', $id)) {
@@ -132,18 +134,19 @@ if (! class_exists('Bank_Repository')) {
                     while (have_rows('evaluation_criteres', $id)) {
                         the_row();
                         $eval_sum += (int) get_sub_field('valeur_note', $id);
-                        $eval_count++;
+                        ++$eval_count;
 
                         array_push($ranking_data->eval_data, array(
-                      "label" => get_sub_field('label_critere', $id),
-                      "description" => get_sub_field('description_critere', $id),
-                      "note" => get_sub_field('valeur_note', $id)
+                      'label' => get_sub_field('label_critere', $id),
+                      'description' => get_sub_field('description_critere', $id),
+                      'note' => get_sub_field('valeur_note', $id),
                     ));
                     }
-                    $ranking_data->title = get_field("evaluation_title", $id);
+                    $ranking_data->title = get_field('evaluation_title', $id);
                     $ranking_data->mean = round($eval_sum / $eval_count);
                 }
             }
+
             return $ranking_data;
         }
     }

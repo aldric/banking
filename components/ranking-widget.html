@@ -1,0 +1,60 @@
+<script type="text/x-template" id="bank-ranking-widget-template">
+  <aside>
+    <div class="card card-ranking">
+      <div class="card-block">
+          <h4 class="card-title widget-title">{{ bank.widget_title }}</h4>
+          <div class="d-flex flex-column">
+              <div class="text-center">
+                <star-rating :percentage="bank.mean" v-show="bank.mean"></star-rating>
+              </div>
+          </div>
+          <div>
+            <div class="d-flex flex-column" v-for="eval in bank.eval_data">
+              <div class="text-center">
+                <dl class="row">
+                  <dt class="col-sm-6 text-center">
+                    <strong class="h6">{{ eval.label }}</strong><br />
+                    <small>{{ eval.description }}</small>
+                  </dt>
+                  <dd class="col-sm-6 text-center">
+                      <star-rating :percentage="eval.note" v-show="eval.note"></star-rating>
+                  </dd>
+                </dl>
+              </div>
+            </div>
+            <div class="d-flex flex-column">
+              <div class="justify-content-center text-center">
+                  <dl>
+                      <dt class=" h5">Offre de bienvenue</dt>
+                      <div class="d-flex justify-content-center"> </div>
+                      <dd><span>{{ bank.welcome_offer }}</span</dd>
+                  </dl>
+                </div>
+               <div class="justify-content-center text-center">
+                 <dl>
+                   <dt class="h5">Revenu minimum</dt>
+                   <div class="d-flex justify-content-center">  </div>
+                   <dd><span>{{ bank.minimum_wadge }}</span</dd>
+                 </dl>
+               </div>
+               <div class="justify-content-center text-center">
+                 <dl>
+                   <dt class=" h5">Carte de crédit</dt>
+                   <dd ><span>{{ bank.credit_card }}</span</dd>
+                 </dl>
+               </div>
+                 <div class="card-block ">
+                   <h4 class="card-title text-center text-uppercase">Services disponibles</h4>
+                   <div v-bind:class="getBg(value)" v-for="(value, key) in bank.offer">
+                       <div class="h6" v-html="getText(key, value)"><?php echo Helper::get_text($data->saving_account, 'Compte courant') ?></div>
+                   </div>
+                   <div class="justify-content-center">
+                     <a v-bind:href="bank.review_link" class="btn btn-success btn-block text-center">Revue détaillée</a>
+                   </div>
+                 </div>
+               </div>
+             </div>
+      </div>
+    </div>
+  </aside>
+</script>

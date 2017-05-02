@@ -1,6 +1,6 @@
 <?php
 
-if (! class_exists('Ranking_Widget')) {
+if (!class_exists('Ranking_Widget')) {
     class Ranking_Widget extends WP_Widget
     {
         private $repository;
@@ -12,7 +12,7 @@ if (! class_exists('Ranking_Widget')) {
                     /*Widget name will appear in UI*/
                     __('AGT Bank Ranking Widget', 'supermagpro-child'),
                     /*Widget description*/
-                    array( 'description' => __('Bank Ranking', 'supermagpro-child'), )
+                    array('description' => __('Bank Ranking', 'supermagpro-child'))
                 );
             $this->repository = new Bank_Repository();
         }
@@ -25,12 +25,12 @@ if (! class_exists('Ranking_Widget')) {
         public function form($instance)
         {
             // $title = esc_attr($instance["title"]);
-            echo "<br />";
+            echo '<br />';
         }
 
         public function widget($args, $instance)
         {
-            $widget_id = "widget_" . $args["widget_id"];
+            $widget_id = 'widget_'.$args['widget_id'];
             $template = get_field('side_template', $widget_id);
             global $post;
             $current_id = $post->ID;
@@ -40,7 +40,7 @@ if (! class_exists('Ranking_Widget')) {
             }
 
             $data = $this->repository->get_bank_data($post_object->post_name);
-            $data->widget_title = get_field('widget_ranking_title', $widget_id).' '. $data->name;
+            $data->widget_title = get_field('widget_ranking_title', $widget_id).' '.$data->name;
             if ($data != null) {
                 echo ViewRenderer::render('ranking.widget.html', $data);
                 $review = new BankReviewJson($data->name,
@@ -49,14 +49,15 @@ if (! class_exists('Ranking_Widget')) {
                                              $data->welcome_offer,
                                              $data->affiliate_link,
                                              round($data->mean / 20, 2),
-                                             "Revue de la banque en ligne : ".$data->name,
+                                             'Revue de la banque en ligne : '.$data->name,
                                              $data->opinion_text);
+                echo '<script type="text/javascript"> var bankRankingWidget='.json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).';</script>';
                 echo '<script type = "application/ld+json" >'.$review->toJson().'</script>';
             }
         }
     }
 
     add_action('widgets_init', function () {
-        register_widget("Ranking_Widget");
+        register_widget('Ranking_Widget');
     });
 }
