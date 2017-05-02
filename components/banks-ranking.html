@@ -57,16 +57,26 @@
             <table class="table table-responsive table-bordered table-condensed table-hover" style="text-align: center;">
                 <thead>
                     <tr>
+                        <th class="hidden-xs hidden-sm"><img src="https://www.topbanque.net/wp-content/uploads/2016/10/cropped-favicon-2.png" style="width:32px;"></i></th>
+                        <th v-for="topBank in topBanks" style="vertical-align: top;text-align:center;margin-bottom:1em;">
+                          <div style="margin-left: auto;margin-right: auto;">
+                            <div style="height:32px;">
+                              <span v-show="topBank.reward && searchStarted">
+                                <span class="tb-rank" v-bind:class="topBank.reward" v-html="topBank.rank"></span>
+                                <span><button class="btn btn-info btn-link" role="button" data-toggle="popover" v-bind:id="topBank.name" data-trigger="focus" data-placement="top" data-type="result" title="Votre recherche" >D&eacute;tails <i class="fa fa-info-circle" aria-hidden="true"></i></button></span>
+                              </span>
+                            </div>
+                          </div>
+                        </th>
+                    </tr>
+                    <tr>
                       <th class="hidden-xs hidden-sm"><i class="fa fa-university fa-2x" aria-hidden="true"></i></th>
                         <th v-for="header in headers" style="vertical-align: top;text-align:center;margin-bottom:1em;">
                           <div style="max-width:100px;margin-left: auto;margin-right: auto;">
                             <div style="height:32px;">
                               <span style="vertical-align:middle;line-height:32px">{{ header.name }}</span>
-                              <span v-show="header.reward && searchStarted">
-                                <span class="tb-rank" v-bind:class="header.reward" v-html="header.rank"></span>
-                              </span>
                             </div>
-                            <img v-bind:src="header.image" />
+                             <img v-bind:src="header.image" />
                             </div>
                         </th>
                     </tr>
@@ -110,7 +120,7 @@
                       </th>
                         <td v-for="value in values">
                           <div class="opinion">{{ value.opinionText }}</div>
-                          <button type="button" class="btn btn-lg btn-success btn-xs" data-toggle="popover" data-placement="top" data-trigger="focus"  title="Notre avis" v-bind:data-content="value.opinionText" ><i class="fa fa-search-plus fa-2c" aria-hidden="true"></i><span class="hidden-xs hidden-sm">En savoir plus</span></button>
+                          <button type="button" class="btn btn-lg btn-success btn-xs" data-toggle="popover" data-type="opinion" data-placement="top" data-trigger="focus"  title="Notre avis" ><i class="fa fa-search-plus fa-2c" aria-hidden="true"></i><span class="hidden-xs hidden-sm">En savoir plus</span></button>
                         </td>
                     </tr>
                     <tr>

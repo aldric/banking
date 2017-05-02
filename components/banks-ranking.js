@@ -33,12 +33,53 @@ var bankRankingComponent = Vue.component('banks-grid', {
 
     },
     updated: function () {
-      jQuery('button[data-toggle]').popover();
+      jQuery('button[data-type=opinion]').popover({ content : function () {
+        return jQuery(this).prev().html();
+      }});
+
+      jQuery('button[data-type=opinion]').popover({ content : function () {
+        return jQuery(this).prev().html();
+      }});
     },
     mounted: function() {
-      jQuery('button[data-toggle]').popover();
+      var that = this;
+      jQuery('button[data-type=result]').popover({  html : true, content : function () {
+        var id = jQuery(this).attr('id');
+        return that.getSearchDetails(id);
+
+      }});
+      jQuery('button[data-type=result]').popover({ html : true, content : function () {
+        return jQuery(this).prev().html();
+        return that.getSearchDetails(id);
+      }});
     },
     methods: {
+      getSearchDetails : function(bankId) {
+          var that = this;
+          var bank = this.filteredBanks.find(function(bank) {
+            return bank.name == bankId;
+          });
+          var apps = this.mobileAppScore(bank);
+          var services = this.serviceScore(bank);
+          var result = "<h5>Note de la rédaction</h5><div style=\"text-align:center;font-weight:bold;margin-bottom:10px\">" + that.getNote(bank.mean) + "</div>";
+          if(services.services.length > 0) {
+            result += "<h5>Services disponibles</h5>";
+            result += "<ul>";
+            services.services.forEach(function(s) {
+                result += "<li>" + s + "</li>";
+            });
+            result += "</ul>";
+          }
+          if(apps.mobileApps.length > 0) {
+            result += "<h5>Disponible sur</h5>";
+            result += "<ul>";
+            apps.mobileApps.forEach(function(s) {
+                result += "<li><i class=\"" + that.getMobileIcon(s) + "\" aria-hidden=\"true\"></i></li>";
+            });
+            result += "</ul>";
+          }
+          return result;
+      },
         getNote: function(note) {
             var n = (note / 10);
             return (Math.round(n) == n ? n : n.toFixed(1)) + '/10';
@@ -79,6 +120,7 @@ var bankRankingComponent = Vue.component('banks-grid', {
             this.selectedServices.splice(0);
             this.mobileApps.splice(0);
         }
+
     },
     computed: {
       numberOfBanks : function() {
@@ -105,7 +147,7 @@ var bankRankingComponent = Vue.component('banks-grid', {
             });
         },
         topBanks: function() {
-          var topBanks = this.filteredBanks.slice().sort(function(a, b) {
+          var topBanks = this.headers.slice().sort(function(a, b) {
             return a.score < b.score;
           }).sort(function(a, b) {
               if(a.score == b.score)
@@ -143,20 +185,7 @@ var bankRankingComponent = Vue.component('banks-grid', {
                     rank: undefined
                 });
             });
-
-            headers.forEach(function(bank){
-              var found = that.topBanks.find(function(b) {
-                return b.name == bank.name;
-              });
-              if(found) {
-                bank.reward = found.reward;
-                bank.rank = found.rank;
-              } else {
-                bank.reward = undefined;
-                bank.rank = undefined;
-              }
-            });
-            return headers;
+          return headers;
         },
         evaluations: function() {
             var b = this.filteredBanks;
