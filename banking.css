@@ -301,3 +301,10 @@ span.tb-bank {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+div.procons ul {
+  padding:0;
+}
+div.procons .panel-body {
+    padding: 5px;
+}

@@ -18,7 +18,7 @@ class ProsConsModel
     }
 }
 //[proscons bank="fortuneo"]
-function proscons_func()
+function proscons_func($atts)
 {
     $a = shortcode_atts(array(
       'bank' => '',
@@ -28,9 +28,7 @@ function proscons_func()
 
     $repo = new Bank_Repository();
     $bank_input = $a['bank'];
-    $bank = explode('|', $bank_input);
-
-    $data = $repo->get_banks_data($bank);
+    $data = $repo->get_bank_data($bank_input);
     $out = ViewRenderer::render('proscons.html', new ProsConsModel(
       $a['pros_title'],
       $a['cons_title'],

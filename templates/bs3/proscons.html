@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row procons">
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading" style="font-size: 16px; line-height: 1em;">
@@ -6,7 +6,10 @@
       <div class="panel-body">
         <ul class="list-group">
           <?php foreach ($data->pros as $pro) : ?>
-            echo '<li class="list-group-item list-group-item-success">'.$pro.'</li>';
+            <?php
+              if($pro != '')
+                echo '<li class="list-group-item list-group-item-success">'.$pro.'</li>';
+            ?>
           <?php endforeach; ?>
         </ul>
       </div>
@@ -19,7 +22,10 @@
       <div class="panel-body">
         <ul class="list-group">
           <?php foreach ($data->cons as $con) : ?>
-            echo '<li class="list-group-item list-group-item-danger">'.$con.'</li>';
+            <?php
+              if($con != '')
+                echo '<li class="list-group-item list-group-item-danger">'.$con.'</li>'; 
+            ?>
           <?php endforeach; ?>
         </ul>
       </div>
