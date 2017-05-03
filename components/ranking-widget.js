@@ -8,10 +8,10 @@ var RankingWidgetComponent = Vue.component('banks-ranking-widget', {
     },
     methods : {
       getBg : function(isOn) {
-        return 'ok';
+        return isOn == '1' ?  "text-success" : "text-danger";
       },
       getText : function(text, isOn) {
-        return 'plop;'
+        return  isOn == '1' ?  '<i class="fa fa-check" aria-hidden="true"></i>' + text : '<i class="fa fa-times" aria-hidden="true"></i><s>' + text + "</s>";
       }
     }
   });

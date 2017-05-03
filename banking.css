@@ -193,6 +193,12 @@ div#bank-box div.ratings div.star-container {
   overflow: hidden;
   position: relative;
 }
+div.top-ranking-stars {
+    height:50px;
+}
+div.top-ranking-stars .glyphicon {
+    font-size: 26px;
+}
 
 [v-cloak] {
   display: none;

@@ -42,7 +42,7 @@ if (!class_exists('Ranking_Widget')) {
             $data = $this->repository->get_bank_data($post_object->post_name);
             $data->widget_title = get_field('widget_ranking_title', $widget_id).' '.$data->name;
             if ($data != null) {
-                echo ViewRenderer::render('ranking.widget.html', $data);
+                echo ViewRenderer::render('bank-ranking-widget.html', $data);
                 $review = new BankReviewJson($data->name,
                                              $data->address,
                                              $data->image,
