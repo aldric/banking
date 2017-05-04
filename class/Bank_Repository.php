@@ -97,6 +97,7 @@ if (!class_exists('Bank_Repository')) {
                 $ranking_data->stock = $this->coerse_null_value(get_field('stock', $id), 0);
 
                 $apps = get_field('mobile_apps', $id);
+                $apps = is_array ($apps) ? $apps : array();
                 $ranking_data->mobile_apps['iOS'] = array_search('iOS', $apps) == false;
                 $ranking_data->mobile_apps['Android'] = array_search('Android', $apps) == false;
                 $ranking_data->mobile_apps['Windows'] = array_search('Windows', $apps) == false;
