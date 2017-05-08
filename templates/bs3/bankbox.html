@@ -103,7 +103,7 @@
                             <div class="ratings" style="height: 20px;">
                                 <star-rating :percentage="bank.mean" v-show="bank.mean"></star-rating>
                             </div>
-                            <img :src="bank.favicon" class="motto-icon" />
+                            <img :src="bank.favicon" class="motto-icon hide-xs" />
                             <h5 class="motto motto-note" style="text-align: center;" v-html="getNote(bank.mean)"></h5>
                         </div>
                         <div class="content">

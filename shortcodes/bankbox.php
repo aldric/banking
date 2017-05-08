@@ -6,7 +6,7 @@ function bankbox_func($atts, $content = null)
     $a = shortcode_atts(array(
      'background' => '#fafafa',
      'banks' => '',
-     'col-xsmall' => 1,
+     'col-xsmall' => 2,
      'col-small' => 2,
      'col-large' => 3,
      'welcome_offer' => true,
@@ -42,8 +42,8 @@ function bankbox_func($atts, $content = null)
              "notes" => $notes,
              "icons" => $icons
            ];
-   $content .= '<script type="text/javascript"> var bankBoxes=' .json_encode($model, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).';</script>';
-   $content .= ViewRenderer::render('bankbox.html', $model);
-   return $content;
+    $content .= '<script type="text/javascript"> var bankBoxes=' .json_encode($model, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).';</script>';
+    $content .= ViewRenderer::render('bankbox.html', $model);
+    return $content;
 }
 add_shortcode('bank-box', 'bankbox_func');
