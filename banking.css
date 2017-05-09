@@ -130,11 +130,11 @@ div.box-offer {
   font-size: 0.9em;
   line-height: 1.5em;
 }
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {
   div.box-offer {
       font-size: 1em;
   }
-}
+}*/
 
 div.box-offer > span {
   display: inline-block;
