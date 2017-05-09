@@ -342,6 +342,10 @@ div.b-box-monabanq img.img-box,div.b-box-ing-direct img.img-box, div.b-box-bours
     display: inline-block;
 }
 
+div.b-box-boursorama-banque .back h4{
+    font-size: 0.9em;
+}
+
 div.b-box-monabanq div.cover {
   padding:0 10px;
   background-color: #000;
