@@ -36,11 +36,11 @@
                         if (bank.mobile_apps[i] === true) {
                             var app = '';
                             if (i == 'iOS')
-                                app = 'fa fa-apple fa-2x apple-grey';
+                                app = 'fa fa-apple apple-grey';
                             else if (i == 'Android')
-                                app = 'fa fa-android fa-2x android-green';
+                                app = 'fa fa-android android-green';
                             else if (i == 'Windows')
-                                app = 'fa fa-windows fa-2x windows-purple';
+                                app = 'fa fa-windows windows-purple';
                             mobileApps.push(app);
                         }
                     }
@@ -80,16 +80,16 @@
             <div :class="getBankClass(bank.name)" class="card-container">
                 <div class="card">
                     <div class="front">
-                        <div class="cover" style="">
+                        <div class="cover">
                             <img :src="bank.image" class="img-box" />
                         </div>
                         <div class="content">
                             <div class="main">
-                                <div class="box-offer"><i class="fa fa-gift" aria-hidden="true"></i>{{ bank.welcome_offer }}</span>
+                                <div class="box-offer text-info"><i class="fa fa-gift hidden-xs" aria-hidden="true"></i>{{ bank.welcome_offer }}
                                 </div>
-                                <div class="box-offer"><i class="fa fa-credit-card" aria-hidden="true"></i>{{ bank.credit_card }}</span>
+                                <div class="box-offer text-success"><i class="fa fa-credit-card" aria-hidden="true"></i>{{ bank.credit_card }}
                                 </div>
-                                <div class="box-offer"><i class="fa fa-check" aria-hidden="true"></i>{{ bank.pros[0] }}</span>
+                                <div class="box-offer text-info"><i class="fa fa-check hidden-xs" aria-hidden="true"></i>{{ bank.pros[0] }}
                                 </div>
                             </div>
                             <div class="footer">
@@ -103,16 +103,14 @@
                             <div class="ratings" style="height: 20px;">
                                 <star-rating :percentage="bank.mean" v-show="bank.mean"></star-rating>
                             </div>
-                            <img :src="bank.favicon" class="motto-icon hide-xs" />
-                            <h5 class="motto motto-note" style="text-align: center;" v-html="getNote(bank.mean)"></h5>
                         </div>
                         <div class="content">
                             <div class="main">
-                                <h4 class="text-center"> {{bank.name}} </h4>
-                                <table class="table table-condensed" style="margin-bottom: 5px;">
+                                <h4 class="text-center"> {{bank.name + ' ('+getNote(bank.mean) + ')' }} </h4>
+                                <table class="table table-condensed table-notes" style="margin-bottom: 0;">
                                     <tbody>
                                         <tr v-for="note in notes(bank)">
-                                            <td>{{ note.label }}</td>
+                                            <td style="white-space:nowrap;font-size:0.85em;">{{ note.label }}</td>
                                             <td>
                                                 <star-rating :percentage="note.note"></star-rating>
                                             </td>
@@ -126,8 +124,8 @@
                         </div>
                         <div class="footer">
                             <div class="social-links text-center">
-                                <a v-bind:href="bank.review_link" class="facebook"><i class="fa fa-info-circle fa-fw"></i>Voir la revue</a>
-                                <a v-bind:href="bank.affiliate_link" target="_blank" rel="nofollow" class="google"><i class="fa fa-external-link fa-fw"></i>Visiter le site</a>
+                                <a v-bind:href="bank.review_link"><i class="fa fa-plus"></i>d&apos;info</a>
+                                <a v-bind:href="bank.affiliate_link" target="_blank" rel="nofollow">Visiter <img :src="bank.favicon" /></a>
                             </div>
                         </div>
                     </div>

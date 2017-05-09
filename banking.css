@@ -127,9 +127,15 @@ div#bank-box hr {
 
 div.box-offer {
   text-align: center;
-  margin-bottom: 5px;
-  font-weight: 400;
+  font-size: 0.9em;
+  line-height: 1.5em;
 }
+@media (min-width: 768px) {
+  div.box-offer {
+      font-size: 1em;
+  }
+}
+
 div.box-offer > span {
   display: inline-block;
   vertical-align: middle;
@@ -177,10 +183,13 @@ div.box-offer > span {
   position: relative;
 }
 div#bank-box div.ratings span.glyphicon {
-  font-size: 24px;
+  font-size: 1.3em;
+}
+div.back table.table-notes span.glyphicon {
+  font-size: 0.9em;
 }
 div#bank-box div.ratings div.star-container {
-  width: 130px;
+  width: 105x;
 }
 
 .star-box {
@@ -316,7 +325,7 @@ div.procons .panel-body {
     padding: 5px;
 }
 div.cover img.img-box {
-  max-height:70px;
+  max-height:65px;
   vertical-align:middle;
   display:block;
   margin-left:auto;
@@ -327,6 +336,7 @@ div.b-box-bforbank div.cover {
 }
 div.cover  {
   line-height:70px;
+  margin-bottom: 5px;
 }
 div.b-box-monabanq img.img-box,div.b-box-ing-direct img.img-box, div.b-box-boursorama-banque img.img-box {
     display: inline-block;
@@ -472,13 +482,12 @@ div.b-box-hello-bank div.cover {
   height: 40px;
   width: 100%;
 }
-
 .card .back .footer {
-    margin: 50px 0 0;
+    padding: 3px 0 0;
 }
 
 .card .footer .social-links{
-    font-size: em;
+    font-size: 0.9em;
 }
 .card .footer .social-links a{
     margin: 0 7px;
