@@ -342,7 +342,7 @@ div.b-box-monabanq img.img-box,div.b-box-ing-direct img.img-box, div.b-box-bours
     display: inline-block;
 }
 
-div.b-box-boursorama-banque .back h4{
+div.back h4{
     font-size: 0.9em;
 }
 
@@ -487,7 +487,7 @@ div.b-box-hello-bank div.cover {
   width: 100%;
 }
 .card .back .footer {
-    padding: 8px 0 0;
+  padding: 8px 0 0;
 }
 .card .back .footer img {
   width:24px;
@@ -503,49 +503,6 @@ div.b-box-hello-bank div.cover {
     color: #f13600;
 }
 
-.card .footer .btn-simple{
-    margin-top: -6px;
-}
 .card .header {
     padding: 0;
-}
-.card .motto{
-    color: #999999;
-    font-size: 14px;
-    font-weight: 700;
-    padding-bottom: 10px;
-    text-align: center;
-}
-.card .motto-icon {
-  position: absolute;
-    top: 2px;
-}
-.card .motto-note  {
-  position: absolute;
-  right: 5px;
-  top: 2px;
-}
-.card .stats-container{
-	width: 100%;
-	margin-top: 50px;
-}
-.card .stats{
-	display: block;
-	float: left;
-	width: 33.333333%;
-	text-align: center;
-}
-
-.card .stats:first-child{
-	border-right: 1px solid #EEEEEE;
-}
-.card .stats:last-child{
-	border-left: 1px solid #EEEEEE;
-}
-.card .stats h4{
-	font-weight: 300;
-	margin-bottom: 5px;
-}
-.card .stats p{
-	color: #777777;
 }

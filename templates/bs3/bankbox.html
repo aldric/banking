@@ -10,6 +10,16 @@
             components: {
                 'star-rating': starRatingComponent
             },
+            mounted: function() {
+              jQuery('div.card-container.manual-flip').click(function(){
+                var $card = jQuery(this);
+                if($card.hasClass('hover')) {
+                  $card.removeClass('hover');
+                } else {
+                  $card.addClass('hover');
+               }
+              });
+            },
             computed: {
                 rowClass: function() {
                     return this.bankBoxes.banks.length > 0 ? 'row' : '';
@@ -77,7 +87,7 @@
 <div id="bank-box">
     <div v-bind:class="rowClass">
         <div v-for="bank in banks" :class="bankBoxes.colCss">
-            <div :class="getBankClass(bank.name)" class="card-container">
+            <div :class="getBankClass(bank.name)" class="card-container manual-flip" style="cursor:pointer">
                 <div class="card">
                     <div class="front">
                         <div class="cover">
