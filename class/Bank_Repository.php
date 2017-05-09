@@ -66,6 +66,8 @@ if (!class_exists('Bank_Repository')) {
                 $ranking_data->image = get_field('bank_image', $id);
 
                 $ranking_data->address = get_field('address', $id);
+                $ranking_data->bank_phone = $this->coerse_null_value(get_field('bank_phone', $id), '');
+
                 $ranking_data->holding_label = get_field('holding_label', $id);
                 $ranking_data->holding_name = get_field('holding', $id);
                 $ranking_data->holding_image = get_field('holding_image', $id);
@@ -157,6 +159,7 @@ if (!class_exists('Bank_Repository')) {
         public $name;
         public $title;
         public $address;
+        public $bank_phone;
 
         public $favicon;
         public $icon;

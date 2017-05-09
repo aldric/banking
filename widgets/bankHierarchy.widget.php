@@ -29,6 +29,8 @@ if (! class_exists('BankHierarchy_Widget')) {
         {
             $widget_id = "widget_" . $args["widget_id"];
             global $post;
+            if($post == null)
+              return '';
             $current_id = $post->ID;
             $top = $post;
             $parents = get_post_ancestors($current_id);

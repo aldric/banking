@@ -30,9 +30,14 @@ if (!class_exists('Ranking_Widget')) {
 
         public function widget($args, $instance)
         {
+          if($args == null)
+          return '';
+
             $widget_id = 'widget_'.$args['widget_id'];
             $template = get_field('side_template', $widget_id);
             global $post;
+            if($post == null)
+              return '';
             $current_id = $post->ID;
             $post_object = get_field('associated_bank', $current_id);
             if ($post_object == null) {
@@ -50,7 +55,8 @@ if (!class_exists('Ranking_Widget')) {
                                              $data->affiliate_link,
                                              round($data->mean / 20, 2),
                                              'Revue de la banque en ligne : '.$data->name,
-                                             $data->opinion_text);
+                                             $data->opinion_text,
+                                             $data->bank_phone);
                 echo '<script type="text/javascript"> var bankRankingWidget='.json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).';</script>';
                 echo '<script type = "application/ld+json" >'.$review->toJson().'</script>';
             }

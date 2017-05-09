@@ -4,7 +4,7 @@
       <div class="panel-heading" style="font-size: 16px; line-height: 1em;">
         <i class="fa fa-check-square" aria-hidden="true"></i> Points positifs</div>
       <div class="panel-body">
-        <ul class="list-group">
+        <ul class="list-group" style="margin-bottom:0">
           <?php foreach ($data->pros as $pro) : ?>
             <?php
               if($pro != '')
@@ -20,11 +20,11 @@
       <div class="panel-heading" style="font-size: 16px; line-height: 1em;">
         <i class="fa fa-minus-square-o" aria-hidden="true"></i> Points négatifs</div>
       <div class="panel-body">
-        <ul class="list-group">
+        <ul class="list-group" style="margin-bottom:0">
           <?php foreach ($data->cons as $con) : ?>
             <?php
               if($con != '')
-                echo '<li class="list-group-item list-group-item-danger">'.$con.'</li>'; 
+                echo '<li class="list-group-item list-group-item-danger">'.$con.'</li>';
             ?>
           <?php endforeach; ?>
         </ul>

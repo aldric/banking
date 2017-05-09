@@ -9,7 +9,9 @@ class BankReviewJson
     private $rating;
     private $reviewName;
     private $reviewBody;
-    public function __construct($bankName, $address, $image, $priceRange, $url, $rating, $reviewName, $reviewBody)
+    private $phone;
+
+    public function __construct($bankName, $address, $image, $priceRange, $url, $rating, $reviewName, $reviewBody, $phone)
     {
         $this->image = $image;
         $this->bankName = $bankName;
@@ -19,6 +21,7 @@ class BankReviewJson
         $this->rating = $rating;
         $this->reviewName = $reviewName;
         $this->reviewBody = $reviewBody;
+        $this->phone = $phone;
     }
     public function toJson()
     {
@@ -30,6 +33,7 @@ class BankReviewJson
           "image"=> $this->image,
           "name"=>  $this->bankName,
           "address"=>  $this->address,
+          "telephone" => $this->phone,
           "priceRange"=>  $this->priceRange,
           "url"=>  $this->url
         ),

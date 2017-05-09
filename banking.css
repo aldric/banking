@@ -204,10 +204,13 @@ div#bank-box div.ratings div.star-container {
   position: relative;
 }
 div.top-ranking-stars {
-    height:50px;
+    height:40px;
 }
 div.top-ranking-stars .glyphicon {
     font-size: 26px;
+}
+div#bank-ranking-widget div.star-container {
+  width:140px;
 }
 
 [v-cloak] {
