@@ -11,14 +11,14 @@
                 'star-rating': starRatingComponent
             },
             mounted: function() {
-              jQuery('div.card-container.manual-flip').click(function(){
-                var $card = jQuery(this);
-                if($card.hasClass('hover')) {
-                  $card.removeClass('hover');
-                } else {
-                  $card.addClass('hover');
-               }
-              });
+                jQuery('div.card-container.manual-flip').click(function() {
+                    var $card = jQuery(this);
+                    if ($card.hasClass('hover')) {
+                        $card.removeClass('hover');
+                    } else {
+                        $card.addClass('hover');
+                    }
+                });
             },
             computed: {
                 rowClass: function() {
@@ -122,7 +122,7 @@
                                         <tr v-for="note in notes(bank)">
                                             <td style="white-space:nowrap;font-size:0.85em;">{{ note.label }}</td>
                                             <td>
-                                                <star-rating :percentage="note.note"></star-rating>
+                                                <h4 class="text-center"> {{ getNote(note.note) }} </h4>
                                             </td>
                                         </tr>
                                     </tbody>
