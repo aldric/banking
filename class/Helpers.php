@@ -16,7 +16,15 @@ class Helper {
   {
       return $value == 1 ?  "text-success" : "text-danger";
   }
-  
+
+  public static function cmp($a, $b)
+  {
+      if ($a->mean == $b->mean) {
+          return 0;
+      }
+      return ($a->mean < $b->mean) ? -1 : 1;
+  }
+
 }
 
 ?>

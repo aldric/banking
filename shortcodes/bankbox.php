@@ -30,6 +30,7 @@ function bankbox_func($atts, $content = null)
     $banks = explode("|", $banks_input);
     $repository = new Bank_Repository();
     $data = $repository->get_banks_data($banks);
+    usort($data, "Helper::cmp");
 
     $col_css = $xs_col.' '.$sm_col.' '.$lg_col;
 
@@ -46,4 +47,5 @@ function bankbox_func($atts, $content = null)
     $content .= ViewRenderer::render('bankbox.html', $model);
     return $content;
 }
+
 add_shortcode('bank-box', 'bankbox_func');

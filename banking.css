@@ -487,7 +487,10 @@ div.b-box-hello-bank div.cover {
   width: 100%;
 }
 .card .back .footer {
-    padding: 3px 0 0;
+    padding: 8px 0 0;
+}
+.card .back .footer img {
+  width:24px;
 }
 
 .card .footer .social-links{

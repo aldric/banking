@@ -11,7 +11,7 @@ function bankranking_func($atts)
     $banks = explode("|", $banks_input);
 
     $data = $repo->get_banks_data($banks);
-    usort($data, "cmp");
+    usort($data, "Helper::cmp");
     if ($a['sort'] == 'asc') {
         array_reverse($data);
     }
@@ -21,13 +21,6 @@ function bankranking_func($atts)
     return $out;
 }
 
-function cmp($a, $b)
-{
-    if ($a->mean == $b->mean) {
-        return 0;
-    }
-    return ($a->mean < $b->mean) ? -1 : 1;
-}
 
 class RankingModel
 {
