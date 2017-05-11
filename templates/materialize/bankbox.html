@@ -2,10 +2,56 @@
   <?php include(__ROOT__ .'/components/bank-box.js') ?>
 </script>
 <?php include(__ROOT__ .'/components/star-rating.html') ?>
-
+<style>
+div#bank-box  div.card img.activator {
+  /*  max-height:80px;
+    width:auto;*/
+    display:inline-block;
+  }
+div#bank-box  div.card div.card-image {
+    text-align:center;
+  }
+div#bank-box  .card.small .card-image+.card-content {
+    max-height:50%;
+  }
+div#bank-box  div.activator {
+    cursor:pointer;
+    text-align:center;
+    font-size:1em;
+  }
+div#bank-box  div.activator i.material-icons {
+    display: inline-flex;
+    vertical-align: bottom;
+  }
+  div#bank-box div.card-content {
+    padding: 10px 0 0 10px;
+  }
+</style>
 <div id="bank-box">
     <div v-bind:class="rowClass">
-        <div v-for="bank in banks" :class="bankBoxes.colCss">
+        <div v-for="bank in banks" class="col s6 m3 l4">
+        <div class="card small sticky-action">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" :src="bank.image" />
+          </div>
+          <div class="card-content activator">
+            <span class="card-title activator grey-text text-darken-4 hide-on-small-only"> {{bank.name + ' ('+getNote(bank.mean) + ')' }} <i class="material-icons right">more_vert</i></span>
+            <div class="activator"><i class="material-icons">&#xE8F6;</i> {{ bank.welcome_offer }}
+            </div>
+            <div class="activator"><i class="material-icons">&#xE870;</i> {{ bank.credit_card }}
+            </div>
+            <div class="activator"><i class="material-icons">&#xE5CA;</i> {{ bank.pros[0] }}
+            </div>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">{{bank.name}}<i class="material-icons right">close</i></span>
+
+          </div>
+          <div class="card-action">
+            <a v-bind:href="bank.review_link">Voir la revue</a>
+            <a v-bind:href="bank.affiliate_link" target="_blank" rel="nofollow">Visiter le site</a>
+          </div>
+        </div>
             <div :class="getBankClass(bank.name)" class="card-container manual-flip" style="cursor:pointer">
                 <div class="card">
                     <div class="front">
