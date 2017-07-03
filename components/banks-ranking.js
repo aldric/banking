@@ -28,6 +28,7 @@ var bankRankingComponent = Vue.component('banks-grid', {
 
     },
     updated: function() {
+        var that = this;
         jQuery('button[data-type=opinion]').popover({
             content: function() {
                 return jQuery(this).prev().html();
@@ -38,13 +39,6 @@ var bankRankingComponent = Vue.component('banks-grid', {
             content: function() {
                 return jQuery(this).prev().html();
             }
-        });
-    },
-    mounted: function() {
-        var that = this;
-        this.$nextTick(function() {
-            window.addEventListener('resize', this.setCheckedNames);
-            this.setCheckedNames();
         });
         jQuery('button[data-type=result]').popover({
             html: true,
@@ -54,13 +48,15 @@ var bankRankingComponent = Vue.component('banks-grid', {
 
             }
         });
-        jQuery('button[data-type=result]').popover({
-            html: true,
-            content: function() {
-                return jQuery(this).prev().html();
-                return that.getSearchDetails(id);
-            }
+    },
+    mounted: function() {
+        var that = this;
+        this.$nextTick(function() {
+            window.addEventListener('resize', this.setCheckedNames);
+            this.setCheckedNames();
         });
+
+
     },
     beforeDestroy() {
         window.removeEventListener('resize', this.setCheckedNames);
