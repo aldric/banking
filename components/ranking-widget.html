@@ -9,7 +9,7 @@
                 <star-rating :percentage="bank.mean" v-show="bank.mean"></star-rating>
               </div>
             </div>
-            <div class="text-center">
+            <div class="text-center" style="padding: 0 10px;">
               <img :src="bank.image" style="max-height:80px;margin-bottom:10px;" />
             </div>
           </div>
@@ -19,7 +19,7 @@
               <div class="text-center">
                 <dl class="row">
                   <dt class="col-sm-6 text-center">
-                    <strong class="h6">{{ eval.label }}</strong><br />
+                    <strong class="h5">{{ eval.label }}</strong><br />
                     <small>{{ eval.description }}</small>
                   </dt>
                   <dd class="col-sm-6 text-center">
@@ -50,20 +50,20 @@
                  </dl>
                </div>
                <div class="d-flex flex-column">
-                 <div class="text-center">
+                 <div class="text-justify" style="padding: 0 5px 20px 5px;">
                    {{ bank.opinion_text }}
                  </div>
                </div>
                  <div class="card-block ">
                    <h4 class="card-title text-center text-uppercase">Services disponibles</h4>
                    <div v-bind:class="getBg(value)" v-for="(value, key) in bank.offer">
-                       <div class="h6" v-html="getText(key, value)"><?php echo Helper::get_text($data->saving_account, 'Compte courant') ?></div>
+                       <div class="h6" style="padding-left:10px;" v-html="getText(key, value)"></div>
                    </div>
-                   <div class="justify-content-center">
+                   <div class="justify-content-center" style="padding : 5px 10px">
                      <a v-bind:href="bank.review_link" class="btn btn-success btn-block text-center">Revue détaillée</a>
                    </div>
-                   <div class="justify-content-center">
-                      <h4 class="card-title text-center text-uppercase" style="margin-top:15px;">{{ bank.holding_label }} : {{ bank.holding_name }}</h4>
+                   <div class="justify-content-center" style="padding-bottom:15px;">
+                      <h4 class="card-title text-center text-uppercase" style="margin-top:15px;">{{ bank.holding_label }} {{ bank.holding_name }}</h4>
                      <div class="text-center"><img :src="bank.holding_image" style="width:150px;" /> </div>
                    </div>
                  </div>

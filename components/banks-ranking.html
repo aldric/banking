@@ -45,7 +45,7 @@
                             <div class="col-md-3" style="text-align:center">
                                 <button type="button" class="btn btn-success btn-xs" v-on:click="resetFilters">
                                 <i class="fa fa-search"></i>
-                                  Commencer une nouvelle recherche
+                                  Nouvelle recherche
                                </button>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                         <th v-bind:colspan="colspan">Note générale</th>
                     </tr>
                     <tr style="height:35px;">
-                        <td v-for="value in values" style="text-align: center;">
+                        <td v-for="value in values" style="text-align: center;"  v-bind:title="getNote(value.mean)">
                             <div class="hidden-xs hidden-sm">
                                 <star-rating :percentage="value.mean" v-show="value.mean"></star-rating>
                             </div>
