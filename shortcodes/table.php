@@ -49,12 +49,14 @@ function tables_entetes_short_code_func($atts, $content = null) {
 function tables_entete_short_code_func($atts, $content = null) {
   $a = shortcode_atts(array(
     'class' => '',
-    'style' => ''
+    'style' => '',
+    'rowspan' => ''
   ), $atts);
-  $table_class =  strlen($a['class']) > 0 ? 'class="'.$a['class'].'"' : '';
+  $table_class  =  strlen($a['class']) > 0 ? 'class="'.$a['class'].'"' : '';
   $inline_style = strlen($a['style']) > 0 ? 'style="'.$a['style'].'"' : '';
+  $rowspan      = strlen($a['rowspan']) > 0 ? 'rowspan="'.$a['rowspan'].'"' : '';
 
-  $output = '<th '.$table_class.' '.$inline_style.'>';
+  $output = '<th '.$table_class.' '.$inline_style.' '.$rowspan.' >';
   $output .= do_shortcode($content);
   $output .= '</th>';
   return $output;
@@ -76,12 +78,16 @@ function tables_line_short_code_func($atts, $content = null) {
 function tables_cell_short_code_func($atts, $content = null) {
   $a = shortcode_atts(array(
     'class' => '',
-    'style' => ''
+    'style' => '',
+    'rowspan' => '',
+    'colspan' => ''
   ), $atts);
   $table_class =  strlen($a['class']) > 0 ? 'class="'.$a['class'].'"' : '';
   $inline_style = strlen($a['style']) > 0 ? 'style="'.$a['style'].'"' : '';
+  $rowspan      = strlen($a['rowspan']) > 0 ? 'rowspan="'.$a['rowspan'].'"' : '';
+  $colspan      = strlen($a['colspan']) > 0 ? 'colspan="'.$a['colspan'].'"' : '';
 
-  $output = '<td '.$table_class.' '.$inline_style.'>';
+  $output = '<td '.$table_class.' '.$inline_style.' '.$rowspan.' '.$colspan.' >';
   $output .= do_shortcode($content);
   $output .= '</td>';
   return $output;
