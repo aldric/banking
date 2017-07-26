@@ -122,11 +122,30 @@ function bank_image_short_code_func($atts, $content = null) {
   return $output;
 }
 
+//[b-icon]
+function bank_icon_short_code_func($atts, $content = null) {
+  $a = shortcode_atts(array(
+    'size' => '1.5em',
+    'icon'  => 'ok',
+    'color' => 'success',
+    'display' => 'inline'
+  ), $atts);
+  $class =  $a['class'];
+  $display = strlen($a['display']) >0 ? 'display:' .$a['display'].';' : '';
+  $size  =  'style="font-size:'.$a['size'].'; '.$display .' "';
+  $icon  = 'glyphicon glyphicon-'.$a['icon'];
+  $color = 'text-'.$a['color'];
+//    display: inline;
+  $output = '<span class="'.$icon.' '.$color.'"  '.$size.'" aria-hidden="true"></span>';
+  return $output;
+}
+
 add_shortcode('tableau', 'tables_short_code_func');
 add_shortcode('entetes', 'tables_entetes_short_code_func');
 add_shortcode('entete', 'tables_entete_short_code_func');
 add_shortcode('ligne', 'tables_line_short_code_func');
 add_shortcode('cellule', 'tables_cell_short_code_func');
 add_shortcode('b-image', 'bank_image_short_code_func');
+add_shortcode('b-icon', 'bank_icon_short_code_func');
 
 ?>
