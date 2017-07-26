@@ -24,13 +24,14 @@ include(__ROOT__. "/shortcodes/bankranking.php");
 include(__ROOT__. "/shortcodes/bankcarousel.php");
 include(__ROOT__. "/shortcodes/proscons.php");
 include(__ROOT__. "/shortcodes/bankbox.php");
+include(__ROOT__. "/shortcodes/table.php");
 include(__ROOT__."/class/BankReviewJson.php");
 
 
 function banking_plugin_enqueue_styles()
 {
     $template_directory = plugin_dir_url(__FILE__);
-    wp_register_style('banking-css', $template_directory.'/banking.css', false, null, 'all');
+    wp_register_style('banking-css', $template_directory.'banking.css', false, '1.1', 'all');
     wp_enqueue_style('banking-css');
 }
 
@@ -44,6 +45,12 @@ function shortcodes_to_exempt_from_wptexturize($shortcodes)
     $shortcodes[] = 'bankranking';
     $shortcodes[] = 'bank-box';
     $shortcodes[] = 'proscons';
+    $shortcodes[] = 'tableau';
+    $shortcodes[] = 'entetes';
+    $shortcodes[] = 'entete';
+    $shortcodes[] = 'ligne';
+    $shortcodes[] = 'cellule';
+    $shortcodes[] = 'b-image';
     return $shortcodes;
 }
 
