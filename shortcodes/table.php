@@ -4,7 +4,8 @@ function tables_short_code_func($atts, $content = null) {
     'titre' => '',
     'responsive' => true,
     'class' => '',
-    'style' => ''
+    'style' => '',
+    'id' => ''
   ), $atts);
 
   $caption = $a['titre'];
@@ -12,12 +13,13 @@ function tables_short_code_func($atts, $content = null) {
   $is_responsive =  $a['responsive'] == 'true';
   $table_class = 'table '.$a['class'];
   $inline_style = strlen($a['style']) > 0 ? 'style="'.$a['style'].'"' : '';
-
+  $table_id = strlen($a['id']) > 0 ? 'id="'.$a['id'].'"' : '';
+  
   $output = '';
   if($is_responsive)
     $output .= '<div class="table-responsive">';
 
-    $output .= '<table class="'.$table_class.'" '.$inline_style.'>';
+    $output .= '<table class="'.$table_class.'" '.$inline_style.' '.$table_id.'>';
 
   if($has_caption)
     $output .= '<caption>'.$caption.'</caption>';
@@ -122,7 +124,7 @@ function bank_image_short_code_func($atts, $content = null) {
   return $output;
 }
 
-//[b-icon]
+//[b-icon icon="ok" color="success" size="1.5em"]
 function bank_icon_short_code_func($atts, $content = null) {
   $a = shortcode_atts(array(
     'size' => '1.5em',
@@ -135,8 +137,24 @@ function bank_icon_short_code_func($atts, $content = null) {
   $size  =  'style="font-size:'.$a['size'].'; '.$display .' "';
   $icon  = 'glyphicon glyphicon-'.$a['icon'];
   $color = 'text-'.$a['color'];
-//    display: inline;
   $output = '<span class="'.$icon.' '.$color.'"  '.$size.'" aria-hidden="true"></span>';
+  return $output;
+}
+
+//[h-img class="cb-comp-img" title="Logo Boursorama Banque" src="/cards/boursorama-225.png" alt="Logo Boursorama Banque" ]
+function html_image_short_code_func($atts, $content = null) {
+  $a = shortcode_atts(array(
+    'class' => '',
+    'title'  => '',
+    'src' => '',
+    'alt' => ''
+  ), $atts);
+  $class =  strlen($a['class']) > 0 ? 'class="'.$a['class'].'"' : '';
+  $title =  strlen($a['title']) > 0 ? 'title="'.$a['title'].'"' : '';
+  $source =  strlen($a['src']) > 0 ? $a['src'] : '';
+  $alt =  strlen($a['alt']) > 0 ? 'alt="'.$a['alt'].'"' : '';
+  
+  $output = '<img '.$class.' '.$title.' src="'.$source.'" '.$title.' '.$alt.' />';
   return $output;
 }
 
@@ -147,5 +165,6 @@ add_shortcode('ligne', 'tables_line_short_code_func');
 add_shortcode('cellule', 'tables_cell_short_code_func');
 add_shortcode('b-image', 'bank_image_short_code_func');
 add_shortcode('b-icon', 'bank_icon_short_code_func');
+add_shortcode('h-img', 'html_image_short_code_func');
 
 ?>

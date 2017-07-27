@@ -51,6 +51,8 @@ function shortcodes_to_exempt_from_wptexturize($shortcodes)
     $shortcodes[] = 'ligne';
     $shortcodes[] = 'cellule';
     $shortcodes[] = 'b-image';
+    $shortcodes[] = 'b-icon';
+    $shortcodes[] = 'b-img';
     return $shortcodes;
 }
 
