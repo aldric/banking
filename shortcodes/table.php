@@ -1,4 +1,10 @@
 <?php //[tableau titre="" responsive="true" class="table-striped | table-bordered | table-hover | table-condensed" style='']
+
+function _build_attr($attributes, $name, $postfix = '') {
+  $val = $attributes[$name];
+  return strlen($val) > 0 ? $name.'="'.$val.$postfix.'"' : '';
+}
+
 function tables_short_code_func($atts, $content = null) {
   $a = shortcode_atts(array(
     'titre' => '',
@@ -158,6 +164,51 @@ function html_image_short_code_func($atts, $content = null) {
   return $output;
 }
 
+//[b-video width="" height="" src=""]
+function video_short_code_func($atts, $content = null) {
+  $a = shortcode_atts(array(
+    'class' => 'embed-responsive',
+    'ratio' => 'embed-responsive-16by9',
+    'width'  => '',
+    'height' => '',
+    'src' => ''
+  ), $atts);
+  $src     = _build_attr($a,'src');
+  $width   = _build_attr($a,'width','px');
+  $height  = _build_attr($a,'height','px');
+  $class   = _build_attr($a,'class', ' '.$a['ratio']);
+  $i_class  = _build_attr($a,'class', '-item');
+  
+  $output = '<div '.$class.'><iframe '.$src.' '.$width.' '.$height.' '.$i_class.' allowfullscreen></iframe></div>';
+  return $output;
+}
+
+//[aff-link bank="monabanq" text="Text a afficher" color="default ou primary ou success ou info ou warning ou link", size="xs ou sm ou lg (facultatif par default taille normale)"]
+function afflink_short_code_func($atts, $content = null) {
+  $a = shortcode_atts(array(
+    'bank'  => '',
+    'text' => 'Visiter',
+    'color' => 'link',
+    'role' => 'button',
+    'size' => ''
+  ), $atts);
+  
+  $affiliates = array(
+    'monabanq' => 'https://clk.tradedoubler.com/click?p=200547&a=2973410'
+  );
+
+  $bank  = $a['bank'];
+  $text  = $a['text'];
+  $color = 'btn btn-'.$a['color'];
+  $size  =  strlen($a['size']) > 0 ? 'btn-'.$a['size'] : ''; 
+  $role  = _build_attr($a,'role');
+  $style = $color.' '.$size;
+  $link = $affiliates[$bank];
+  
+  $output = '<a class="'.$style.'" href="'.$link.'" '.$role.' target="_blank" rel="nofollow">'.$text.'</a>';
+  return $output;
+}
+
 add_shortcode('tableau', 'tables_short_code_func');
 add_shortcode('entetes', 'tables_entetes_short_code_func');
 add_shortcode('entete', 'tables_entete_short_code_func');
@@ -166,5 +217,7 @@ add_shortcode('cellule', 'tables_cell_short_code_func');
 add_shortcode('b-image', 'bank_image_short_code_func');
 add_shortcode('b-icon', 'bank_icon_short_code_func');
 add_shortcode('h-img', 'html_image_short_code_func');
+add_shortcode('b-video', 'video_short_code_func');
+add_shortcode('aff-link', 'afflink_short_code_func');
 
 ?>
