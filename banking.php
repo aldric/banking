@@ -31,7 +31,7 @@ include(__ROOT__."/class/BankReviewJson.php");
 function banking_plugin_enqueue_styles()
 {
     $template_directory = plugin_dir_url(__FILE__);
-    wp_register_style('banking-css', $template_directory.'banking.css', false, '1.1', 'all');
+    wp_register_style('banking-css', $template_directory.'banking.css', false, '1.3', 'all');
     wp_enqueue_style('banking-css');
 }
 

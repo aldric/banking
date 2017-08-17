@@ -85,7 +85,7 @@
                         <th v-bind:colspan="colspan">Note générale</th>
                     </tr>
                     <tr style="height:35px;">
-                        <td v-for="value in values" style="text-align: center;"  v-bind:title="getNote(value.mean)">
+                        <td v-for="value in values" style="text-align: center;" v-bind:title="getNote(value.mean)">
                             <div class="hidden-xs hidden-sm">
                                 <star-rating :percentage="value.mean" v-show="value.mean"></star-rating>
                             </div>
@@ -112,7 +112,8 @@
                     <tr>
                         <td v-for="value in values">
                             <div class="opinion">{{ value.opinionText }}</div>
-                            <button type="button" class="btn btn-lg btn-success btn-xs" data-toggle="popover" data-type="opinion" data-placement="top" data-trigger="focus" title="Notre avis"><i class="fa fa-search-plus fa-2c" aria-hidden="true"></i><span class="hidden-xs hidden-sm">En savoir plus</span></button>
+                            <button type="button" class="btn btn-lg btn-success btn-xs" data-toggle="popover" data-type="opinion" data-placement="top"
+                                data-trigger="focus" title="Notre avis"><i class="fa fa-search-plus fa-2c" aria-hidden="true"></i><span class="hidden-xs hidden-sm">En savoir plus</span></button>
                         </td>
                     </tr>
                     <tr>
@@ -151,33 +152,15 @@
                             </span>
                             </template>
                             <template v-else>
-                            <span class="fa-stack fa-lg" >
+                                <span class="fa-stack fa-lg">
                               <i v-bind:class="getMobileIcon(key, true)"></i>
                               <i class="fa fa-ban fa-stack-2x text-danger"></i>
                             </span>
-                          </template>
+                            </template>
                             </span>
                         </td>
                     </tr>
-                    <template v-for="(values, key) in evaluations">
-                        <tr>
-                          <th v-bind:colspan="colspan">{{ key }}</th>
-                        </tr>
-                        <tr>
-                          <td  v-for="data in values">
-                              <div>
-                                  <div class="hidden-xs hidden-sm">
-                                      <star-rating :percentage="data.note" v-show="data.note"></star-rating>
-                                  </div>
-                                  <div class="visible-xs-block visible-sm-block small-note" v-html="getNote(data.note)">
-                                  </div>
-                                  <div style="padding-top: 25px;">
-                                      <div class="small-pros">{{ data.description }}</div>
-                                  </div>
-                              </div>
-                          </td>
-                        </tr>
-                    </template>
+
                     <tr>
                         <th v-bind:colspan="colspan">Nombre de clients</th>
                     </tr>
@@ -193,7 +176,8 @@
                     <tr>
                         <td v-for="value in values">
                             <ul class="fa-ul">
-                                <li v-for="(key, value) in value.offer" v-bind:class="[ key == '1' ? 'text-success' : 'text-danger']"><i v-bind:class="[ key == '1' ? 'fa-li fa fa-check' : 'fa-li fa fa-times']"></i>{{ value }}</li>
+                                <li v-for="(key, value) in value.offer" v-bind:class="[ key == '1' ? 'text-success' : 'text-danger']"><i v-bind:class="[ key == '1' ? 'fa-li fa fa-check' : 'fa-li fa fa-times']"></i>{{ value
+                                    }}</li>
                             </ul>
                         </td>
                     </tr>
@@ -203,7 +187,7 @@
                     <tr>
                         <td v-for="value in values">
                             <div class="holding-name" v-html="value.holdingName" style="font-weight:bold; font-size:1.1em;"></div>
-                            <div class="holding-image"> <img v-bind:src="value.holdingImage" /></div>
+                            <div class="holding-image"> <img v-bind:src="value.holdingImage" style="max-height: 100px;" /></div>
                         </td>
                     </tr>
                 </tbody>

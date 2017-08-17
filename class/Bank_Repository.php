@@ -100,9 +100,9 @@ if (!class_exists('Bank_Repository')) {
 
                 $apps = get_field('mobile_apps', $id);
                 $apps = is_array ($apps) ? $apps : array();
-                $ranking_data->mobile_apps['iOS'] = array_search('iOS', $apps) == false;
-                $ranking_data->mobile_apps['Android'] = array_search('Android', $apps) == false;
-                $ranking_data->mobile_apps['Windows'] = array_search('Windows', $apps) == false;
+                $ranking_data->mobile_apps['iOS'] = array_search('iOS', $apps) > -1;
+                $ranking_data->mobile_apps['Android'] = array_search('Android', $apps)> -1;
+                $ranking_data->mobile_apps['Windows'] = array_search('Windows', $apps) > -1;
 
                 $ranking_data->offer[ 'Compte courant'] = $ranking_data->saving_account;
                 $ranking_data->offer[ 'Offre jeune'] = $ranking_data->young_offer;

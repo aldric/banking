@@ -1,4 +1,23 @@
-.carousel-overlay {
+/* Small devices (tablets, 768px and up) */
+/* @media (min-width: 768px) {  
+  div.wrapper {
+    width: 100%;
+  }
+} */
+
+.btn-red {
+    color: #fff;
+    background-color: #f13600;
+    border-color: #f13600;
+    text-decoration: none;
+}
+  .btn-red:hover , .btn-red.active.focus, .btn-red.active:focus, .btn-red.active:hover, .btn-red:active.focus, .btn-red:active:focus, .btn-red:active:hover, .open>.dropdown-toggle.btn-red.focus, .open>.dropdown-toggle.btn-red:focus, .open>.dropdown-toggle.btn-red:hover {
+    color: #fff;
+    background-color: #d44d0c;
+    border-color: #bd4207;
+}
+
+  .carousel-overlay {
   position:absolute;
   left:0;
   bottom:-22px;
@@ -209,7 +228,7 @@ div.top-ranking-stars {
 div.top-ranking-stars .glyphicon {
     font-size: 26px;
 }
-div#bank-ranking-widget div.star-container {
+div#bank-ranking-widget div.top-ranking-stars div.star-container {
   width:140px;
 }
 
@@ -499,7 +518,7 @@ div.b-box-hello-bank div.cover {
 .card .footer .social-links{
     font-size: 0.9em;
 }
-.card .footer .social-links a{
+.card .footer .social-links a {
     margin: 0 7px;
 }
 .card .footer .social-links a:hover {
@@ -508,4 +527,43 @@ div.b-box-hello-bank div.cover {
 
 .card .header {
     padding: 0;
+}
+/* nav#site-navigation.main-navigation {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index : 999;
+  left: 0;
+} */
+div.card-ranking div.img-monabanq img {
+  padding: 5px 10px;
+  background-color: black;
+}
+
+div.card-ranking div.img-monabanq img {
+  margin:0;
+}
+
+
+table.table#cb-comp, table.table#cb-comp > thead > tr > th {
+    text-align: center;
+}
+table.table#cb-comp span.glyphicon {
+    font-size: 1.6em;
+	display:inline-block;
+}
+
+ .table > tbody > tr > td.cell-middle {
+    vertical-align: middle;
+    text-align: center;
+}
+
+img.cb-comp-img {
+    width:64px;
+}
+td.title-cell {
+    font-weight: bold;
+}
+table.table#cb-comp > tbody > tr > td.sep-bank {
+    border-top: 1px solid #444;
 }
