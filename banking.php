@@ -55,6 +55,7 @@ function shortcodes_to_exempt_from_wptexturize($shortcodes)
     $shortcodes[] = 'b-img';
     $shortcodes[] = 'b-video';
     $shortcodes[] = 'aff-link';
+    $shortcodes[] = 'aff-image';
     return $shortcodes;
 }
 

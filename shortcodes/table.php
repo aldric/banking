@@ -183,29 +183,42 @@ function video_short_code_func($atts, $content = null) {
   return $output;
 }
 
-//[aff-link bank="monabanq" text="Text a afficher" color="default ou primary ou success ou info ou warning ou link", size="xs ou sm ou lg (facultatif par default taille normale)"]
+//[aff-link name="monabanq" text="Text a afficher" color="default ou primary ou success ou info ou warning ou link", size="xs ou sm ou lg (facultatif par default taille normale)" style="width:600px;"]
 function afflink_short_code_func($atts, $content = null) {
   $a = shortcode_atts(array(
-    'bank'  => '',
+    'name'  => '',
     'text' => 'Visiter',
     'color' => 'link',
     'role' => 'button',
-    'size' => ''
+    'size' => '',
+    'style' => ''
   ), $atts);
-  
-  $affiliates = array(
-    'monabanq' => 'https://clk.tradedoubler.com/click?p=200547&a=2973410'
-  );
+ 
 
-  $bank  = $a['bank'];
+  $name  = $a['name'];
   $text  = $a['text'];
   $color = 'btn btn-'.$a['color'];
   $size  =  strlen($a['size']) > 0 ? 'btn-'.$a['size'] : ''; 
   $role  = _build_attr($a,'role');
-  $style = $color.' '.$size;
-  $link = $affiliates[$bank];
+  $style  = _build_attr($a,'style');
+  $class = $color.' '.$size;
+  $link = '/visite/'.$name;
   
-  $output = '<a class="'.$style.'" href="'.$link.'" '.$role.' target="_blank" rel="nofollow">'.$text.'</a>';
+  $output = '<a class="'.$class.'" href="'.$link.'" '.$role.' '.$style.' target="_blank" rel="nofollow">'.$text.'</a>';
+  return $output;
+}
+
+//[aff-image name="monabanq" image="01.gif"]
+function affimage_short_code_func($atts, $content = null) {
+  $a = shortcode_atts(array(
+    'name'  => '',
+    'image' => '01'
+  ), $atts);
+ 
+  $name  = $a['name'];
+  $link = '/visite/'.$name;
+  $image = '/images/'.$name.'/'.$a['image'];
+  $output = '<a href="'.$link.'" target="_blank" rel="nofollow"><img src="'.$image.'"></img></a>';
   return $output;
 }
 
@@ -219,5 +232,6 @@ add_shortcode('b-icon', 'bank_icon_short_code_func');
 add_shortcode('h-img', 'html_image_short_code_func');
 add_shortcode('b-video', 'video_short_code_func');
 add_shortcode('aff-link', 'afflink_short_code_func');
+add_shortcode('aff-image', 'affimage_short_code_func');
 
 ?>
