@@ -75,7 +75,7 @@
               <div v-bind:class="getBg(value)" v-for="(value, key) in bank.offer">
                 <div class="h6" style="padding-left:10px;" v-html="getText(key, value)"></div>
               </div>
-              <div class="justify-content-center" style="padding : 5px 10px">
+              <div class="justify-content-center" style="padding : 5px 10px" v-show="location() != bank.review_link">
                 <a v-bind:href="bank.review_link" class="btn btn-success btn-block text-center">Voir la revue compl&egrave;te</a>
               </div>
               <div class="justify-content-center" style="padding : 5px 10px">

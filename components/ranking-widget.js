@@ -7,6 +7,9 @@ var RankingWidgetComponent = Vue.component('banks-ranking-widget', {
     bank: Object
   },
   methods: {
+    location:function () {
+      return window.location;
+    },
     getBg: function (isOn) {
       return isOn == '1' ? "text-success" : "text-danger";
     },
