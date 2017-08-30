@@ -12,6 +12,7 @@ Version: 1.6
 */
 define('__ROOT__', realpath(dirname(__FILE__)));
 
+defined('__STYLE__') ? null : define('__STYLE__', 'materialize');
 
 
 include(__ROOT__.'/class/Bank_Repository.php');

@@ -42,7 +42,7 @@ if (! class_exists('BankBanner_Widget')) {
                 }
                 if(count($banners) > 0 ) {
                     $key = array_rand($banners);
-                    $banner = $banners[$key];
+                    $data = $banners[$key];
                     echo ViewRenderer::render('bankbanner.widget.html', $data);
                 }
             }

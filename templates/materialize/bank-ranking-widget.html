@@ -1,0 +1,20 @@
+<script type="text/javascript">
+    jQuery(function() {
+      <?php include(__ROOT__ .'/components/star-rating.js') ?>
+      <?php include(__ROOT__ .'/components/ranking-widget.js') ?>
+
+        var comparer = new Vue({
+            el: '#bank-ranking-widget',
+            data: {
+                bank: bankRankingWidget
+            }
+        });
+    });
+</script>
+<?php include(__ROOT__ .'/components/star-rating.html') ?>
+<?php include(__ROOT__ .'/components/ranking-widget.html') ?>
+
+<div id="bank-ranking-widget">
+    <banks-ranking-widget :bank="bank">
+    </banks-ranking-widget>
+</div>

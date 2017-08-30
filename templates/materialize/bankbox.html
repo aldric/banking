@@ -30,28 +30,7 @@ div#bank-box  div.activator i.material-icons {
 <div id="bank-box">
     <div v-bind:class="rowClass">
         <div v-for="bank in banks" class="col s6 m3 l4">
-        <div class="card small sticky-action">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" :src="bank.image" />
-          </div>
-          <div class="card-content activator">
-            <span class="card-title activator grey-text text-darken-4 hide-on-small-only"> {{bank.name + ' ('+getNote(bank.mean) + ')' }} <i class="material-icons right">more_vert</i></span>
-            <div class="activator"><i class="material-icons">&#xE8F6;</i> {{ bank.welcome_offer }}
-            </div>
-            <div class="activator"><i class="material-icons">&#xE870;</i> {{ bank.credit_card }}
-            </div>
-            <div class="activator"><i class="material-icons">&#xE5CA;</i> {{ bank.pros[0] }}
-            </div>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">{{bank.name}}<i class="material-icons right">close</i></span>
-
-          </div>
-          <div class="card-action">
-            <a v-bind:href="bank.review_link">Voir la revue</a>
-            <a v-bind:href="bank.affiliate_link" target="_blank" rel="nofollow">Visiter le site</a>
-          </div>
-        </div>
+        
             <div :class="getBankClass(bank.name)" class="card-container manual-flip" style="cursor:pointer">
                 <div class="card">
                     <div class="front">
