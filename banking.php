@@ -12,7 +12,10 @@ Version: 1.6
 */
 define('__ROOT__', realpath(dirname(__FILE__)));
 
+if (!defined('__STYLE__')) 
+    define('__STYLE__', 'bs3');
 
+require_once('types.php');
 
 include(__ROOT__.'/class/Bank_Repository.php');
 include(__ROOT__.'/class/Helpers.php');
@@ -31,7 +34,7 @@ include(__ROOT__."/class/BankReviewJson.php");
 function banking_plugin_enqueue_styles()
 {
     $template_directory = plugin_dir_url(__FILE__);
-    wp_register_style('banking-css', $template_directory.'banking.css', false, '1.3', 'all');
+    wp_register_style('banking-css', $template_directory.'banking.css', false, '1.4', 'all');
     wp_enqueue_style('banking-css');
 }
 
@@ -56,6 +59,8 @@ function shortcodes_to_exempt_from_wptexturize($shortcodes)
     $shortcodes[] = 'b-video';
     $shortcodes[] = 'aff-link';
     $shortcodes[] = 'aff-image';
+   // $shortcodes[] = 'maxbutton';
+    $shortcodes[] = 'aff-button';
     return $shortcodes;
 }
 
@@ -80,3 +85,29 @@ function add_scriptfilter($string)
     return $string;
 }
 add_filter('pre_kses', 'add_scriptfilter');
+
+/*Button options page*/
+if( function_exists('acf_add_options_page') ) {
+	
+	acf_add_options_page(array(
+		'page_title' 	=> 'Affiliation Buttons Settings',
+		'menu_title'	=> 'Affiliation',
+		'menu_slug' 	=> 'aff-buttons-settings',
+		'capability'	=> 'edit_posts',
+        'redirect'		=> true,
+        'icon_url'      => 'dashicons-admin-links'
+	));
+	
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Liste des boutons affiliés',
+		'menu_title'	=> 'Liste boutons',
+		'parent_slug'	=> 'aff-buttons-settings',
+	));
+	
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Theme Footer Settings',
+		'menu_title'	=> 'Add New',
+		'parent_slug'	=> 'aff-buttons-settings',
+	));
+	
+}

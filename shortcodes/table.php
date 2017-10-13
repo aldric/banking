@@ -222,6 +222,54 @@ function affimage_short_code_func($atts, $content = null) {
   return $output;
 }
 
+//[aff-button name="" style="width:600px;" title="" text="", size="", type="", url="", new_window="False", nofollow="True"]
+//[maxbutton  name="" style="width:600px;"]
+function affbutton_short_code_func($atts, $content = null) {
+  $a = shortcode_atts(array(
+    'name'  => '',
+    'text' => '',
+    'title' => '',
+    'url' => '',
+    'type' => '',
+    'role' => '',
+    'size' => '',
+    'new_window' => '',
+    'nofollow' => '',
+    'style' => '',
+    'role' => 'button'
+  ), $atts);
+ 
+  $output = '';
+  $data = get_field('affiliate_button', 'option');
+  $search = $a['name'];
+  
+  $result = array_filter($data == null ? array() : $data, function($item) use ($search) {
+      if ($item['name'] == $search) {
+          return true;
+      }
+      return false;
+  }, ARRAY_FILTER_USE_BOTH);
+
+  if(count($result) > 0) {
+    $button = reset($result);
+    $url = strlen($a['url']) > 0 ? $a['url'] : $button['url']; 
+    $text = strlen($a['text']) > 0 ? $a['text'] : $button['text']; 
+    $title = strlen($a['title']) > 0 ? $a['title'] : $button['title']; 
+    $type = strlen($a['type']) > 0 ? $a['type'] : $button['type']; 
+    $size = strlen($a['size']) > 0 ? $a['size'] : $button['size']; 
+    $new = strlen($a['new_window']) > 0 ? $a['new_window'] : $button['new_window']; 
+    $nof = strlen($a['nofollow']) > 0 ? $a['nofollow'] : $button['nofollow']; 
+
+    $role  = _build_attr($a,'role');
+    $style  = _build_attr($a,'style');
+    $target = is_bool($new) && $new ? '_blank' : $new; 
+    $rel = is_bool($nof) && $nof ? 'nofollow' : $nof; 
+    $class = $type.' '.$size;
+    $output = '<a class="btn  '.$class.'" href="'.$url.'" '.$role.' '.$style.' target="'.$target.'" rel="'.$rel.'" title="'.$title.'">'.$text.'</a>';
+  }
+ return $output;
+}
+
 add_shortcode('tableau', 'tables_short_code_func');
 add_shortcode('entetes', 'tables_entetes_short_code_func');
 add_shortcode('entete', 'tables_entete_short_code_func');
@@ -233,5 +281,7 @@ add_shortcode('h-img', 'html_image_short_code_func');
 add_shortcode('b-video', 'video_short_code_func');
 add_shortcode('aff-link', 'afflink_short_code_func');
 add_shortcode('aff-image', 'affimage_short_code_func');
+add_shortcode('aff-button', 'affbutton_short_code_func');
+//add_shortcode('maxbutton', 'affbutton_short_code_func');
 
 ?>
