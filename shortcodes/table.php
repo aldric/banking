@@ -238,7 +238,6 @@ function affbutton_short_code_func($atts, $content = null) {
     'style' => '',
     'role' => 'button'
   ), $atts);
- 
   $output = '';
   $data = get_field('affiliate_button', 'option');
   $search = $a['name'];
@@ -249,8 +248,7 @@ function affbutton_short_code_func($atts, $content = null) {
       }
       return false;
   }, ARRAY_FILTER_USE_BOTH);
-
-  if(count($result) > 0) {
+  
     $button = reset($result);
     $url = strlen($a['url']) > 0 ? $a['url'] : $button['url']; 
     $text = strlen($a['text']) > 0 ? $a['text'] : $button['text']; 
@@ -266,7 +264,6 @@ function affbutton_short_code_func($atts, $content = null) {
     $rel = is_bool($nof) && $nof ? 'nofollow' : $nof; 
     $class = $type.' '.$size;
     $output = '<a class="btn  '.$class.'" href="'.$url.'" '.$role.' '.$style.' target="'.$target.'" rel="'.$rel.'" title="'.$title.'">'.$text.'</a>';
-  }
  return $output;
 }
 
