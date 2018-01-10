@@ -1,68 +1,25 @@
 <script type="text/javascript">
-  <?php include(__ROOT__ .'/components/bank-box.js') ?>
+    <?php include(__ROOT__ .'/components/bank-box.js') ?>
 </script>
-<?php include(__ROOT__ .'/components/star-rating.html') ?>
 
 <div id="bank-box">
-    <div v-bind:class="rowClass">
-        <div v-for="bank in banks" :class="bankBoxes.colCss">
-            <div :class="getBankClass(bank.name)" class="card-container manual-flip" style="cursor:pointer">
-                <div class="card">
-                    <div class="front">
-                        <div class="cover">
-                            <img :src="bank.image" class="img-box" />
-                        </div>
-                        <div class="content">
-                            <div class="main">
-                                <div class="box-offer text-info"><i class="fa fa-gift hidden-xs" aria-hidden="true"></i>{{ bank.welcome_offer }}
-                                </div>
-                                <div class="box-offer text-success"><i class="fa fa-credit-card" aria-hidden="true"></i>{{ bank.credit_card }}
-                                </div>
-                                <div class="box-offer text-info"><i class="fa fa-check hidden-xs" aria-hidden="true"></i>{{ bank.pros[0] }}
-                                </div>
-                            </div>
-                            <div class="footer">
-                                <i class="fa fa-mail-forward"></i> {{bank.name}}
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end front panel -->
-                    <div class="back">
-                        <div class="header">
-                            <div class="ratings" style="height: 20px;">
-                                <star-rating :percentage="bank.mean" v-show="bank.mean"></star-rating>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <div class="main">
-                                <h4 class="text-center"> {{bank.name + ' ('+getNote(bank.mean) + ')' }} </h4>
-                                <table class="table table-condensed table-notes" style="margin-bottom: 0;">
-                                    <tbody>
-                                        <tr v-for="note in notes(bank)">
-                                            <td style="white-space:nowrap;font-size:0.85em;">{{ note.label }}</td>
-                                            <td>
-                                                <h4 class="text-center"> {{ getNote(note.note) }} </h4>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="col-md-12 text-center">
-                                    <i v-for="app in mobileApps(bank)" :class="app"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="footer">
-                            <div class="social-links text-center">
-                                <a v-bind:href="bank.review_link"><i class="fa fa-plus"></i>d&apos;info</a>
-                                <a v-bind:href="bank.affiliate_link" target="_blank" rel="nofollow">Visiter <img :src="bank.favicon" /></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end back panel -->
-                </div>
-                <!-- end card -->
+    <div v-for="bank in banks" style="width:250px;" class="mat-card">
+        <div class="top-right">
+            <div class="badge-ribbon"></div>
+            <div class="box-note">{{ (bank.mean / 20).toFixed(1) }}/5</div>
+        </div>
+        <div class="flex-container">
+            <div :class="getBankClass(bank.name) + ' box-img'">
+                <img :src="bank.image" />
             </div>
-            <!-- end card-container -->
+            <ul>
+                <li>{{ bank.welcome_offer }}</li>
+                <li>{{ bank.pros[0] }}</li>
+            </ul>
+            <div style="display: flex;justify-content: space-between;width:100%">
+                <a v-bind:href="bank.review_link" class="btn-mat btn-small orange">REVUE</a>
+                <a v-bind:href="bank.affiliate_link" class="btn-mat btn-small cyan" target="_blank" rel="nofollow">VISITER</a>
+            </div>
         </div>
     </div>
 </div>

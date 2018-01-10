@@ -1,30 +1,12 @@
 jQuery(function() {
-    <?php include(__ROOT__ .'/components/star-rating.js') ?>
-
     var boxes = new Vue({
         el: '#bank-box',
         data: {
             bankBoxes: bankBoxes
         },
-        components: {
-            'star-rating': starRatingComponent
-        },
-        mounted: function() {
-            jQuery('div.card-container.manual-flip').click(function() {
-                var $card = jQuery(this);
-                if ($card.hasClass('hover')) {
-                    $card.removeClass('hover');
-                } else {
-                    $card.addClass('hover');
-                }
-            });
-        },
         computed: {
-            rowClass: function() {
-                return this.bankBoxes.banks.length > 0 ? 'row' : '';
-            },
             banks: function() {
-                return this.bankBoxes.banks;
+                return this.bankBoxes.banks.reverse();
             }
         },
         methods: {
