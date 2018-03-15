@@ -1,0 +1,25 @@
+<script type="text/javascript">
+    <?php include(__ROOT__ .'/components/bank-box.js') ?>
+</script>
+
+<div id="bank-box">
+    <div v-for="bank in banks" style="width:250px;" class="mat-card">
+        <div class="top-right">
+            <div class="badge-ribbon"></div>
+            <div class="box-note">{{ (bank.mean / 20).toFixed(1) }}/5</div>
+        </div>
+        <div class="flex-container">
+            <div :class="getBankClass(bank.name) + ' box-img'">
+                <img :src="bank.image" />
+            </div>
+            <ul>
+                <li>{{ bank.welcome_offer }}</li>
+                <li>{{ bank.pros[0] }}</li>
+            </ul>
+            <div style="display: flex;justify-content: space-between;width:100%">
+                <a v-bind:href="bank.review_link" class="btn-mat btn-small orange">REVUE</a>
+                <a v-bind:href="bank.affiliate_link" class="btn-mat btn-small cyan" target="_blank" rel="nofollow">VISITER</a>
+            </div>
+        </div>
+    </div>
+</div>

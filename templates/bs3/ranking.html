@@ -1,0 +1,20 @@
+<script type="text/javascript">
+    jQuery(function() {
+        <?php include(__ROOT__ .'/components/star-rating.js') ?>
+        <?php include(__ROOT__ .'/components/banks-ranking.js') ?>
+
+        var comparer = new Vue({
+            el: '#app-compare',
+            data: {
+                ranking: ranking
+            }
+        });
+    });
+</script>
+<?php include(__ROOT__ .'/components/star-rating.html') ?>
+<?php include(__ROOT__ .'/components/banks-ranking.html') ?>
+
+<div id="app-compare">
+    <banks-grid :banks="ranking.banks" :offer="ranking.offer">
+    </banks-grid>
+</div>

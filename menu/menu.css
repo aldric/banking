@@ -1,0 +1,14 @@
+li.menu-bforbank {
+    background-image: url("32x32/bforbank.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    padding-left: 37px;
+    background-position-y: center;
+}
+
+li.menu-fortuneo {
+  background-image: url(http://localhost:8080/topbanque/wp-content/plugins/banking/menu/32x32/fortuneo.png);
+  background-repeat: no-repeat;
+  padding-left: 37px;
+  background-position-y: center;
+}

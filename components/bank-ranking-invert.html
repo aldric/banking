@@ -1,0 +1,98 @@
+<div class="table-responsive" id="table-ranking">
+    <table class="table table-bordered table-condensed table-hover" style="text-align: center;">
+        <thead>
+          <tr>
+            <th style="text-align:center;"></th>
+            <th style="text-align:center;">
+                <div class="hidden-xs hidden-sm">Note générale</div>
+                <div><i class="fa fa-trophy fa-3x" style="color:gold" aria-hidden="true"></i></div>
+            </th>
+            <th style="text-align:center;"></th>
+            <th>Notre avis</th>
+            <th>Service Client</th>
+            <th>Application</th>
+            <th>Carte de crédit</th>
+            <th><i class="fa fa-user-plus fa-2x" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Nombre de clients</span></th>
+            <th><i class="fa fa-gift fa-2x" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Offre de bienvenue</span></th>
+            <th><i class="fa fa-key fa-2x" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Conditions d'accès</span></th>
+            <th><i class="fa fa-credit-card fa-2x" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Carte de cr&eacute;dit</span></th>
+            <th><i class="fa fa-mobile fa-2x" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Application mobile</span></th>
+            <th><i class="fa fa-plus-circle fa-2x text-success" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Points positifs</span></th>
+            <th><i class="fa fa-minus-circle fa-2x text-danger" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Points négatifs</span></th>
+            <th><i class="fa fa-cubes fa-2x" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Les services et produits proposés</span></th>
+            <th><i class="fa fa-cubes fa-2x" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Filliale du groupe</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="value in values" style="text-align: center;">
+            <th  style="vertical-align: top;text-align:center;margin-bottom:1em;">
+                <div style="max-width:100px;margin-left: auto;margin-right: auto;"><img v-bind:src="value.image" /></div>
+                <div v-html="value.name"></div>
+            </th>
+            <td>
+              <div class="hidden-xs hidden-sm"><star-rating :percentage="value.mean" v-show="value.mean"></star-rating></div>
+              <div class="visible-xs-block visible-sm-block" v-html="getNote(value.mean)"></div>
+            </td>
+            <td>
+                {{ value.opinionText }}
+            </td>
+            <td v-for="eval in value.evalData" >
+              <div>
+                  <div class="hidden-xs hidden-sm">
+                      <star-rating :percentage="eval.note" v-show="eval.note"></star-rating>
+                  </div>
+                  <div class="visible-xs-block visible-sm-block" v-html="getNote(eval.note)">
+                  </div>
+                  <div style="padding-top: 25px;">
+                      {{ eval.description }}
+                  </div>
+              </div>
+            </td>
+            <td>
+                {{ value.customerCount }}
+            </td>
+            <td>
+              {{ value.welcomeOffer }}
+            </td>
+            <td>
+              {{ value.minimumWadge }}
+            </td>
+            <td>
+              {{ value.creditCard }}
+            </td>
+            <td>
+              <ul class="fa-ul">
+                  <li v-for="pro in value.pros"><i class="fa-li fa fa-plus-circle"></i>{{ pro }}</li>
+              </ul>
+              <ul class="fa-ul">
+                  <li v-for="con in value.cons"><i class="fa-li fa fa-minus-circle"></i>{{ con }}</li>
+              </ul>
+            </td>
+            <td>
+                <ul class="fa-ul">
+                    <li v-for="(key, value) in value.offer" v-bind:class="[ key == '1' ? 'text-success' : 'text-danger']"><i v-bind:class="[ key == '1' ? 'fa-li fa fa-check' : 'fa-li fa fa-times']"></i>{{ value }}</li>
+                </ul>
+            </td>
+            <td>
+              <span v-for="(value, key) in value.mobileApps">
+                <template v-if="value">
+                <span class="fa-stack fa-lg">
+                  <i v-bind:class="getMobileIcon(key)"></i>
+                </span>
+              </template>
+              <template v-else>
+                <span class="fa-stack fa-lg" >
+                  <i v-bind:class="getMobileIcon(key, true)"></i>
+                  <i class="fa fa-ban fa-stack-2x text-danger"></i>
+                </span>
+              </template>
+              </span>
+            </td>
+            <td>
+                <div v-html="value.holdingName" style="font-weight:bold; font-size:1.1em;"></div>
+                <div style="width:100px;margin-left: auto;margin-right: auto;"> <img v-bind:src="value.holdingImage" /></div>
+            </td>
+        </tr>
+        </tbody>
+      </table>
+</div>
