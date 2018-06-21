@@ -8,7 +8,6 @@ var starRatingComponent = Vue.component('star-rating', {
     },
     mounted: function() {
         var that = this;
-        console.log(that.$el);
         jQuery(that.$el).find('div.star-limiter').animate( {width : that.value + '%'}, 2000);
     }
 });

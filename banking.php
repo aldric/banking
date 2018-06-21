@@ -23,6 +23,7 @@ include(__ROOT__."/ViewRenderer.php");
 include(__ROOT__. "/widgets/ranking.widget.php");
 include(__ROOT__. "/widgets/bankbanner.widget.php");
 include(__ROOT__. "/widgets/bankHierarchy.widget.php");
+include(__ROOT__. "/widgets/bankOffer.widget.php");
 include(__ROOT__. "/shortcodes/bankranking.php");
 include(__ROOT__. "/shortcodes/bankcarousel.php");
 include(__ROOT__. "/shortcodes/proscons.php");
@@ -69,7 +70,12 @@ function wpex_fix_shortcodes($content)
     return strtr($content, [
         '<p>[' => '[',
         ']</p>' => ']',
-        ']<br />' => ']'
+        ']<br />' => ']',
+        ']<br/>' => ']',
+        ']<br>' => ']',
+        '<br />[' => '[',
+        '<br/>[' => '[',
+        '<br>[' => '['
     ]);
 }
 remove_filter('the_content', 'wpautop');

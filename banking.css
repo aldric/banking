@@ -1,6 +1,5 @@
 /* Small devices (tablets, 768px and up) */
 
-
 /* @media (min-width: 768px) {  
   div.wrapper {
     width: 100%;
@@ -50,7 +49,7 @@
 }
 
 .bx-viewport {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)!important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
 
 .btn-success-shiny {
@@ -96,7 +95,7 @@ div.slide ul.fa-ul i {
 }
 
 div.shade {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)!important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
     border-radius: 2px;
 }
 
@@ -194,7 +193,6 @@ div.box-offer {
     font-size: 1em;
     line-height: 1.3em;
 }
-
 
 /*@media (min-width: 768px) {
   div.box-offer {
@@ -432,7 +430,6 @@ div.b-box-monabanq {
     background-color: #000;
 }
 
-
 /* nav#site-navigation.main-navigation {
   position: fixed;
   top: 0;
@@ -592,10 +589,13 @@ div.mat-card ul li:first-child {
     background: #0093ff;
 }
 
+.n26 {
+    background: rgb(59, 208, 214);
+}
+
 .btn-mat:active {
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12)
 }
-
 
 /* Ripple magic */
 
@@ -742,8 +742,8 @@ div.mat-card ul li:first-child {
 
 @media (max-width: 600px) {
     .btn-mat {
-      font-size: 1.8rem;
-      padding: 15px 15px;
+        font-size: 1.8rem;
+        padding: 15px 15px;
     }
     .mat-card {
         padding: 24px 16px
@@ -854,40 +854,6 @@ div.box-note {
     text-align: center;
 }
 
-div.burst-12 {
-    background: #e2bf00;
-    width: 40px;
-    height: 40px;
-    text-align: center;
-}
-
-div.burst-12:before,
-div.burst-12:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 40px;
-    width: 40px;
-    background: #e2bf00;
-}
-
-div.burst-12:before {
-    transform: rotate(30deg);
-    -webkit-transform: rotate(30deg);
-    -moz-transform: rotate(30deg);
-    -ms-transform: rotate(30deg);
-    -o-transform: rotate(30deg);
-}
-
-div.burst-12:after {
-    transform: rotate(60deg);
-    -webkit-transform: rotate(60deg);
-    -moz-transform: rotate(60deg);
-    -ms-transform: rotate(60deg);
-    -o-transform: rotate(60deg);
-}
-
 div.badge-ribbon {
     background: goldenrod;
     height: 40px;
@@ -898,9 +864,6 @@ div.badge-ribbon {
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
 }
 
-div#bank-box div.mat-card:first-child div.burst-12,
-div#bank-box div.mat-card:first-child div.burst-12:before,
-div#bank-box div.mat-card:first-child div.burst-12:after,
 div#bank-box div.mat-card:first-child div.badge-ribbon {
     background: gold;
 }
@@ -916,4 +879,52 @@ div.mat-card ul:first-letter {
 
 div.mat-card ul li:first-child {
     padding-top: 5px;
+}
+
+aside.bk-offer-widget div.mat-card {
+    margin: 5px 0;
+    padding: 8px 2px;
+    background-color: rgb(216, 216, 216);
+    height: 70px;
+    display: flex;
+}
+
+aside.bk-offer-widget div.mat-card:first-child {
+    background: #ddff0f;
+}
+
+aside.bk-offer-widget div.mat-card div.bk-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+aside.bk-offer-widget div.mat-card div.bk-line  div {
+    text-align: center;
+}
+
+aside.bk-offer-widget .name {
+    font-size: 1.2em;
+}
+aside.bk-offer-widget .offer {
+    font-weight: 700;
+    font-size: 1.1em;
+    color:rgb(26, 173, 26);
+    line-height: 1.1em;
+}
+
+
+aside.bk-offer-widget div.mat-card div.bk-line a.btn-mat {
+    padding: 8px 12px;
+    font-size: 16px;
+}
+
+aside.bk-offer-widget div.bk-img img {
+    width: 48px;
+    margin-left: 8px;
+}
+
+aside.bk-offer-widget div.bk-link {
+    margin-right: 8px;
 }
